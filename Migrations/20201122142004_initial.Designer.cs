@@ -9,7 +9,7 @@ using SmartSaver.Contexts;
 namespace SmartSaver.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20201121131619_initial")]
+    [Migration("20201122142004_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,7 +20,7 @@ namespace SmartSaver.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("Smart_Saver_WEB.Models.ExpensesInformation", b =>
+            modelBuilder.Entity("SmartSaver.Models.ExpensesInformation", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -38,7 +38,7 @@ namespace SmartSaver.Migrations
                     b.ToTable("ExpensesInfo");
                 });
 
-            modelBuilder.Entity("Smart_Saver_WEB.Models.ExpensesManagerInformation", b =>
+            modelBuilder.Entity("SmartSaver.Models.ExpensesManagerInformation", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -62,7 +62,7 @@ namespace SmartSaver.Migrations
                     b.ToTable("EMInfo");
                 });
 
-            modelBuilder.Entity("Smart_Saver_WEB.Models.SavingsManagerInformation", b =>
+            modelBuilder.Entity("SmartSaver.Models.SavingsManagerInformation", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -92,7 +92,7 @@ namespace SmartSaver.Migrations
                     b.ToTable("SMInfo");
                 });
 
-            modelBuilder.Entity("Smart_Saver_WEB.Models.UserBalance", b =>
+            modelBuilder.Entity("SmartSaver.Models.UserBalance", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -110,7 +110,7 @@ namespace SmartSaver.Migrations
                     b.ToTable("UserBalance");
                 });
 
-            modelBuilder.Entity("Smart_Saver_WEB.Models.UserExpense", b =>
+            modelBuilder.Entity("SmartSaver.Models.UserExpense", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -131,7 +131,7 @@ namespace SmartSaver.Migrations
                     b.ToTable("UserExpense");
                 });
 
-            modelBuilder.Entity("Smart_Saver_WEB.Models.UserIncome", b =>
+            modelBuilder.Entity("SmartSaver.Models.UserIncome", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -149,7 +149,7 @@ namespace SmartSaver.Migrations
                     b.ToTable("UserIncome");
                 });
 
-            modelBuilder.Entity("Smart_Saver_WEB.Models.UserInformation", b =>
+            modelBuilder.Entity("SmartSaver.Models.UserInformation", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()

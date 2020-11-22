@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace Smart_Saver_WEB.Models
+namespace SmartSaver.Models
 {
     public partial class SavingsManagerInformation
     {

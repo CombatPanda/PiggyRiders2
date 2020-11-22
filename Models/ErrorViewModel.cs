@@ -1,6 +1,6 @@
 using System;
 
-namespace Smart_Saver_WEB.Models
+namespace SmartSaver.Models
 {
     public class ErrorViewModel
     {

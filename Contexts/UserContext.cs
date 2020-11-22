@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Smart_Saver_WEB.Models;
+using SmartSaver.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
-using Smart_Saver_WEB.Models;
+using SmartSaver.Models;
 
 namespace SmartSaver.Controllers
 {

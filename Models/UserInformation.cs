@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-namespace Smart_Saver_WEB.Models
+namespace SmartSaver.Models
 {
     public class UserInformation
     {

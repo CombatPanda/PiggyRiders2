@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Smart_Saver_WEB.Models
+namespace SmartSaver.Models
 {
     public class ExpensesInformation
     {
