@@ -60,7 +60,7 @@ namespace SmartSaver.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserInformationExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
