@@ -8,6 +8,7 @@ import FetchRandomUser from "./components/FetchRandomUser";
 import FetchSavingInfo from "./components/FetchSavingInfo";
 import SavingInfoDetails from "./components/SavingInfoDetails";
 import './custom.css'
+import AddSavingInfo from "./components/AddSavingInfo";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -20,7 +21,8 @@ export default class App extends Component {
         <Route path='/fetch-data' component={FetchData} />
         <Route path='/fetch-random' component={FetchRandomUser} />
         <Route path='/SavingsManagerInformations' exact component={FetchSavingInfo} />
-        <Route path="/SavingsManagerInformations/:id" component={SavingInfoDetails} />
+        <Route path="/SavingsManagerInformations/:id" exact component={SavingInfoDetails} />
+        <Route path="/SavingsManagerInformations/add" exact component={AddSavingInfo} />
       </Layout>
     );
   }
