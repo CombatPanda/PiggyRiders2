@@ -42,6 +42,7 @@ function FetchExpensesManagerInfo() {
                     )}
                 </tbody>
             </table>
+            <button className="pi pi-plus">Add</button>
         </div>
     );
 
