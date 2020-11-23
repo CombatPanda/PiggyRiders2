@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SmartSaver.Contexts;
+using SmartSaver.Service;
 
 namespace SmartSaver
 {
@@ -21,6 +24,7 @@ namespace SmartSaver
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IUserServices, UserServices>();
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory
@@ -28,6 +32,9 @@ namespace SmartSaver
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddDbContext<UserContext>(options =>
+          options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
