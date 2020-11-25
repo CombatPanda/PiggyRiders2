@@ -23,36 +23,23 @@ export class NavMenu extends Component {
 
   render () {
     return (
-      <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
-          <Container>
-            <NavbarBrand tag={Link} to="/">WebApplication3</NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-            <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
-              <ul className="navbar-nav flex-grow">
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
-                   </NavItem>
-                  <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/fetch-random">Fetch person</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/SavingsManagerInformations">Savings Information</NavLink>
-                   </NavItem>
-                   <NavItem>
-                      <NavLink tag={Link} className="text-dark" to="/ExpensesManagerInformations">Expenses Manager Information</NavLink>
-                    </NavItem>
-              </ul>
-            </Collapse>
-          </Container>
-        </Navbar>
-      </header>
+        <div>
+            <ul id="dropdown" className="dropdown-content">
+                <li><a href="/SavingsManagerInformations">Saving Manager</a></li>
+                <li className="divider"></li>
+                <li><a href="/ExpensesManagerInformations">Expenses Manager</a></li>
+                <li><a href="/ExpensesManagerInformations/add">Add Limit</a></li>
+                
+            </ul>
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="/" className="brand-logo">Smart Saver</a>
+                    <ul className="right hide-on-med-and-down">
+                        <li><a className="dropdown-trigger" href="#!" data-target="dropdown">Menu</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
     );
   }
 }
