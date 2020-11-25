@@ -8,8 +8,8 @@ import FetchRandomUser from "./components/FetchRandomUser";
 import FetchSavingInfo from "./components/FetchSavingInfo";
 import SavingInfoDetails from "./components/SavingInfoDetails";
 import FetchExpensesManagerInfo from "./components/FetchExpensesManagerInfo";
-import ExpensesInfoDetails from "./components/ExpensesInfoDetails";
 import AddLimit from "./components/AddLimit";
+import EditExpensesInfo from "./components/EditExpensesInfo";
 import './custom.css'
 
 export default class App extends Component {
@@ -25,8 +25,8 @@ export default class App extends Component {
         <Route path='/SavingsManagerInformations' exact component={FetchSavingInfo} />
         <Route path="/SavingsManagerInformations/:id" component={SavingInfoDetails} />
         <Route path='/ExpensesManagerInformations' exact component={FetchExpensesManagerInfo} />
-            <Route path="/ExpensesManagerInformations/:id" excat component={ExpensesInfoDetails} />
-            <Route path="/ExpensesManagerInformations/add" excat component={AddLimit} />
+         <Route path="/ExpensesManagerInformations/add" excat component={AddLimit} />
+         <Route path="/ExpensesManagerInformations/edit/:id" excat component={EditExpensesInfo} />
       </Layout>
     );
   }

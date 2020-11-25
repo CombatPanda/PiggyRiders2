@@ -32,7 +32,7 @@ export class NavMenu extends Component {
                 
             </ul>
             <nav>
-                <div class="nav-wrapper">
+                <div className="nav-wrapper">
                     <a href="/" className="brand-logo">Smart Saver</a>
                     <ul className="right hide-on-med-and-down">
                         <li><a className="dropdown-trigger" href="#!" data-target="dropdown">Menu</a></li>
