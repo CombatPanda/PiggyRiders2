@@ -6,8 +6,8 @@ class AddLimit extends Component {
     onSubmit(e) {
         const newLimit = {
             category: this.refs.category.value,
-            spent: this.refs.spent.value,
-            limit: this.refs.limit.value,
+            spent: (this.refs.spent.value == "") ? null : this.refs.spent.value,
+            limit: (this.refs.limit.value == "") ? null : this.refs.limit.value,     
             uid: 1
         }
         this.addLimit(newLimit);

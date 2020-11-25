@@ -36,11 +36,11 @@ class EditExpensesInfo extends Component {
     onSubmit(e) {
         const newLimit = {
             category: this.refs.category.value,
-            spent: this.refs.spent.value,
-            limit: this.refs.limit.value
-        }
-        this.editLimit(newLimit);
+            spent: (this.refs.spent.value == "") ? null : this.refs.spent.value,
+            limit: (this.refs.limit.value == "") ? null : this.refs.limit.value     
+                }
         e.preventDefault();
+        this.editLimit(newLimit);
     }
 
     editLimit(newLimit) {
@@ -54,7 +54,8 @@ class EditExpensesInfo extends Component {
                 ID: this.state.id,
                 Category: newLimit.category,
                 Spent: newLimit.spent,
-                Limit: newLimit.limit
+                Limit: newLimit.limit,
+                uID: 1
             })
         }).then(response => {
             this.props.history.push('/ExpensesManagerInformations')
