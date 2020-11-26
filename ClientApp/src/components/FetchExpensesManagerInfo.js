@@ -32,6 +32,12 @@ class FetchExpensesManagerInfo extends Component {
         }
     }
 
+    getColor = (spent, limit) => {
+        if (spent > limit)
+            return 'red';
+        else return 'black';
+    }
+
     render() {
         return (
             <div>
@@ -45,7 +51,7 @@ class FetchExpensesManagerInfo extends Component {
                     </thead>
                     <tbody className="collection-item">
                         {this.state.expenses.map(expense =>
-                            <tr key={expense.id}>
+                            <tr key={expense.id} style={{ color: this.getColor(expense.spent, expense.limit) }}>
                                 <td>{expense.category}</td>
                                 <td>{expense.spent}</td>
                                 <td>{expense.limit}</td>
