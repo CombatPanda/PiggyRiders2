@@ -104,5 +104,16 @@ namespace SmartSaver.Controllers
         {
             return _context.SMInfo.Any(e => e.ID == id);
         }
+        [HttpPost]
+        [Route("/test")]
+        public async Task<ActionResult<SavingsManagerInformation>> Test(SavingsManagerInformation savingsManagerInformation)
+        {
+            _context.SMInfo.Add(savingsManagerInformation);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetSavingsManagerInformation", new { id = savingsManagerInformation.ID }, savingsManagerInformation);
+        }
     }
+    
 }
+

@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
+import AddSavingInfo from './AddSavingInfo';
 
 function FetchSavingInfo() {
 
@@ -20,15 +21,8 @@ function FetchSavingInfo() {
 
     return (
         <div>
+            <AddSavingInfo />
             <table className='table table-striped' aria-labelledby="tabelLabel">
-                <Route render={({ history }) => (
-                    <Button
-                        type="primary"
-                        onClick={() => { history.push('/SavingsManagerInformations/add') }}
-                    >
-                        Add new
-                    </Button>
-                )} />
                 <thead>
                     <tr>
                         <th>Purpose</th>
