@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 
 
-function SavingInfoDetails({ match}) {
+function SavingInfoDetails({ match }) {
 
     useEffect(() => {
         fetchItem();
