@@ -1,27 +1,13 @@
-﻿import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useContext } from 'react';
+import { SavingContext } from './SavingContext';
 import { Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import AddSavingInfo from './AddSavingInfo';
+import DeleteSaving from './DeleteSaving';
 
-function FetchSavingInfo() {
-
-    useEffect(() => {
-        fetchItems();
-    }, []);
-
-    const [items, setItems] = useState([]);
-
-    const fetchItems = async () => {
-        const data = await fetch('https://localhost:44312/api/SavingsManagerInformations');
-
-        const items = await data.json();
-        console.log(items);
-        setItems(items);
-    };
-
+const SavingList = () => {
+    const [items, setItems] = useContext(SavingContext);
     return (
         <div>
-            <AddSavingInfo />
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>
@@ -41,6 +27,14 @@ function FetchSavingInfo() {
                             <td>{item.savedAmount}</td>
                             <td>{item.status}</td>
                             <td>
+                                <Button
+                                    type="primary"
+                                    onClick={DeleteSaving }
+                                >
+                                    Delete
+                                </Button>
+                            </td>
+                            <td>
                                 <Route render={({ history }) => (
                                     <Button
                                         type="primary"
@@ -50,12 +44,12 @@ function FetchSavingInfo() {
                                     </Button>
                                 )} />
                             </td>
-                            <td>delete</td>
                         </tr>
                     )}
                 </tbody>
             </table>
         </div>
-    );
-}
-export default FetchSavingInfo;
+        );
+};
+
+export default SavingList;

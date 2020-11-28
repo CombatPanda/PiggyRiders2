@@ -1,10 +1,12 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useContext } from 'react';
+import { SavingContext } from './SavingContext';
 
 const AddSavingInfo = () => {
 
     const [purpose, setPurpose] = useState('');
     const [cost, setCost] = useState('');
     const [date, setDate] = useState('');
+    const [items, setItems] = useContext(SavingContext);
 
     const updatePurpose = e => {
         setPurpose(e.target.value);
@@ -32,14 +34,15 @@ const AddSavingInfo = () => {
                 Status: "Not started"
             })
         })
+        setItems(prevItems => [...prevItems, { purpose: purpose, cost: cost, date: date }])
 
     };
-    
+
     return (
         <form onSubmit={addSavingInfo}>
             <input type="text" name="purpose" value={purpose} onChange={updatePurpose} />
             <input type="text" name="cost" value={cost} onChange={updateCost} />
-            <input type="text" name="date" value={date} onChange={updateDate}/>
+            <input type="text" name="date" value={date} onChange={updateDate} />
             <button>Submit</button>
         </form>
     );
