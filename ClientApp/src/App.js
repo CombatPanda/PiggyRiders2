@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
-import FetchRandomUser from "./components/FetchRandomUser";
-import FetchSavingInfo from "./components/FetchSavingInfo";
-import SavingInfoDetails from "./components/SavingInfoDetails";
-import FetchExpensesManagerInfo from "./components/FetchExpensesManagerInfo";
-import AddLimit from "./components/AddLimit";
-import EditExpensesInfo from "./components/EditExpensesInfo";
+import FetchSavingInfo from "./components/SavingComponents/FetchSavingInfo";
+import SavingInfoDetails from "./components/SavingComponents/SavingInfoDetails";
+import FetchExpensesManagerInfo from "./components/ExpensenesComponents/FetchExpensesManagerInfo";
+import AddLimit from "./components/ExpensenesComponents/AddLimit";
+import EditExpensesInfo from "./components/ExpensenesComponents/EditExpensesInfo";
 import './custom.css'
 
 export default class App extends Component {
@@ -19,9 +16,6 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path='/' exact component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
-        <Route path='/fetch-random' component={FetchRandomUser} />
         <Route path='/SavingsManagerInformations' exact component={FetchSavingInfo} />
         <Route path="/SavingsManagerInformations/:id" component={SavingInfoDetails} />
         <Route path='/ExpensesManagerInformations' exact component={FetchExpensesManagerInfo} />
