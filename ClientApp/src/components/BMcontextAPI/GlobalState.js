@@ -15,16 +15,24 @@ export const GlobalProvider = ({ children }) => {
 
     // Actions
 
-    function addTransaction(transaction) {
+    function addIncome(income) {
         dispatch({
-            type: 'ADD_TRANSACTION',
-            payload: transaction
+            type: 'ADD_INCOME',
+            payload: income
+        });
+    }
+
+    function addExpenses(expenses) {
+        dispatch({
+            type: 'ADD_EXPENSES',
+            payload: expenses
         });
     }
 
     return (<GlobalContext.Provider value={{
         transactions: state.transactions,
-        addTransaction
+        addIncome,
+        addExpenses
     }}>
         {children}
     </GlobalContext.Provider>);

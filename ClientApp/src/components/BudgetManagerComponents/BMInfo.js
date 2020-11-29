@@ -1,10 +1,12 @@
 ﻿import React from 'react';
 import { GlobalProvider } from '../BMcontextAPI/GlobalState';
 import './BMapp.css';
+import { addIncome } from './AddTransaction';
+import { addExpenses } from './AddTransaction';
 import { Balance } from './Balance';
 import { IncomeExpenses } from './IncomeExpenses';
 import { TransactionList } from './TransactionList';
-import { AddTransaction } from './AddTransaction';;
+
 
 
 function App() {
@@ -14,7 +16,8 @@ function App() {
                 <Balance />
                 <IncomeExpenses />
                 <TransactionList />
-                <AddTransaction />
+                <addIncome />
+                <addExpenses />
             </div>
         </GlobalProvider>
     );
