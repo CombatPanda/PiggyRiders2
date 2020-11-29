@@ -1,9 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import "./index.css";
+import "./components/LoginRegisterComponents/LRindex.css";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
     <BrowserRouter>
@@ -11,5 +10,3 @@ ReactDOM.render(
     </BrowserRouter>,
     document.getElementById("root")
 );
-
-serviceWorker.unregister();

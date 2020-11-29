@@ -1,10 +1,10 @@
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './components/LoginRegisterComponents/LRApp.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Login from "./components/login.component";
-import SignUp from "./components/signup.component";
+import Login from "./components/LoginRegisterComponents/login.component";
+import SignUp from "./components/LoginRegisterComponents/signup.component";
 
 function App() {
   return (<Router>
@@ -37,6 +37,4 @@ function App() {
     </div></Router>
   );
 }
-
-
 export default App;
