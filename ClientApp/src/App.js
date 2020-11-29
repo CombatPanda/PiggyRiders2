@@ -5,7 +5,6 @@ import { Home } from './components/Home';
 import SavingInfoApp from "./components/SavingComponents/SavingInfoApp";
 import SavingInfoDetails from "./components/SavingComponents/SavingInfoDetails";
 import FetchSavingInfo from "./components/SavingComponents/FetchSavingInfo";
-import SavingInfoDetails from "./components/SavingComponents/SavingInfoDetails";
 import FetchExpensesManagerInfo from "./components/ExpensenesComponents/FetchExpensesManagerInfo";
 import AddLimit from "./components/ExpensenesComponents/AddLimit";
 import EditExpensesInfo from "./components/ExpensenesComponents/EditExpensesInfo";
