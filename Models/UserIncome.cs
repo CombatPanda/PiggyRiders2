@@ -13,6 +13,7 @@ namespace SmartSaver.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public int income { get; set; }
+        public string incomeInfo { get; set; }
         public int userID { get; set; }
     }
 }

@@ -9,13 +9,7 @@ import FetchExpensesManagerInfo from "./components/ExpensenesComponents/FetchExp
 import AddLimit from "./components/ExpensenesComponents/AddLimit";
 import EditExpensesInfo from "./components/ExpensenesComponents/EditExpensesInfo";
 import './custom.css'
-import { Header } from './components/BudgetManagerComponents/Header';
-import { Balance } from './components/BudgetManagerComponents/Balance';
-import { IncomeExpenses } from './components/BudgetManagerComponents/IncomeExpenses';
-import { TransactionList } from './components/BudgetManagerComponents/TransactionList';
-import { AddTransaction } from './components/BudgetManagerComponents/AddTransaction';
-import { GlobalProvider } from './components/BMcontextAPI/GlobalState'
-import './BMapp.css'
+import BMInfo from "./components/BudgetManagerComponents/BMInfo";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -31,16 +25,7 @@ export default class App extends Component {
         <Route path="/ExpensesManagerInformations/edit/:id" excat component={EditExpensesInfo} />
         <Route path='/SavingsManagerInformations' exact component={SavingInfoApp} />
         <Route path="/SavingsManagerInformations/:id" exact component={SavingInfoDetails} />
-
-        <GlobalProvider>
-        <Header />
-            <div className="container">
-                <Balance />
-                <IncomeExpenses />
-                <TransactionList />
-                <AddTransaction />
-            </div>
-        </GlobalProvider>
+        <Route path="/BMInfo" exact component={BMInfo} />
       </Layout>
     );
   }

@@ -10,8 +10,8 @@ using SmartSaver.Contexts;
 namespace SmartSaver.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20201128233747_smartsaver")]
-    partial class smartsaver
+    [Migration("20201129184813_SmartSaver")]
+    partial class SmartSaver
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -141,6 +141,9 @@ namespace SmartSaver.Migrations
 
                     b.Property<int>("income")
                         .HasColumnType("int");
+
+                    b.Property<string>("incomeInfo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("userID")
                         .HasColumnType("int");

@@ -140,6 +140,9 @@ namespace SmartSaver.Migrations
                     b.Property<int>("income")
                         .HasColumnType("int");
 
+                    b.Property<string>("incomeInfo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("userID")
                         .HasColumnType("int");
 

@@ -2,7 +2,7 @@
 
 namespace SmartSaver.Migrations
 {
-    public partial class smartsaver : Migration
+    public partial class SmartSaver : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,6 +90,7 @@ namespace SmartSaver.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     income = table.Column<int>(type: "int", nullable: false),
+                    incomeInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
