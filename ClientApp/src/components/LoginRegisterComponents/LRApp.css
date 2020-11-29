@@ -1,12 +1,12 @@
-.App {
+.LRApp {
   text-align: center;
 }
 
-.App-logo {
+.LRApp-logo {
   height: 40vmin;
 }
 
-.App-header {
+.LRApp-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -17,6 +17,6 @@
   color: white;
 }
 
-.App-link {
+.LRApp-link {
   color: #09d3ac;
 }
