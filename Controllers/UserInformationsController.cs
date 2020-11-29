@@ -23,16 +23,16 @@ namespace SmartSaver.Controllers
 
         // GET: api/UserInformations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserInformation>>> GetUserInformation()
+        public async Task<ActionResult<IEnumerable<UserInformation>>> GetUserInfo()
         {
-            return await _context.UserInformation.ToListAsync();
+            return await _context.UserInfo.ToListAsync();
         }
 
         // GET: api/UserInformations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserInformation>> GetUser(int id)
+        public async Task<ActionResult<UserInformation>> GetUserInformation(int id)
         {
-            var userInformation = await _context.UserInformation.FindAsync(id);
+            var userInformation = await _context.UserInfo.FindAsync(id);
 
             if (userInformation == null)
             {
@@ -45,7 +45,7 @@ namespace SmartSaver.Controllers
         // PUT: api/UserInformations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, UserInformation userInformation)
+        public async Task<IActionResult> PutUserInformation(int id, UserInformation userInformation)
         {
             if (id != userInformation.ID)
             {
@@ -60,7 +60,7 @@ namespace SmartSaver.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!UserInformationExists(id))
                 {
                     return NotFound();
                 }
@@ -76,9 +76,9 @@ namespace SmartSaver.Controllers
         // POST: api/UserInformations
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UserInformation>> PostUser(UserInformation userInformation)
+        public async Task<ActionResult<UserInformation>> PostUserInformation(UserInformation userInformation)
         {
-            _context.UserInformation.Add(userInformation);
+            _context.UserInfo.Add(userInformation);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUserInformation", new { id = userInformation.ID }, userInformation);
@@ -86,23 +86,23 @@ namespace SmartSaver.Controllers
 
         // DELETE: api/UserInformations/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUserInformation(int id)
         {
-            var userInformation = await _context.UserInformation.FindAsync(id);
+            var userInformation = await _context.UserInfo.FindAsync(id);
             if (userInformation == null)
             {
                 return NotFound();
             }
 
-            _context.UserInformation.Remove(userInformation);
+            _context.UserInfo.Remove(userInformation);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool UserExists(int id)
+        private bool UserInformationExists(int id)
         {
-            return _context.UserInformation.Any(e => e.ID == id);
+            return _context.UserInfo.Any(e => e.ID == id);
         }
     }
 }

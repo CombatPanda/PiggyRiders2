@@ -5,14 +5,13 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Home } from './components/Home';
 import { Layout } from './components/Layout';
 import SavingInfoApp from "./components/SavingComponents/SavingInfoApp";
-import LRApp from "./components/LoginRegisterComponents/LRApp";
 import SavingInfoDetails from "./components/SavingComponents/SavingInfoDetails";
 import FetchExpensesManagerInfo from "./components/ExpensenesComponents/FetchExpensesManagerInfo";
 import AddLimit from "./components/ExpensenesComponents/AddLimit";
 import EditExpensesInfo from "./components/ExpensenesComponents/EditExpensesInfo";
 import './custom.css'
-import Login from "./components/LoginRegisterComponents/login.component";
-import SignUp from "./components/LoginRegisterComponents/signup.component";
+import Login from "./components/LoginRegisterComponents/Login";
+import SignUp from "./components/LoginRegisterComponents/Signup";
 
 
 export default class App extends Component {

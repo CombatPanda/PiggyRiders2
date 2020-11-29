@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
+import addUser from "./AddUser"
 export default class Login extends Component {
+
   render() {
     return (
       <form>

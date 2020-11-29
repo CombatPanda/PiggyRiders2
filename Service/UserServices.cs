@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿/*using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
 using System;
@@ -42,12 +42,12 @@ namespace SmartSaver.Service
                     db.UserInformation.Add(usr);
 
                 }
-/*                else
+                else
                 {
                     Username = usr.Username,
                     Password = usr.Password,
                     Email = UserInformation.Email,
-                }*/
+                }
 
                 return await db.SaveChangesAsync() >= 1;
             }
@@ -68,3 +68,4 @@ namespace SmartSaver.Service
         }
     }
 }
+*/
