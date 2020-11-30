@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
 export class NavMenu extends Component {
+  
   static displayName = NavMenu.name;
 
   constructor (props) {
@@ -26,6 +27,9 @@ export class NavMenu extends Component {
         <div>
             <ul id="dropdown" className="dropdown-content">
                 <li><a href="/SavingsManagerInformations">Saving Manager</a></li>
+                <li className="divider"></li>
+                <li><a href="/log-in">Log In</a></li>
+                <li><a href="/sign-up">Sign Up</a></li>
                 <li className="divider"></li>
                 <li><a href="/ExpensesManagerInformations">Expenses Manager</a></li>
                 <li><a href="/ExpensesManagerInformations/add">Add Limit</a></li>
