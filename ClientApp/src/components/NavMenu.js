@@ -35,7 +35,7 @@ export class NavMenu extends Component {
                 <li><a href="/ExpensesManagerInformations/add">Add Limit</a></li>
                 
             </ul>
-            <nav>
+            <nav className = "pink">
                 <div className="nav-wrapper">
                     <a href="/" className="brand-logo">Smart Saver</a>
                     <ul className="right hide-on-med-and-down">

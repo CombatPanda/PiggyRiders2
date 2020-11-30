@@ -35,7 +35,7 @@ class FetchExpensesManagerInfo extends Component {
     getColor = (spent, limit) => {
         if (spent > limit)
             return 'red';
-        else return 'black';
+        else return 'white';
     }
 
     render() {
