@@ -6,7 +6,6 @@ import { Home } from './components/Home';
 import { Layout } from './components/Layout';
 import SavingInfoApp from "./components/SavingComponents/SavingInfoApp";
 import SavingInfoDetails from "./components/SavingComponents/SavingInfoDetails";
-import FetchSavingInfo from "./components/SavingComponents/FetchSavingInfo";
 import FetchExpensesManagerInfo from "./components/ExpensenesComponents/FetchExpensesManagerInfo";
 import AddLimit from "./components/ExpensenesComponents/AddLimit";
 import EditExpensesInfo from "./components/ExpensenesComponents/EditExpensesInfo";
@@ -32,6 +31,7 @@ export default class App extends Component {
         <Route path='/SavingsManagerInformations' exact component={SavingInfoApp} />
         <Route path="/SavingsManagerInformations/:id" exact component={SavingInfoDetails} />
         <Route path="/BMInfo" exact component={BMInfo} />
+        <Route path="/BMInfo/:id" exact component={BMInfo} />
       </Layout>
     );
   }

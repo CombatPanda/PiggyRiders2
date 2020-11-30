@@ -72,7 +72,6 @@ export class AddTransaction extends Component {
             
                     <input type="submit" value="incomes" className="btn"  name="incomes"/>
                         <input type="submit" value="expenses" className="btn" name="expenses" />
-                     
                 </form>
             </div>
         )
