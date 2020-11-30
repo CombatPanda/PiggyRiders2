@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -78,10 +81,23 @@ namespace SmartSaver.Controllers
         [HttpPost]
         public async Task<ActionResult<UserInformation>> PostUserInformation(UserInformation userInformation)
         {
-            _context.UserInfo.Add(userInformation);
-            await _context.SaveChangesAsync();
+            if(!EmailExists(userInformation.Email))
+            {
+                return BadRequest();
+            }
+            else if(!UsernameExists(userInformation.Username))
+            {
+                return BadRequest();
+            }
+                else
+                {
+                    _context.UserInfo.Add(userInformation);
+                    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUserInformation", new { id = userInformation.ID }, userInformation);
+                    return CreatedAtAction("GetUserInformation", new { id = userInformation.ID }, userInformation);
+
+                }
+  
         }
 
         // DELETE: api/UserInformations/5
@@ -104,5 +120,14 @@ namespace SmartSaver.Controllers
         {
             return _context.UserInfo.Any(e => e.ID == id);
         }
+        private bool EmailExists(string email)
+        {
+            return _context.UserInfo.Any(e => e.Email == email);
+        }
+        private bool UsernameExists(string username)
+        {
+            return _context.UserInfo.Any(e => e.Username == username);
+        }
+
     }
 }
