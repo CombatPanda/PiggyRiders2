@@ -1,5 +1,6 @@
 ﻿import React, { useState, useContext } from 'react';
 import { SavingContext } from './SavingContext';
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 const AddSavingInfo = () => {
 
@@ -40,10 +41,13 @@ const AddSavingInfo = () => {
 
     return (
         <form onSubmit={addSavingInfo}>
+            <Label for="Purpose">Purpose</Label>
             <input type="text" name="purpose" value={purpose} onChange={updatePurpose} />
+            <Label for="Cost">Cost</Label>
             <input type="text" name="cost" value={cost} onChange={updateCost} />
+            <Label for="Date">Date</Label>
             <input type="text" name="date" value={date} onChange={updateDate} />
-            <button>Submit</button>
+            <Button>Submit</Button>
         </form>
     );
 };
