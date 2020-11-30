@@ -2,25 +2,55 @@ import React, { Component } from "react";
 import addUser from "./AddUser"
 export default class Login extends Component {
 
+  onSubmit(e) {
+    const newUser = {
+        password: this.refs.password.value,   
+        email: this.refs.email.value
+    }
+    this.getUser(newUser);
+    e.preventDefault();
+}
+
+getUser(newUser) {
+    fetch('https://localhost:44312/api/UserInformations/' , {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            Password: newUser.password,
+            Email: newUser.email 
+        })
+    }).then(response => {
+        this.props.history.push('/SavingsManagerInformations')
+    })
+    
+}
+
+
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.onSubmit.bind(this)}>
         <h3>Log In</h3>
 
-        <div className="form-group">
+        <div className="imput-field">
           <label>Email address</label>
           <input
             type="email"
+            name = "email" ref="email"
             className="form-control"
             placeholder="Enter email"
           />
         </div>
 
-        <div className="form-group">
-          <label>Password</label>
+        <div className="imput-field">
+          <label htmlFor="password">Password</label>
           <input
             type="password"
-            className="form-control"
+            name = "password"
+            ref = "password"
             placeholder="Enter password"
           />
         </div>

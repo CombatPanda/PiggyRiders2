@@ -27,8 +27,8 @@ addUser(newUser) {
     }).then(response => {
         this.props.history.push('/log-in')
     })
+    
 }
-
     render() {
         return (
             <form onSubmit={this.onSubmit.bind(this)}>
@@ -49,7 +49,7 @@ addUser(newUser) {
                     <input type="email" name = "email" ref="email"  placeholder="Enter email" />
                 </div>
 
-                <button type="submit" className="btn">Sign Up</button>
+                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                 <p className="forgot-password text-right">
                     Already registered <a href="#">sign in?</a>
                 </p>
