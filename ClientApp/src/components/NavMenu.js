@@ -33,6 +33,7 @@ export class NavMenu extends Component {
                 <li className="divider"></li>
                 <li><a href="/ExpensesManagerInformations">Expenses Manager</a></li>
                 <li><a href="/ExpensesManagerInformations/add">Add Limit</a></li>
+                <li><a href="/BMInfo">Add Transaction</a></li>
                 
             </ul>
             <nav>

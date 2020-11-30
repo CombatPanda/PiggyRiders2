@@ -2,7 +2,7 @@
 
 namespace SmartSaver.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,6 +90,7 @@ namespace SmartSaver.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     income = table.Column<int>(type: "int", nullable: false),
+                    incomeInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -103,9 +104,9 @@ namespace SmartSaver.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
