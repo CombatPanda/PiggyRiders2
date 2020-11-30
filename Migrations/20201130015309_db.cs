@@ -2,7 +2,7 @@
 
 namespace SmartSaver.Migrations
 {
-    public partial class SmartSaver : Migration
+    public partial class db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
