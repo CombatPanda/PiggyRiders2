@@ -2,10 +2,23 @@
 import { SavingContext } from './SavingContext';
 import { Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
-import DeleteSaving from './DeleteSaving';
+//import DeleteSaving from './DeleteSaving';
 
 const SavingList = () => {
     const [items, setItems] = useContext(SavingContext);
+
+    const deleteLimit = (id) => {
+        if (window.confirm('Are you sure?')) {
+            fetch('https://localhost:44312/api/SavingsManagerInformations/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                }
+            })
+            window.location.reload();
+        }
+    }
     return (
         <div>
             <table className='table table-striped' aria-labelledby="tabelLabel">
@@ -29,7 +42,7 @@ const SavingList = () => {
                             <td>
                                 <Button
                                     type="primary"
-                                    onClick={DeleteSaving }
+                                    onClick={() => deleteLimit(item.id)}
                                 >
                                     Delete
                                 </Button>
