@@ -37,7 +37,7 @@ getUser(newUser) {
 
         <div className="imput-field">
           <label>Email address</label>
-          <input
+          <input 
             type="email"
             name = "email" ref="email"
             className="form-control"

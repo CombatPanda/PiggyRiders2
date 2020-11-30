@@ -26,16 +26,18 @@ export class NavMenu extends Component {
     return (
         <div>
             <ul id="dropdown" className="dropdown-content">
-                <li><a href="/SavingsManagerInformations">Saving Manager</a></li>
-                <li className="divider"></li>
                 <li><a href="/log-in">Log In</a></li>
                 <li><a href="/sign-up">Sign Up</a></li>
+                <li className="divider"></li>
+                <li><a href="/BMInfo">Add Transaction</a></li>
+                <li className="divider"></li>
+                <li><a href="/SavingsManagerInformations">Saving Manager</a></li>
                 <li className="divider"></li>
                 <li><a href="/ExpensesManagerInformations">Expenses Manager</a></li>
                 <li><a href="/ExpensesManagerInformations/add">Add Limit</a></li>
                 
             </ul>
-            <nav>
+            <nav className = "pink">
                 <div className="nav-wrapper">
                     <a href="/" className="brand-logo">Smart Saver</a>
                     <ul className="right hide-on-med-and-down">
