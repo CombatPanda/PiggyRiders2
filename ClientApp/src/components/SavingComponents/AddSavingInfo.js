@@ -35,7 +35,7 @@ const AddSavingInfo = () => {
                 Status: "Not started"
             })
         })
-        setItems(prevItems => [...prevItems, { purpose: purpose, cost: cost, date: date }])
+        setItems(prevItems => [...prevItems, { purpose: purpose, cost: cost, date: date, savedAmount: 0, status: "Not started" }])
 
     };
 
