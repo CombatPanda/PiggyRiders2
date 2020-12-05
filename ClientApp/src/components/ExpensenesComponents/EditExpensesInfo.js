@@ -49,20 +49,23 @@ class EditExpensesInfo extends Component {
         if (!newLimit.category) {
             formIsValid = false;
             alert("Category field cannot be empty!");
+            return formIsValid;
         }
-        if (newLimit.spent != null) {
+        else if (newLimit.spent != null) {
             if (!newLimit.spent.match(/^[0-9]/)) {
                 formIsValid = false;
                 alert("Spent is only numbers field!");
+                return formIsValid;
             }
         }
-        if (newLimit.limit != null) {
+        else if (newLimit.limit != null) {
             if (!newLimit.limit.match(/^[0-9]/)) {
                 formIsValid = false;
                 alert("Limit is only numbers field!");
+                return formIsValid;
             }
         }
-        return formIsValid;
+        else return formIsValid;
     }
 
     editLimit(newLimit) {
@@ -104,16 +107,16 @@ class EditExpensesInfo extends Component {
 
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <div className="imput-field">
-                        <input type="text" name="category" ref="category" value={this.state.category} onChange={this.handleInputChange} />
                         <label htmlFor="category">Category</label>
+                        <input type="text" name="category" ref="category" value={this.state.category} onChange={this.handleInputChange} />                    
                     </div>
                     <div className="imput-field">
-                        <input type="text" name="spent" ref="spent" value={this.state.spent} onChange={this.handleInputChange} />
                         <label htmlFor="spent">Spent</label>
+                        <input type="text" name="spent" ref="spent" value={this.state.spent} onChange={this.handleInputChange} />                       
                     </div>
                     <div className="imput-field">
-                        <input type="text" name="limit" ref="limit" value={this.state.limit} onChange={this.handleInputChange}   />
                         <label htmlFor="limit">Limit</label>
+                        <input type="text" name="limit" ref="limit" value={this.state.limit} onChange={this.handleInputChange} />                       
                     </div>
                     <input type="submit" value="Save" className="btn" />
                 </form>

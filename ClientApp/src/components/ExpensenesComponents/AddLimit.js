@@ -23,20 +23,23 @@ class AddLimit extends Component {
         {
             formIsValid = false;
             alert("Category field cannot be empty!");
+            return formIsValid;
         }
-        if (newLimit.spent != null) {
+        else if (newLimit.spent != null) {
             if (!newLimit.spent.match(/^[0-9]/)) {
                 formIsValid = false;
                 alert("Spent is only numbers field!");
+                return formIsValid;
             }
         }
-        if (newLimit.limit != null) {
+       else if (newLimit.limit != null) {
             if (!newLimit.limit.match(/^[0-9]/)) {
                 formIsValid = false;
                 alert("Limit is only numbers field!");
+                return formIsValid;
             }
         }
-        return formIsValid;
+       else return formIsValid;
     }
 
     addLimit(newLimit) {
