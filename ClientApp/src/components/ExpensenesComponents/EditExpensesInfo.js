@@ -40,7 +40,29 @@ class EditExpensesInfo extends Component {
             limit: (this.refs.limit.value == "") ? null : this.refs.limit.value     
                 }
         e.preventDefault();
-        this.editLimit(newLimit);
+        if (this.handleValidation(newLimit)) {
+            this.editLimit(newLimit);
+        }
+    }
+    handleValidation(newLimit) {
+        var formIsValid = true;
+        if (!newLimit.category) {
+            formIsValid = false;
+            alert("Category field cannot be empty!");
+        }
+        if (newLimit.spent != null) {
+            if (!newLimit.spent.match(/^[0-9]/)) {
+                formIsValid = false;
+                alert("Spent is only numbers field!");
+            }
+        }
+        if (newLimit.limit != null) {
+            if (!newLimit.limit.match(/^[0-9]/)) {
+                formIsValid = false;
+                alert("Limit is only numbers field!");
+            }
+        }
+        return formIsValid;
     }
 
     editLimit(newLimit) {
