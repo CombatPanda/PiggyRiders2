@@ -19,68 +19,18 @@ namespace SmartSaver.Controllers
     [ApiController]
     public class UserInformationsController : ControllerBase
     {
-        private readonly UserContext _context;
+        private readonly IUserServices _userService;
 
-        public UserInformationsController(UserContext context)
+        public UserInformationsController(IUserServices userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
-        // GET: api/UserInformations
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserInformation>>> GetUserInfo()
+        // GET: api/SavingsManagerInformations/
+        [HttpGet("{email}/{password}")]
+        public async Task<ActionResult<UserInformation>> GetUser(string email, string password)
         {
-            return await _context.UserInfo.ToListAsync();
-        }
-
-        // GET: api/UserInformations/
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserInformation>> GetUserInformation(int id, UserInformation userInformation)
-        {
-            UserServices userServices = new UserServices();
-            await userServices.GetUser(userInformation);
-            return userInformation;
-            
-            
-/*            var userInformation = await _context.UserInfo.FindAsync(id);
-
-            if (userInformation == null)
-            {
-                return NotFound();
-            }
-
-            return userInformation;*/
-        }
-
-        // PUT: api/UserInformations/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserInformation(int id, UserInformation userInformation)
-        {
-            if (id != userInformation.ID)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(userInformation).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserInformationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(await _userService.GetUser(email, password));
         }
 
         // POST: api/UserInformations
@@ -88,38 +38,112 @@ namespace SmartSaver.Controllers
         [HttpPost]
         public async Task<ActionResult<UserInformation>> PostUserInformation(UserInformation userInformation)
         {
-            UserServices userServices = new UserServices();
-            if(await userServices.SaveUser(userInformation))
-            {
-                return CreatedAtAction("GetUserInformation", new { id = userInformation.ID }, userInformation);
-            }
-            else
-            {
-                return BadRequest();
-            }
-
+            return Ok(await _userService.AddUser(userInformation));
         }
 
-        // DELETE: api/UserInformations/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserInformation(int id)
+
+/*        // POST: api/UserInformations/
+        [HttpPost]
+        public async Task<ActionResult<UserInformation>> PostUserInformation(UserInformation newUser)
         {
-            var userInformation = await _context.UserInfo.FindAsync(id);
-            if (userInformation == null)
-            {
-                return NotFound();
-            }
+            return Ok(await _userService.AddUser(newUser));
+        }*/
+        /* // GET: api/UserInformations
+         [HttpGet]
+         public async Task<ActionResult<IEnumerable<UserInformation>>> GetUserInfo()
+         {
+             return await _context.UserInfo.ToListAsync();
+         }
 
-            _context.UserInfo.Remove(userInformation);
-            await _context.SaveChangesAsync();
+         // GET: api/UserInformations/
+         [HttpGet("{id}")]
+         public async Task<ActionResult<UserInformation>> GetUserInformation(int id, UserInformation userInformation)
+         {
+             UserServices userServices = new UserServices();
+             await userServices.GetUser(userInformation);
+             return userInformation;
 
-            return NoContent();
-        }
 
-        private bool UserInformationExists(int id)
-        {
-            return _context.UserInfo.Any(e => e.ID == id);
-        }
+ *//*            var userInformation = await _context.UserInfo.FindAsync(id);
 
+             if (userInformation == null)
+             {
+                 return NotFound();
+             }
+
+             return userInformation;*//*
+         }
+
+         // PUT: api/UserInformations/5
+         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+         [HttpPut("{id}")]
+         public async Task<IActionResult> PutUserInformation(int id, UserInformation userInformation)
+         {
+             if (id != userInformation.ID)
+             {
+                 return BadRequest();
+             }
+
+             _context.Entry(userInformation).State = EntityState.Modified;
+
+             try
+             {
+                 await _context.SaveChangesAsync();
+             }
+             catch (DbUpdateConcurrencyException)
+             {
+                 if (!UserInformationExists(id))
+                 {
+                     return NotFound();
+                 }
+                 else
+                 {
+                     throw;
+                 }
+             }
+
+             return NoContent();
+         }
+
+         // POST: api/UserInformations
+         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+         [HttpPost]
+         public async Task<ActionResult<UserInformation>> PostUserInformation(UserInformation userInformation)
+         {
+             UserServices userServices = new UserServices();
+             if(await userServices.SaveUser(userInformation))
+             {
+                 return CreatedAtAction("GetUserInformation", new { id = userInformation.ID }, userInformation);
+             }
+             else
+             {
+                 return BadRequest();
+             }
+
+         }
+
+         // DELETE: api/UserInformations/5
+         [HttpDelete("{id}")]
+         public async Task<IActionResult> DeleteUserInformation(int id)
+         {
+             var userInformation = await _context.UserInfo.FindAsync(id);
+             if (userInformation == null)
+             {
+                 return NotFound();
+             }
+
+             _context.UserInfo.Remove(userInformation);
+             await _context.SaveChangesAsync();
+
+             return NoContent();
+         }
+
+         private bool UserInformationExists(int id)
+         {
+             return _context.UserInfo.Any(e => e.ID == id);
+         }
+
+     */
     }
-}
+    }
+
