@@ -9,10 +9,8 @@ namespace SmartSaver.Contexts
 {
     public class UserContext : DbContext
     {
-        public UserContext(DbContextOptions<UserContext> options) : base(options)
-        {
-
-        }
+        public UserContext(DbContextOptions<UserContext> options) : base(options){}
+        public UserContext() { }
 
         public DbSet<UserInformation> UserInfo { get; set; }
         public DbSet<ExpensesManagerInformation> EMInfo { get; set; }
@@ -21,6 +19,12 @@ namespace SmartSaver.Contexts
         public DbSet<UserBalance> UserBalance { get; set; }
         public DbSet<UserIncome> UserIncome { get; set; }
         public DbSet<ExpensesInformation> ExpensesInfo { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(LocalDB)\MSSQLLocalDB;Database=UserDB;Trusted_Connection=True;");
+        }
+
 
     }
 }

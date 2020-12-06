@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
+using SmartSaver.Service;
+
 
 namespace SmartSaver.Controllers
 {
@@ -31,18 +33,23 @@ namespace SmartSaver.Controllers
             return await _context.UserInfo.ToListAsync();
         }
 
-        // GET: api/UserInformations/5
+        // GET: api/UserInformations/
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserInformation>> GetUserInformation(int id)
+        public async Task<ActionResult<UserInformation>> GetUserInformation(int id, UserInformation userInformation)
         {
-            var userInformation = await _context.UserInfo.FindAsync(id);
+            UserServices userServices = new UserServices();
+            await userServices.GetUser(userInformation);
+            return userInformation;
+            
+            
+/*            var userInformation = await _context.UserInfo.FindAsync(id);
 
             if (userInformation == null)
             {
                 return NotFound();
             }
 
-            return userInformation;
+            return userInformation;*/
         }
 
         // PUT: api/UserInformations/5
@@ -81,23 +88,16 @@ namespace SmartSaver.Controllers
         [HttpPost]
         public async Task<ActionResult<UserInformation>> PostUserInformation(UserInformation userInformation)
         {
-            if(!EmailExists(userInformation.Email))
+            UserServices userServices = new UserServices();
+            if(await userServices.SaveUser(userInformation))
+            {
+                return CreatedAtAction("GetUserInformation", new { id = userInformation.ID }, userInformation);
+            }
+            else
             {
                 return BadRequest();
             }
-            else if(!UsernameExists(userInformation.Username))
-            {
-                return BadRequest();
-            }
-                else
-                {
-                    _context.UserInfo.Add(userInformation);
-                    await _context.SaveChangesAsync();
 
-                    return CreatedAtAction("GetUserInformation", new { id = userInformation.ID }, userInformation);
-
-                }
-  
         }
 
         // DELETE: api/UserInformations/5
@@ -119,14 +119,6 @@ namespace SmartSaver.Controllers
         private bool UserInformationExists(int id)
         {
             return _context.UserInfo.Any(e => e.ID == id);
-        }
-        private bool EmailExists(string email)
-        {
-            return _context.UserInfo.Any(e => e.Email == email);
-        }
-        private bool UsernameExists(string username)
-        {
-            return _context.UserInfo.Any(e => e.Username == username);
         }
 
     }

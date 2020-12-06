@@ -1,4 +1,4 @@
-﻿/*using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
 using System;
@@ -10,15 +10,14 @@ namespace SmartSaver.Service
 {
     public class UserServices : IUserServices
     {
-        public async Task<List<UserInformation>> GetUser()
+
+        public async Task<List<UserInformation>> GetUser(UserInformation user)
         {
             using (UserContext db = new UserContext())
             {
-                return await (from a in db.UserInformation.AsNoTracking()
+                return await (from a in db.UserInfo.AsNoTracking()
                               select new UserInformation
                               {
-                                  ID = a.ID,
-                                  Username = a.Username,
                                   Password = a.Password,
                                   Email = a.Email,
                               }).ToListAsync();
@@ -29,26 +28,20 @@ namespace SmartSaver.Service
         {
             using (UserContext db = new UserContext())
             {
-                var usr = db.UserInformation
-                    .Where(x => x.ID == user.ID).FirstOrDefault<UserInformation>();
+                var usr = db.UserInfo
+                    .Where(b => b.Username == user.Username
+                    && b.Password == user.Password).FirstOrDefault<UserInformation>();
                 if (usr == null)
                 {
-                    usr = new UserInformation()
+                    var newUser = new UserInformation()
                     {
-                        Username = usr.Username,
-                        Password = usr.Password,
-                        Email = usr.Email,
+                        Username = user.Username,
+                        Password = user.Password,
+                        Email = user.Email,
                     };
-                    db.UserInformation.Add(usr);
+                    db.UserInfo.Add(newUser);
 
                 }
-                else
-                {
-                    Username = usr.Username,
-                    Password = usr.Password,
-                    Email = UserInformation.Email,
-                }
-
                 return await db.SaveChangesAsync() >= 1;
             }
         }
@@ -57,15 +50,14 @@ namespace SmartSaver.Service
         {
             using (UserContext db = new UserContext())
             {
-                var usr = db.UserInformation
+                var usr = db.UserInfo
                     .Where(x => x.ID == Id).FirstOrDefault<UserInformation>();
                 if (usr != null)
                 {
-                    db.UserInformation.Remove(usr);
+                    db.UserInfo.Remove(usr);
                 }
                 return await db.SaveChangesAsync() >= 1;
             }
         }
     }
 }
-*/

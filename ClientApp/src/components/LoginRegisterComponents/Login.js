@@ -1,34 +1,30 @@
 import React, { Component } from "react";
-import addUser from "./AddUser"
+import addUser from "./AddUser";
 export default class Login extends Component {
-
   onSubmit(e) {
     const newUser = {
-        password: this.refs.password.value,   
-        email: this.refs.email.value
-    }
+      password: this.refs.password.value,
+      email: this.refs.email.value
+    };
     this.getUser(newUser);
     e.preventDefault();
-}
+  }
 
-getUser(newUser) {
-    fetch('https://localhost:44312/api/UserInformations/' , {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            Password: newUser.password,
-            Email: newUser.email 
-        })
+  getUser(newUser) {
+    fetch("https://localhost:44312/api/UserInformations/", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        Password: newUser.password,
+        Email: newUser.email
+      })
     }).then(response => {
-        this.props.history.push('/SavingsManagerInformations')
-    })
-    
-}
-
-
+      this.props.history.push("/SavingsManagerInformations");
+    });
+  }
 
   render() {
     return (
@@ -37,9 +33,10 @@ getUser(newUser) {
 
         <div className="imput-field">
           <label>Email address</label>
-          <input 
+          <input
             type="email"
-            name = "email" ref="email"
+            name="email"
+            ref="email"
             className="form-control"
             placeholder="Enter email"
           />
@@ -49,8 +46,8 @@ getUser(newUser) {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            name = "password"
-            ref = "password"
+            name="password"
+            ref="password"
             placeholder="Enter password"
           />
         </div>
