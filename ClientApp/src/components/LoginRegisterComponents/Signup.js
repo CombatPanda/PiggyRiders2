@@ -13,6 +13,7 @@ export default class SignUp extends Component {
 }
 
 addUser(newUser) {
+    console.log("___");
     fetch('https://localhost:44312/api/UserInformations', {
         method: 'POST',
         headers: {

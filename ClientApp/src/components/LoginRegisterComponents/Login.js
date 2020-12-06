@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import addUser from "./AddUser";
+
 export default class Login extends Component {
   onSubmit(e) {
     const newUser = {
@@ -9,12 +9,12 @@ export default class Login extends Component {
     this.getUser(newUser);
     e.preventDefault();
   }
-
   getUser(newUser) {
     fetch("https://localhost:44312/api/UserInformations/", {
       method: "GET",
       headers: {
-        Accept: "application/json",
+        Accept: 
+        "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
