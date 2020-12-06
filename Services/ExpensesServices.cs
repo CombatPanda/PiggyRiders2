@@ -7,9 +7,14 @@ using SmartSaver.Models;
 
 namespace SmartSaver.Services
 {
-    public class ExpensesServices
+    public class ExpensesServices : IExpenseServices
     {
-        public async Task<List<ExpensesManagerInformation>> GetAll(UserContext context)
+        private readonly UserContext context;
+        public ExpensesServices(UserContext context)
+        {
+            this.context = context;
+        }
+        public async Task<List<ExpensesManagerInformation>> GetAll()
         {
             //cia reiketu iterpti, kad iesko pagal user id
             List<ExpensesManagerInformation> expenses = new List<ExpensesManagerInformation>();
@@ -20,7 +25,7 @@ namespace SmartSaver.Services
             return expenses;
         }
 
-        public async Task<ExpensesManagerInformation> GetById(UserContext context, int id)
+        public async Task<ExpensesManagerInformation> GetById(int id)
         {
             var expense = await context.EMInfo.FirstOrDefaultAsync(e => e.ID == id);
             if (expense == null)
@@ -29,7 +34,7 @@ namespace SmartSaver.Services
 
         }
 
-        public async Task Edit(UserContext context, ExpensesManagerInformation expense, int id)      
+        public async Task Edit(ExpensesManagerInformation expense, int id)      
         {
             context.Entry(expense).State = EntityState.Modified;
             try
@@ -43,14 +48,14 @@ namespace SmartSaver.Services
             
         }
 
-        public async Task Add(UserContext context, ExpensesManagerInformation expense)
+        public async Task Add( ExpensesManagerInformation expense)
         {
             //cia reiketu iterpti User ID
             context.EMInfo.Add(expense) ;
             await context.SaveChangesAsync();
         }
 
-        public async Task Delete(UserContext context, int id)
+        public async Task Delete(int id)
         {
             var expense = await context.EMInfo.FindAsync(id);
             context.EMInfo.Remove(expense);
@@ -59,7 +64,7 @@ namespace SmartSaver.Services
        
         //is budget trackerio
         //reikia iterpti user id
-        public void AddToDB(int spent, string category, UserContext context)
+        public void AddToDB(int spent, string category)
         {
             var l = new ExpensesManagerInformation
             {
