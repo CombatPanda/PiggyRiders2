@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace SmartSaver.Models
@@ -24,5 +26,6 @@ namespace SmartSaver.Models
         public string Status { get; set; }
 
         public int user_id { get; set; }
+
     }
 }

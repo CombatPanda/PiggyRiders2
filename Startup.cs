@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartSaver.Contexts;
+using SmartSaver.Service.SavingService;
 
 namespace SmartSaver
 {
@@ -30,6 +31,7 @@ namespace SmartSaver
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            services.AddScoped<ISavingService, SavingService>();
 
             services.AddDbContext<UserContext>(options=>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
