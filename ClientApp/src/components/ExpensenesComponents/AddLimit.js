@@ -25,20 +25,6 @@ class AddLimit extends Component {
             alert("Category field cannot be empty!");
             return formIsValid;
         }
-        else if (newLimit.spent != null) {
-            if (!newLimit.spent.match(/^[0-9]/)) {
-                formIsValid = false;
-                alert("Spent is only numbers field!");
-                return formIsValid;
-            }
-        }
-       else if (newLimit.limit != null) {
-            if (!newLimit.limit.match(/^[0-9]/)) {
-                formIsValid = false;
-                alert("Limit is only numbers field!");
-                return formIsValid;
-            }
-        }
        else return formIsValid;
     }
 
@@ -75,11 +61,11 @@ class AddLimit extends Component {
                     </div>
                     <div className="imput-field">
                         <label htmlFor="spent">Spent</label>
-                        <input type="text" name="spent" ref="spent" />                        
+                        <input type="number" name="spent" ref="spent" />                        
                     </div>
                     <div className="imput-field">                       
                         <label htmlFor="limit">Limit</label>
-                        <input type="text" name="limit" ref="limit" />
+                        <input type="number" name="limit" ref="limit" />
                     </div>
                     <input type="submit" value="Save" className="btn" />
                 </form>
