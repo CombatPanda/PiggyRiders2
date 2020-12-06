@@ -22,5 +22,6 @@ namespace SmartSaver.Contexts
         public DbSet<UserIncome> UserIncome { get; set; }
         public DbSet<ExpensesInformation> ExpensesInfo { get; set; }
 
+        
     }
 }
