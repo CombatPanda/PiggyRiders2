@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using SmartSaver.Contexts;
 using SmartSaver.Service.ServicesBM;
 using SmartSaver.Services;
+using SmartSaver.Service;
 
 namespace SmartSaver
 {
@@ -25,6 +26,7 @@ namespace SmartSaver
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IUserServices, UserServices>();
             services.AddControllersWithViews();
 
             // In production, the React files will be served from this directory

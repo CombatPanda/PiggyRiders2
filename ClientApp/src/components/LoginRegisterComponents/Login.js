@@ -1,34 +1,38 @@
 import React, { Component } from "react";
-import addUser from "./AddUser"
+
+
 export default class Login extends Component {
+
 
   onSubmit(e) {
     const newUser = {
-        password: this.refs.password.value,   
-        email: this.refs.email.value
-    }
+      password: this.refs.password.value,
+      email: this.refs.email.value
+    };
     this.getUser(newUser);
     e.preventDefault();
-}
-
-getUser(newUser) {
-    fetch('https://localhost:44312/api/UserInformations/' , {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            Password: newUser.password,
-            Email: newUser.email 
-        })
+  }
+  
+  
+  getUser(newUser) {
+    fetch("https://localhost:44312/api/UserInformations/" + newUser.email  + "/" + newUser.password, {
+      method: "GET",
+      headers: {
+        Accept: 
+        "application/json",
+        "Content-Type": "application/json"
+      },
     }).then(response => {
-        this.props.history.push('/SavingsManagerInformations')
-    })
-    
-}
-
-
+      console.log(response.ok)
+      if (response.ok) {
+        this.props.history.push("/SavingsManagerInformations");
+      }
+      else{
+        alert("Failed to login, try signing up");
+        this.props.history.push("/log-in");
+      }
+    });
+  }
 
   render() {
     return (
@@ -37,9 +41,10 @@ getUser(newUser) {
 
         <div className="imput-field">
           <label>Email address</label>
-          <input 
+          <input
             type="email"
-            name = "email" ref="email"
+            name="email"
+            ref="email"
             className="form-control"
             placeholder="Enter email"
           />
@@ -49,8 +54,8 @@ getUser(newUser) {
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            name = "password"
-            ref = "password"
+            name="password"
+            ref="password"
             placeholder="Enter password"
           />
         </div>

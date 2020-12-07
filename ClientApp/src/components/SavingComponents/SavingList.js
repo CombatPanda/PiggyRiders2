@@ -62,7 +62,7 @@ const SavingList = () => {
                 </tbody>
             </table>
         </div>
-        );
+    );
 };
 
 export default SavingList;
