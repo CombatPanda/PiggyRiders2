@@ -69,6 +69,7 @@ namespace SmartSaver.Service.SavingService
             savingsManagerInformation.Purpose = updatedSaving.Purpose;
             savingsManagerInformation.Cost = updatedSaving.Cost;
             savingsManagerInformation.Date = updatedSaving.Date;
+            savingsManagerInformation.SavedAmount += updatedSaving.lastAddition;
             await _context.SaveChangesAsync();
             serviceResponse.Data = savingsManagerInformation;
             }

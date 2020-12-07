@@ -20,10 +20,10 @@ class SavingInfoDetails extends Component {
         const data = await fetch(`https://localhost:44312/api/SavingsManagerInformations/${savingId}`);
         const response = await data.json();
         this.setState({
-            id: response.id,
-            purpose: response.purpose,
-            cost: response.cost,
-            date: response.date
+            id: response.data.id,
+            purpose: response.data.purpose,
+            cost: response.data.cost,
+            date: response.data.date
         }, () => {
 
         });

@@ -83,6 +83,9 @@ namespace SmartSaver.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("lastAddition")
+                        .HasColumnType("int");
+
                     b.Property<int>("user_id")
                         .HasColumnType("int");
 

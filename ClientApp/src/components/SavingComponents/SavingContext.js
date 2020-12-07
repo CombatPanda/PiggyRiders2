@@ -15,7 +15,7 @@ export const SavingProvider = props => {
 
         const items = await data.json();
         console.log(items);
-        setItems(items);
+        setItems(items.data);
     };
 
     return (
