@@ -1,6 +1,7 @@
 import React, {Component } from 'react';
+//import './passValidation.css';
 
-export default class SignUp extends Component {
+export default class SignUp extends React.Component {
 
     onSubmit(e) {
     const newUser = {
@@ -13,7 +14,6 @@ export default class SignUp extends Component {
 }
 
 addUser(newUser) {
-    console.log("___");
     fetch('https://localhost:44312/api/UserInformations', {
         method: 'POST',
         headers: {
@@ -26,8 +26,15 @@ addUser(newUser) {
             Email: newUser.email 
         })
     }).then(response => {
-        this.props.history.push('/log-in')
-    })
+        if (response.ok) {
+          alert("Successfully registered, you can log in")
+          this.props.history.push("/log-in");
+        }
+        else{
+          alert("Failed to register this email or username is taken, try loging in");
+          this.props.history.push("/log-in");
+        }
+      });
     
 }
     render() {
@@ -42,7 +49,7 @@ addUser(newUser) {
 
                 <div className="imput-field">
                     <label htmlFor="password">Password</label>
-                    <input type="password" name = "password" ref="password"  placeholder="Enter password" />
+                    <input type="password"  name = "password" ref="password"  placeholder="Enter password" />
                 </div>
 
                 <div className="imput-field">
@@ -55,6 +62,7 @@ addUser(newUser) {
                     Already registered <a href="#">sign in?</a>
                 </p>
             </form>
+            
         );
     }
 }

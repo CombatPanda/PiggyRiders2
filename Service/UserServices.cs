@@ -23,13 +23,11 @@ namespace SmartSaver.Service
             if (UsernameExists(newUser.Username) || EmailExists(newUser.Email))
             {
                 serviceResponse.Success = false;
-                serviceResponse.Message = "With this email or username account already exsists!";
                 return serviceResponse;
 
             }
             else
             {
- 
                 _context.UserInfo.Add(newUser);
                 await _context.SaveChangesAsync();
                 serviceResponse.Data = await _context.UserInfo.ToListAsync();
@@ -41,8 +39,19 @@ namespace SmartSaver.Service
         public async Task<ServiceResponse<UserInformation>> GetUser(string email,string password)
         {
             ServiceResponse<UserInformation> serviceResponse = new ServiceResponse<UserInformation>();
-            serviceResponse.Data = _context.UserInfo.Where(e => e.Email == email && e.Password == password).FirstOrDefault<UserInformation>();
-            return serviceResponse;
+            if (EmailExists(email))
+            {
+               
+                serviceResponse.Data = _context.UserInfo.Where(e => e.Email == email && e.Password == password).FirstOrDefault<UserInformation>();
+                serviceResponse.Message = "Loggin was successful";
+                return serviceResponse;
+            }
+            else
+            {
+                serviceResponse.Success = false;
+                return serviceResponse;
+            }
+
         }
 
 

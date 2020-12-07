@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 
+
 export default class Login extends Component {
+
+
   onSubmit(e) {
     const newUser = {
       password: this.refs.password.value,
@@ -9,20 +12,25 @@ export default class Login extends Component {
     this.getUser(newUser);
     e.preventDefault();
   }
+  
+  
   getUser(newUser) {
-    fetch("https://localhost:44312/api/UserInformations/", {
+    fetch("https://localhost:44312/api/UserInformations/" + newUser.email  + "/" + newUser.password, {
       method: "GET",
       headers: {
         Accept: 
         "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        Password: newUser.password,
-        Email: newUser.email
-      })
     }).then(response => {
-      this.props.history.push("/SavingsManagerInformations");
+      console.log(response.ok)
+      if (response.ok) {
+        this.props.history.push("/SavingsManagerInformations");
+      }
+      else{
+        alert("Failed to login, try signing up");
+        this.props.history.push("/log-in");
+      }
     });
   }
 
