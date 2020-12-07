@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
 
-namespace SmartSaver.Services
+namespace SmartSaver.Service.ServicesBM
 {
-    public interface IExpensiveService
+    public interface IExpenseService
     {
         Task<List<UserExpense>> GetAll();
         Task<UserExpense> GetByID(int ID);

@@ -10,7 +10,7 @@ using SmartSaver.Contexts;
 namespace SmartSaver.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20201207014222_Smart Saver")]
+    [Migration("20201207114603_Smart Saver")]
     partial class SmartSaver
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

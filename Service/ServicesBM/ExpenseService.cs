@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmartSaver.Service.ServicesBM
 {
-    public class ExpenseService
+    public class ExpenseService : IExpenseService
     {
         private readonly UserContext context;
         public ExpenseService(UserContext context)

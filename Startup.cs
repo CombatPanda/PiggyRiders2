@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SmartSaver.Contexts;
+using SmartSaver.Service.ServicesBM;
 using SmartSaver.Services;
 
 namespace SmartSaver
@@ -35,7 +36,12 @@ namespace SmartSaver
             services.AddDbContext<UserContext>(options=>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
-            services.AddScoped<ILimitsService, LimitsService>();
+            services.AddScoped<ILimitsService, ExpensesService>();
+
+            services.AddScoped<IIncomeService, IncomeService>();
+            services.AddScoped<IBalanceServices, BalanceService>();
+            services.AddScoped<IExpenseService, ExpenseService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

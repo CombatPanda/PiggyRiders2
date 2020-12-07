@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
+using SmartSaver.Service.ServicesBM;
 using SmartSaver.Services;
 
 namespace SmartSaver.Controllers
@@ -15,8 +16,8 @@ namespace SmartSaver.Controllers
     [ApiController]
     public class UserExpensesController : ControllerBase
     {
-        private readonly IExpensiveService service;
-        public UserExpensesController(IExpensiveService service)
+        private readonly IExpenseService service;
+        public UserExpensesController(IExpenseService service)
         {
             this.service = service;
         }

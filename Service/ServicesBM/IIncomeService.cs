@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
 
-namespace SmartSaver.Services
+namespace SmartSaver.Service.ServicesBM
 {
     public interface IIncomeService
     {

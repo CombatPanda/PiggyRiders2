@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmartSaver.Service.ServicesBM
 {
-    public class BalanceService
+    public class BalanceService : IBalanceServices
     {
         private readonly UserContext context;
         public BalanceService(UserContext context)

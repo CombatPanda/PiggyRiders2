@@ -8,10 +8,10 @@ using SmartSaver.Models;
 
 namespace SmartSaver.Services
 {
-    public class LimitsService : ILimitsService
+    public class ExpensesService : ILimitsService
     {
         private readonly UserContext context;
-        public LimitsService(UserContext context)
+        public ExpensesService(UserContext context)
         {
             this.context = context;
         }

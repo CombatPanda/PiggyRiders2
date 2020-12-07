@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SmartSaver.Service.ServicesBM
 {
-    public class IncomeService
+    public class IncomeService : IIncomeService
     {
         private readonly UserContext context;
         public IncomeService(UserContext context)
