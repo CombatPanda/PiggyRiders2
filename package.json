@@ -1,6 +1,8 @@
 {
   "dependencies": {
     "aws-amplify": "^3.3.9",
-    "bootstrap": "^4.5.3"
+    "bootstrap": "^4.5.3",
+    "prettier.configPath": "/home/v1rtl/.prettierrc.yml",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
