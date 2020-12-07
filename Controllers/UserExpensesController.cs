@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
+using SmartSaver.Service.ServicesBM;
+using SmartSaver.Services;
 
 namespace SmartSaver.Controllers
 {
@@ -14,95 +16,45 @@ namespace SmartSaver.Controllers
     [ApiController]
     public class UserExpensesController : ControllerBase
     {
-        private readonly UserContext _context;
-
-        public UserExpensesController(UserContext context)
+        private readonly IExpenseService service;
+        public UserExpensesController(IExpenseService service)
         {
-            _context = context;
+            this.service = service;
         }
 
-        // GET: api/UserExpenses
+        // GET: api/UserBalance
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserExpense>>> GetUserExpense()
+        public async Task<List<UserExpense>> GetBMInfo()
         {
-            return await _context.UserExpense.ToListAsync();
+            var all = await service.GetAll();
+            return all;
         }
 
-        // GET: api/UserExpenses/5
+        // GET: api/UserBalance/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserExpense>> GetUserExpense(int id)
+        public async Task<UserExpense> GetUserExpens(int ID)
         {
-            var userExpense = await _context.UserExpense.FindAsync(id);
+            var byID = await service.GetByID(ID);
+            return byID;
 
-            if (userExpense == null)
-            {
-                return NotFound();
-            }
-
-            return userExpense;
         }
 
-        // PUT: api/UserExpenses/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/ExpensesManagerInformations/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserExpense(int id, UserExpense userExpense)
+        public async Task<IActionResult> PutUserExpense(int ID, UserExpense userExpense)
         {
-            if (id != userExpense.ID)
-            {
+            if (ID != userExpense.ID)
                 return BadRequest();
-            }
-
-            _context.Entry(userExpense).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExpenseExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await service.Edit(userExpense, ID);
             return NoContent();
         }
 
-        // POST: api/UserExpenses
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/ExpensesManagerInformations
         [HttpPost]
-        public async Task<ActionResult<UserExpense>> PostUserExpense(UserExpense userExpense)
+        public async Task<ActionResult<UserBalance>> PostUserExpense(UserExpense userExpense)
         {
-            _context.UserExpense.Add(userExpense);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUserExpense", new { id = userExpense.ID }, userExpense);
-        }
-
-        // DELETE: api/UserExpenses/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserExpense(int id)
-        {
-            var userExpense = await _context.UserExpense.FindAsync(id);
-            if (userExpense == null)
-            {
-                return NotFound();
-            }
-
-            _context.UserExpense.Remove(userExpense);
-            await _context.SaveChangesAsync();
-
+            await service.Add(userExpense);
             return NoContent();
-        }
-
-        private bool UserExpenseExists(int id)
-        {
-            return _context.UserExpense.Any(e => e.ID == id);
         }
     }
 }

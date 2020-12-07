@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
+using SmartSaver.Service.ServicesBM;
+using SmartSaver.Services;
 
 namespace SmartSaver.Controllers
 {
@@ -14,95 +16,46 @@ namespace SmartSaver.Controllers
     [ApiController]
     public class UserIncomesController : ControllerBase
     {
-        private readonly UserContext _context;
-
-        public UserIncomesController(UserContext context)
+        private readonly IIncomeService service;
+        public UserIncomesController(IIncomeService service)
         {
-            _context = context;
+            this.service = service;
         }
 
-        // GET: api/UserIncomes
+        // GET: api/UserBalance
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserIncome>>> GetUserIncome()
+        public async Task<List<UserIncome>> GetBMInfo()
         {
-            return await _context.UserIncome.ToListAsync();
+            var all = await service.GetAll();
+            return all;
         }
 
-        // GET: api/UserIncomes/5
+        // GET: api/UserBalance/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserIncome>> GetUserIncome(int id)
+        public async Task<UserIncome> GetUserIncome(int ID)
         {
-            var userIncome = await _context.UserIncome.FindAsync(id);
+            var byID = await service.GetByID(ID);
+            return byID;
 
-            if (userIncome == null)
-            {
-                return NotFound();
-            }
-
-            return userIncome;
         }
 
-        // PUT: api/UserIncomes/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/ExpensesManagerInformations/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserIncome(int id, UserIncome userIncome)
+        public async Task<IActionResult> PutUserIncome(int ID, UserIncome userIncome)
         {
-            if (id != userIncome.ID)
-            {
+            if (ID != userIncome.ID)
                 return BadRequest();
-            }
-
-            _context.Entry(userIncome).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserIncomeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await service.Edit(userIncome, ID);
             return NoContent();
         }
 
-        // POST: api/UserIncomes
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/ExpensesManagerInformations
         [HttpPost]
         public async Task<ActionResult<UserIncome>> PostUserIncome(UserIncome userIncome)
         {
-            _context.UserIncome.Add(userIncome);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUserIncome", new { id = userIncome.ID }, userIncome);
-        }
-
-        // DELETE: api/UserIncomes/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserIncome(int id)
-        {
-            var userIncome = await _context.UserIncome.FindAsync(id);
-            if (userIncome == null)
-            {
-                return NotFound();
-            }
-
-            _context.UserIncome.Remove(userIncome);
-            await _context.SaveChangesAsync();
-
+            await service.Add(userIncome);
             return NoContent();
-        }
-
-        private bool UserIncomeExists(int id)
-        {
-            return _context.UserIncome.Any(e => e.ID == id);
         }
     }
 }
+

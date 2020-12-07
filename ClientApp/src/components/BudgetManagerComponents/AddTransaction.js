@@ -69,9 +69,10 @@ export class AddTransaction extends Component {
                         <label htmlFor="amount">Amount <br />(negative - expense, positive - income)</label>
                         <input type="number" name="amount" ref="amount" placeholder="Enter amount..." />
                     </div>
-            
-                    <input type="submit" value="incomes" className="btn"  name="incomes"/>
-                        <input type="submit" value="expenses" className="btn" name="expenses" />
+
+                    <input type="submit" value="incomes" className="btn" name="incomes" />
+                    <input type="submit" value="expenses" className="btn" name="expenses" />
+
                 </form>
             </div>
         )

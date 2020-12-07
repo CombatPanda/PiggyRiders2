@@ -7,102 +7,56 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
+using SmartSaver.Service.ServicesBM;
+using SmartSaver.Services;
 
 namespace SmartSaver.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserBalancesController : ControllerBase
+    public class UserBalanceController : ControllerBase
     {
-        private readonly UserContext _context;
-
-        public UserBalancesController(UserContext context)
+        private readonly IBalanceServices service;
+        public UserBalanceController(IBalanceServices service)
         {
-            _context = context;
+            this.service = service;
         }
 
-        // GET: api/UserBalances
+        // GET: api/UserBalance
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserBalance>>> GetUserBalance()
+        public async Task<List<UserBalance>> GetBMInfo()
         {
-            return await _context.UserBalance.ToListAsync();
+            var all = await service.GetAll();
+            return all;
         }
 
-        // GET: api/UserBalances/5
+        // GET: api/UserBalance/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserBalance>> GetUserBalance(int id)
+        public async Task<UserBalance> GetUserBalance(int ID)
         {
-            var userBalance = await _context.UserBalance.FindAsync(id);
+            var byID = await service.GetByID(ID);
+            return byID;
 
-            if (userBalance == null)
-            {
-                return NotFound();
-            }
-
-            return userBalance;
         }
 
-        // PUT: api/UserBalances/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // PUT: api/ExpensesManagerInformations/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUserBalance(int id, UserBalance userBalance)
+        public async Task<IActionResult> PutUserBalance(int ID, UserBalance userBalance)
         {
-            if (id != userBalance.ID)
-            {
+            if (ID != userBalance.ID)
                 return BadRequest();
-            }
-
-            _context.Entry(userBalance).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserBalanceExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await service.Edit(userBalance, ID);
             return NoContent();
         }
 
-        // POST: api/UserBalances
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/ExpensesManagerInformations
         [HttpPost]
-        public async Task<ActionResult<UserBalance>> PostUserBalance(UserBalance userBalance)
+        public async Task<ActionResult<UserBalance>> PostUserBalance (UserBalance userBalance)
         {
-            _context.UserBalance.Add(userBalance);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUserBalance", new { id = userBalance.ID }, userBalance);
-        }
-
-        // DELETE: api/UserBalances/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUserBalance(int id)
-        {
-            var userBalance = await _context.UserBalance.FindAsync(id);
-            if (userBalance == null)
-            {
-                return NotFound();
-            }
-
-            _context.UserBalance.Remove(userBalance);
-            await _context.SaveChangesAsync();
-
+            await service.Add(userBalance);
             return NoContent();
-        }
-
-        private bool UserBalanceExists(int id)
-        {
-            return _context.UserBalance.Any(e => e.ID == id);
         }
     }
+
+
 }
