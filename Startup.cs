@@ -35,7 +35,7 @@ namespace SmartSaver
             services.AddDbContext<UserContext>(options=>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
-            services.AddScoped<IExpenseServices, ExpensesServices>();
+            services.AddScoped<ILimitsService, LimitsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,7 +7,7 @@ using SmartSaver.Models;
 
 namespace SmartSaver.Services
 {
-   public  interface IExpenseServices
+   public  interface ILimitsService
     {
         Task<List<ExpensesManagerInformation>> GetAll();
         Task<ExpensesManagerInformation> GetById(int id);

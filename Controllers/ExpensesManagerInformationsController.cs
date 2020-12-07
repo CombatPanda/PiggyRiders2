@@ -15,8 +15,8 @@ namespace SmartSaver.Controllers
     [ApiController]
     public class ExpensesManagerInformationsController : ControllerBase
     {
-        private readonly IExpenseServices service;
-        public ExpensesManagerInformationsController(IExpenseServices service)
+        private readonly ILimitsService service;
+        public ExpensesManagerInformationsController(ILimitsService service)
         {
             this.service = service;
         }
