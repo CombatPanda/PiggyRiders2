@@ -16,16 +16,6 @@ export const IncomeExpenses = () => {
     -1
   ).toFixed(2);
 
-  getexpense(id){
-  fetch('https://localhost:44312/api/UserBalance' + id, {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-    }
-}
-)}
-
   return (
     <div className="inc-exp-container">
       <div>
