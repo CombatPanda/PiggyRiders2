@@ -22,9 +22,6 @@ namespace SmartSaver.Contexts
         public DbSet<UserIncome> UserIncome { get; set; }
         public DbSet<ExpensesInformation> ExpensesInfo { get; set; }
 
-        public static implicit operator List<object>(UserContext v)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

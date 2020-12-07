@@ -2,7 +2,6 @@
 import { GlobalProvider } from '../BMcontextAPI/GlobalState';
 import './BMapp.css';
 import { AddTransaction } from './AddTransaction';
-import { addExpenses } from './AddTransaction';
 import { Balance } from './Balance';
 import { IncomeExpenses } from './IncomeExpenses';
 import { TransactionList } from './TransactionList';

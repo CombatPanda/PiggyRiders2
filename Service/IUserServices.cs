@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace SmartSaver.Service
 {
-    interface IUserServices
+    public interface IUserServices
     {
-            Task<List<UserInformation>> GetUser();
-            Task<bool> SaveUser(UserInformation contact);
-            Task<bool> DeleteUser(int Id);
+
+        Task<ServiceResponse<List<UserInformation>>> AddUser(UserInformation newUser);
+        Task<ServiceResponse<UserInformation>> GetUser(string email, string password);
 
     }
 }
