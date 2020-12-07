@@ -10,8 +10,8 @@ using SmartSaver.Contexts;
 namespace SmartSaver.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20201130015309_db")]
-    partial class db
+    [Migration("20201207014222_Smart Saver")]
+    partial class SmartSaver
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -161,15 +161,12 @@ namespace SmartSaver.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
