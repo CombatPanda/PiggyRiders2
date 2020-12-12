@@ -54,20 +54,50 @@ namespace SmartSaver.Service.ServicesBM
             //cia reiketu iterpti User ID
             context.UserExpense.Add(expense);
             await context.SaveChangesAsync();
+            AddToLimitDB(expense.expenses, expense.expensesInfo);
+            AddToBalanceDB(expense.expenses);
         }
 
-        //is budget trackerio
         //reikia iterpti user id
-        public void AddToDB(int amount, string info)
+        public void AddToLimitDB(int spent, string category)
         {
-            var l = new UserExpense
+            ExpensesManagerInformation limit = context.EMInfo.SingleOrDefault(l => l.Category == category); //cia reiketu patikrinti dar ir useri
+            if (limit == null)
             {
-                expenses = amount,
-                expensesInfo = info,
-                userID = 1
-            };
-            context.UserExpense.Add(l);
+                var l = new ExpensesManagerInformation
+                {
+                    Category = category,
+                    Spent = spent,
+                    Limit = null,
+                    uID = 1
+                };
+                context.EMInfo.Add(l);
+            }
+            else
+            {
+                limit.Spent += spent;
+            }
+            context.SaveChanges();
+        }
+        //reikia prideti userID
+        public void AddToBalanceDB(int amount)
+        {
+            UserBalance balance = context.UserBalance.SingleOrDefault(b => b.user_id == 1);
+            if (balance == null)
+            {
+                var b = new UserBalance
+                {
+                    balance = -amount,
+                    user_id = 1
+                };
+                context.UserBalance.Add(b);
+            }
+            else
+            {
+                balance.balance -= amount;
+            }
             context.SaveChanges();
         }
     }
+
 }

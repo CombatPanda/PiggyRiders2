@@ -54,19 +54,25 @@ namespace SmartSaver.Service.ServicesBM
             //cia reiketu iterpti User ID
             context.UserIncome.Add(income);
             await context.SaveChangesAsync();
+            AddToBalanceDB(income.income);
         }
 
-        //is budget trackerio
-        //reikia iterpti user id
-        public void AddToDB(int amount, string info)
+        public void AddToBalanceDB(int amount)
         {
-            var l = new UserIncome
+            UserBalance balance = context.UserBalance.SingleOrDefault(b => b.user_id == 1);
+            if (balance == null)
             {
-                income = amount,
-                incomeInfo = info,
-                userID = 1
-            };
-            context.UserIncome.Add(l);
+                var b = new UserBalance
+                {
+                    balance = amount,
+                    user_id = 1
+                };
+                context.UserBalance.Add(b);
+            }
+            else
+            {
+                balance.balance += amount;
+            }
             context.SaveChanges();
         }
     }
