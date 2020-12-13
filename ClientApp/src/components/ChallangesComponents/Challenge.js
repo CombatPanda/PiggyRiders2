@@ -29,7 +29,7 @@ class Challenges extends React.Component {
     getColor = (status) => {
         if (status == 0)
             return 'red';
-        if (status > 1)
+        if (status == 1)
             return 'green';
         else return 'red';
     }
@@ -37,7 +37,7 @@ class Challenges extends React.Component {
     getImage = (status) => {
         if (status == 0)
             return uncompletedChallenge;
-        if (status > 1)
+        if (status == 1)
             return completedChallenge;
         else return uncompletedChallenge;
     }
@@ -45,7 +45,7 @@ class Challenges extends React.Component {
     getStatus = (status) => {
         if (status == 0)
             return "Ongoing";
-        if (status > 1)
+        if (status == 1)
             return "Completed";
         else return "Ongoing";
     }
