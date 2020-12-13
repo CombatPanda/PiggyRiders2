@@ -17,10 +17,8 @@ namespace SmartSaver.Contexts
         public DbSet<UserInformation> UserInfo { get; set; }
         public DbSet<ExpensesManagerInformation> EMInfo { get; set; }
         public DbSet<SavingsManagerInformation> SMInfo { get; set; }
-        public DbSet<UserExpense> UserExpense { get; set; }
         public DbSet<UserBalance> UserBalance { get; set; }
-        public DbSet<UserIncome> UserIncome { get; set; }
-        public DbSet<ExpensesInformation> ExpensesInfo { get; set; }
+        public DbSet<UserBudget> UserBudget { get; set; }
 
         
     }
