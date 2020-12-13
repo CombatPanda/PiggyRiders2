@@ -33,12 +33,34 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
-    function addTransaction(transaction) {
-        dispatch({
-            type: 'ADD_TRANSACTION',
-            payload: transaction
+    async function addTransaction(transaction) {
+        try {
+            fetch('https://localhost:44312/api/UserIncomes', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    incomeInfo: transaction.text,
+                    income: transaction.amount,
+                    userID: 1
+                })
+            })
+            dispatch({
+                type: 'ADD_TRANSACTION',
+                payload: transaction.data
+            });
+        }
+        catch (err) {
+            dispatch({
+            type: 'TRANSACTION_ERROR',
+            payload: err.transaction.error
         });
+        }
+       
     }
+
 
     return (
         <GlobalContext.Provider value={{
