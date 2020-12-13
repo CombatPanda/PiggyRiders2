@@ -1,0 +1,17 @@
+﻿.list-container {
+    min-height: 440px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+
+hright {
+    display: contents;
+    font-size: 1.17em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: right;
+}
