@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState, useContext, Component } from 'react'
-import { GlobalContext } from '../BMcontextAPI/GlobalState';
+import { GlobalContext } from '../context/GlobalState';
 
 export class AddTransaction extends Component {
   

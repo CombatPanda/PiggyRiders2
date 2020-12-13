@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { GlobalProvider } from '../BMcontextAPI/GlobalState';
+import { GlobalProvider } from '../context/GlobalState';
 import './BMapp.css';
 import { AddTransaction } from './AddTransaction';
 import { Balance } from './Balance';

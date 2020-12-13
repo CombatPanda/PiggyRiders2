@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { GlobalContext } from '../BMcontextAPI/GlobalState';
+import { GlobalContext } from '../context/GlobalState';
 
 export const Balance = () => {
   const { transactions } = useContext(GlobalContext);
