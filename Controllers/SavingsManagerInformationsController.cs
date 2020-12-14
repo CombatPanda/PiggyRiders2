@@ -38,8 +38,8 @@ namespace SmartSaver.Controllers
 
         // PUT: api/SavingsManagerInformations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut]
-        public async Task<IActionResult> UpdateSaving(SavingsManagerInformation updatedSaving)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateSaving(SavingsManagerInformation updatedSaving, int id)
         {
             ServiceResponse<SavingsManagerInformation> response = await _savingService.UpdateSaving(updatedSaving);
             if(response.Data == null)

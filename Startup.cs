@@ -12,6 +12,7 @@ using SmartSaver.Service.ServicesBM;
 using SmartSaver.Services;
 using SmartSaver.Service;
 using SmartSaver.Service.SavingService;
+using SmartSaver.Service.BalanceService;
 
 namespace SmartSaver
 {
@@ -43,7 +44,7 @@ namespace SmartSaver
             services.AddScoped<ILimitsService, ExpensesService>();
 
             services.AddScoped<IIncomeService, IncomeService>();
-            services.AddScoped<IBalanceServices, BalanceService>();
+            services.AddScoped<IBalanceService, BalanceService>();
             services.AddScoped<IExpenseService, ExpenseService>();
 
         }

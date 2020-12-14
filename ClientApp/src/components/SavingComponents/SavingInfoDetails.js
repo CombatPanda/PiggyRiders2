@@ -10,7 +10,9 @@ class SavingInfoDetails extends Component {
             id: '',
             purpose: '',
             cost: '',
-            date: ''
+            date: '',
+            addition: ''
+
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
@@ -23,7 +25,8 @@ class SavingInfoDetails extends Component {
             id: response.data.id,
             purpose: response.data.purpose,
             cost: response.data.cost,
-            date: response.data.date
+            date: response.data.date,
+            addition: response.data.lastAddition
         }, () => {
 
         });
@@ -37,7 +40,8 @@ class SavingInfoDetails extends Component {
         const newSaving = {
             purpose: this.refs.purpose.value,
             cost: (this.refs.cost.value == "") ? null : this.refs.cost.value,
-            date: (this.refs.date.value == "") ? null : this.refs.date.value
+            date: (this.refs.date.value == "") ? null : this.refs.date.value,
+            addition: (this.refs.addition.value == "") ? null : this.refs.addition.value
         }
         e.preventDefault();
         this.editSaving(newSaving);
@@ -55,8 +59,7 @@ class SavingInfoDetails extends Component {
                 purpose: newSaving.purpose,
                 cost: newSaving.cost,
                 date: newSaving.date,
-                status: "Not Started",
-                uID: 0
+                lastAddition: newSaving.addition
             })
         }).then(response => {
             this.props.history.push('/SavingsManagerInformations')
@@ -93,6 +96,10 @@ class SavingInfoDetails extends Component {
                     <div className="imput-field">
                         <input type="text" name="date" ref="date" value={this.state.date} onChange={this.handleInputChange} />
                         <label htmlFor="date">Date</label>
+                    </div>
+                    <div className="imput-field">
+                        <input type="text" name="addition" ref="addition" value={this.state.addition} onChange={this.handleInputChange} />
+                        <label htmlFor="addition">Add to your saving</label>
                     </div>
                     <input type="submit" value="Save" className="btn" />
                 </form>
