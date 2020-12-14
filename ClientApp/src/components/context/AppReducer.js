@@ -1,14 +1,14 @@
 export default (state, action) => {
     switch (action.type) {
-        case 'ADD_INCOME':
+        case 'GET_TRANSACTION':
             return {
                 ...state,
-                transactions: [action.payload, ...state.transactions]
+                transactions: action.payload
             }
-        case 'ADD_EXPENSES':
+        case 'ADD_TRANSACTION':
             return {
                 ...state,
-                transactions: [action.payload, ...state.transactions]
+                transactions: [...state.transactions, action.payload]
             }
         default:
             return state;

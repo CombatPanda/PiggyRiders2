@@ -70,6 +70,14 @@ namespace SmartSaver.Service.SavingService
             savingsManagerInformation.Cost = updatedSaving.Cost;
             savingsManagerInformation.Date = updatedSaving.Date;
             savingsManagerInformation.SavedAmount += updatedSaving.lastAddition;
+                if (savingsManagerInformation.SavedAmount > 0 && savingsManagerInformation.SavedAmount < savingsManagerInformation.Cost)
+                {
+                    savingsManagerInformation.Status = "In progress";
+                }
+                if (savingsManagerInformation.SavedAmount + updatedSaving.lastAddition >=savingsManagerInformation.Cost)
+                {
+                    savingsManagerInformation.Status = "Completed";
+                }
             await _context.SaveChangesAsync();
             serviceResponse.Data = savingsManagerInformation;
             }

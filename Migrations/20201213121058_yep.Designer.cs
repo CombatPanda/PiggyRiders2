@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartSaver.Contexts;
 
 namespace SmartSaver.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20201213121058_yep")]
+    partial class yep
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,27 +96,6 @@ namespace SmartSaver.Migrations
                     b.ToTable("SMInfo");
                 });
 
-            modelBuilder.Entity("SmartSaver.Models.UserAchievement", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("UserAchievement");
-                });
-
             modelBuilder.Entity("SmartSaver.Models.UserBalance", b =>
                 {
                     b.Property<int>("ID")
@@ -122,13 +103,7 @@ namespace SmartSaver.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("add")
-                        .HasColumnType("int");
-
                     b.Property<int>("balance")
-                        .HasColumnType("int");
-
-                    b.Property<int>("remove")
                         .HasColumnType("int");
 
                     b.Property<int>("user_id")

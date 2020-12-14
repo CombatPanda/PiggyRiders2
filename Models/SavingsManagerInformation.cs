@@ -12,9 +12,9 @@ namespace SmartSaver.Models
         public string Purpose { get; set; }
         public int Cost { get; set; }
         public string Date { get; set; }
-        public int SavedAmount { get; set; }
-        public string Status { get; set; }
-        public int lastAddition { get; set; }
+        public int SavedAmount { get; set; } = 0;
+        public string Status { get; set; } = "Not started";
+        public int lastAddition { get; set; } = 0;
         public int user_id { get; set; }
 
     }
