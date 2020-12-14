@@ -42,10 +42,8 @@ namespace SmartSaver
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
             services.AddScoped<ILimitsService, ExpensesService>();
-
-            services.AddScoped<IIncomeService, IncomeService>();
-            services.AddScoped<IBalanceService, BalanceService>();
-            services.AddScoped<IExpenseService, ExpenseService>();
+            services.AddScoped<IBalanceServices, BalanceService>();
+            services.AddScoped<IBudgetService, BudgetService>();
 
         }
 

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace SmartSaver.Models
 {
-    public class UserExpense
+    public class UserBudget
     {
         public int ID { get; set; }
-        public int expenses { get; set; }
-        public string expensesInfo { get; set; }
+        public int amount { get; set; }
+        public string text { get; set; }
         public int userID { get; set; }
     }
 }
