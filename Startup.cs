@@ -12,6 +12,7 @@ using SmartSaver.Service.ServicesBM;
 using SmartSaver.Services;
 using SmartSaver.Service;
 using SmartSaver.Service.SavingService;
+using SmartSaver.Service.AchievementService;
 using SmartSaver.Service.BalanceService;
 
 namespace SmartSaver
@@ -45,6 +46,7 @@ namespace SmartSaver
             services.AddScoped<IBalanceService, BalanceService>();
             services.AddScoped<IBudgetService, BudgetService>();
 
+            services.AddScoped<IAchievementService, AchievementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
