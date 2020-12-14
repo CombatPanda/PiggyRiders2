@@ -35,7 +35,8 @@ export class NavMenu extends Component {
                 <li className="divider"></li>
                 <li><a href="/ExpensesManagerInformations">Expenses Manager</a></li>
                 <li><a href="/ExpensesManagerInformations/add">Add Limit</a></li>
-                
+                <li className="divider"></li>
+                <li><a href="/Challenges">Challenges</a></li>
             </ul>
             <nav className = "pink">
                 <div className="nav-wrapper">
