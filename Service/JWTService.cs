@@ -18,13 +18,9 @@ namespace SmartSaver.Service
         private IConfiguration _config;
         private readonly IUserServices _userService;
 
-        public JWTService(IConfiguration config)
+        public JWTService(IConfiguration config, IUserServices userService)
         {
             _config = config;
-        }
-
-        public JWTService(IUserServices userService)
-        {
             _userService = userService;
         }
 
@@ -61,5 +57,6 @@ namespace SmartSaver.Service
             return user;
         }
 
+ 
     }
 }

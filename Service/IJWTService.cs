@@ -9,7 +9,7 @@ namespace SmartSaver.Service
     public interface IJWTService
     {
         string GenerateJSONWebToken(UserInformation userInfo);
-       UserInformation AuthenticateUserAsync(UserInformation login);
+        Task<UserInformation> AuthenticateUserAsync(UserInformation login);
 
 
     }

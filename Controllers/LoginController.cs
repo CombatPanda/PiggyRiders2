@@ -42,7 +42,7 @@ namespace SmartSaver.Controllers
 
             if (user != null)
             {
-                var tokenString = _JWTService.GenerateJSONWebToken(user);
+                var tokenString = _JWTService.GenerateJSONWebToken(user.Result);
                 response = Ok(new { token = tokenString });
             }
 

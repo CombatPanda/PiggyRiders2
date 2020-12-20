@@ -27,7 +27,7 @@ namespace SmartSaver.Controllers
             _userService = userService;
         }
 
-        [HttpGet("{email}/{password}")]
+/*        [HttpGet("{email}/{password}")]
         public async Task<ActionResult<UserInformation>> GetUser(string email, string password)
         {
             var check = await _userService.GetUser(email, password);
@@ -39,8 +39,8 @@ namespace SmartSaver.Controllers
             {
                 return BadRequest();
             }
-           
-        }
+
+        }*/
 
         // POST: api/UserInformations
         [HttpPost]
@@ -49,7 +49,7 @@ namespace SmartSaver.Controllers
             var check = await _userService.AddUser(userInformation);
             if (check.Success)
             {
-             return Ok(await _userService.AddUser(userInformation));
+                return Ok(await _userService.AddUser(userInformation));
             }
             else
             {
@@ -58,5 +58,5 @@ namespace SmartSaver.Controllers
         }
 
     }
-    }
+}
 
