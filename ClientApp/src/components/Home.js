@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Logo from "../piggy.gif";
-import ggg from "./logo.css"
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -8,7 +7,7 @@ export class Home extends Component {
   render() {
     return (
         <div>
-            <img src={Logo} width='500' class={ggg} />
+            <img src={Logo} width='500' />
         <h1>Hello, world!</h1>
         <p>Welcome to Smart saver!</p>
       </div>
