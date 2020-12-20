@@ -26,6 +26,33 @@ export const GlobalProvider = ({ children }) => {
     }
 
     async function addTransaction(transaction) {
+        if (transaction.amount < 0) {
+            fetch('https://localhost:44312/api/ExpensesManagerInformations', {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    Category: transaction.text,
+                    Spent: transaction.amount * -1,
+                    Limit: null,
+                    uId: 1
+                })
+            })
+        }
+        fetch('https://localhost:44312/api/UserBalance/1', {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                add: (transaction.amount > 0) ? transaction.amount : 0,
+                remove: (transaction.amount < 0) ? transaction.amount : 0,
+                user_id:1
+            })
+        })
           fetch('https://localhost:44312/api/UserBudgets', {
                 method: 'POST',
                 headers: {

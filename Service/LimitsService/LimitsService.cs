@@ -65,15 +65,16 @@ namespace SmartSaver.Services
        
         //is budget trackerio
         //reikia iterpti user id
-        public void AddToDB(int spent, string category)
+
+        public async Task EditFromBudgetManager(ExpensesManagerInformation expense)
         {
-            ExpensesManagerInformation limit = context.EMInfo.SingleOrDefault(l => l.Category == category); //cia reiketu patikrinti dar ir useri
+            ExpensesManagerInformation limit = context.EMInfo.SingleOrDefault(l => l.Category == expense.Category); //cia reiketu patikrinti dar ir useri
             if (limit == null)
             {
                 var l = new ExpensesManagerInformation
                 {
-                    Category = category,
-                    Spent = spent,
+                    Category = expense.Category,
+                    Spent = expense.Spent,
                     Limit = null,
                     uID = 1
                 };
@@ -81,9 +82,9 @@ namespace SmartSaver.Services
             }
             else
             {
-                limit.Spent += spent;
+                limit.Spent += expense.Spent;
             }
-            context.SaveChanges();
+           await context.SaveChangesAsync();
         }
     }
 }

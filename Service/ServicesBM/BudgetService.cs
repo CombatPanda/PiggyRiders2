@@ -19,11 +19,6 @@ namespace SmartSaver.Service.ServicesBM
         {
            context.UserBudget.Add(budget);
            await context.SaveChangesAsync();
-           AddToBalanceDB(budget.amount);
-            if (budget.amount < 0)
-            {
-                AddToLimitDB(budget.amount, budget.text);
-            }
         }
 
         public async Task<List<UserBudget>> GetAll()
@@ -50,26 +45,6 @@ namespace SmartSaver.Service.ServicesBM
             else
             {
                 balance.balance += amount;
-            }
-            context.SaveChanges();
-        }
-        public void AddToLimitDB(int spent, string category)
-        {
-            ExpensesManagerInformation limit = context.EMInfo.SingleOrDefault(l => l.Category == category); //cia reiketu patikrinti dar ir useri
-            if (limit == null)
-            {
-                var l = new ExpensesManagerInformation
-                {
-                    Category = category,
-                    Spent = spent*-1,
-                    Limit = null,
-                    uID = 1
-                };
-                context.EMInfo.Add(l);
-            }
-            else
-            {
-                limit.Spent += (spent*-1);
             }
             context.SaveChanges();
         }
