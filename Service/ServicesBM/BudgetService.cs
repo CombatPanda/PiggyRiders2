@@ -30,23 +30,5 @@ namespace SmartSaver.Service.ServicesBM
             }
             return budget;
         }
-        public void AddToBalanceDB(int amount)
-        {
-            UserBalance balance = context.UserBalance.SingleOrDefault(b => b.user_id == 1);
-            if (balance == null)
-            {
-                var b = new UserBalance
-                {
-                    balance = amount,
-                    user_id = 1
-                };
-                context.UserBalance.Add(b);
-            }
-            else
-            {
-                balance.balance += amount;
-            }
-            context.SaveChanges();
-        }
     }
 }

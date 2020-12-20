@@ -65,14 +65,14 @@ namespace SmartSaver.Controllers
 
 
 
-                // DELETE: api/ExpensesManagerInformations/5
-                [HttpDelete("{id}")]
-                public async Task<IActionResult> DeleteExpensesManagerInformation(int id)
-                {
-                        await service.Delete(id);
-                        return NoContent();
-                }
+        // DELETE: api/ExpensesManagerInformations/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteExpensesManagerInformation(int id)
+        {
+           await service.Delete(id);
+           return NoContent();
         }
+    }
 
 
     }
