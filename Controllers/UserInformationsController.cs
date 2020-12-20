@@ -17,6 +17,8 @@ namespace SmartSaver.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [RESTAuthorize]
+
     public class UserInformationsController : ControllerBase
     {
         private readonly IUserServices _userService;
@@ -25,6 +27,16 @@ namespace SmartSaver.Controllers
         {
             _userService = userService;
         }
+
+
+
+/*        [HttpGet]
+        public JsonResult Person(string query)
+        {
+            var data = PersonRepository.Find(query);
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }*/
 
         // GET: api/SavingsManagerInformations/
         [HttpGet("{email}/{password}")]

@@ -10,6 +10,7 @@ namespace SmartSaver.Service
 {
     public class UserServices : IUserServices
     {
+        public static UserInformation user;
         private readonly UserContext _context;
 
         public UserServices(UserContext context)
@@ -39,12 +40,13 @@ namespace SmartSaver.Service
         public async Task<ServiceResponse<UserInformation>> GetUser(string email,string password)
         {
             ServiceResponse<UserInformation> serviceResponse = new ServiceResponse<UserInformation>();
-            if (EmailExists(email))
+            user = _context.UserInfo.Where(e => e.Email == email && e.Password == password).FirstOrDefault();
+            if (user != null)
             {
-               
-                serviceResponse.Data = _context.UserInfo.Where(e => e.Email == email && e.Password == password).FirstOrDefault<UserInformation>();
-                serviceResponse.Message = "Loggin was successful";
-                return serviceResponse;
+                    serviceResponse.Data = user;
+                    serviceResponse.Message = "Loggin was successful";
+                    return serviceResponse;
+
             }
             else
             {
