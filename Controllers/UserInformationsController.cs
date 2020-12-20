@@ -17,7 +17,6 @@ namespace SmartSaver.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [RESTAuthorize]
 
     public class UserInformationsController : ControllerBase
     {
@@ -28,24 +27,13 @@ namespace SmartSaver.Controllers
             _userService = userService;
         }
 
-
-
-/*        [HttpGet]
-        public JsonResult Person(string query)
-        {
-            var data = PersonRepository.Find(query);
-
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }*/
-
-        // GET: api/SavingsManagerInformations/
         [HttpGet("{email}/{password}")]
         public async Task<ActionResult<UserInformation>> GetUser(string email, string password)
         {
             var check = await _userService.GetUser(email, password);
             if (check.Success)
             {
-                return Ok(await _userService.GetUser(email, password));
+                return Ok(check);
             }
             else
             {

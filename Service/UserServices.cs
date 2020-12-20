@@ -37,22 +37,9 @@ namespace SmartSaver.Service
 
         }
 
-        public async Task<ServiceResponse<UserInformation>> GetUser(string email,string password)
+        public async Task<UserInformation> CheckUser(UserInformation newUser)
         {
-            ServiceResponse<UserInformation> serviceResponse = new ServiceResponse<UserInformation>();
-            user = _context.UserInfo.Where(e => e.Email == email && e.Password == password).FirstOrDefault();
-            if (user != null)
-            {
-                    serviceResponse.Data = user;
-                    serviceResponse.Message = "Loggin was successful";
-                    return serviceResponse;
-
-            }
-            else
-            {
-                serviceResponse.Success = false;
-                return serviceResponse;
-            }
+            return _context.UserInfo.Where(e => e.Email == newUser.Email && e.Password == newUser.Password).FirstOrDefault();
 
         }
 
