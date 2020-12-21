@@ -30,7 +30,8 @@ namespace SmartSaver.Service
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[] {
-            new Claim(JwtRegisteredClaimNames.Sub, userInfo.Username),
+            new Claim(JwtRegisteredClaimNames.Sub, userInfo.ID.ToString()),
+            new Claim(JwtRegisteredClaimNames.UniqueName, userInfo.Username),
             new Claim(JwtRegisteredClaimNames.Email, userInfo.Email),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
              };
@@ -49,14 +50,25 @@ namespace SmartSaver.Service
             UserInformation user = null;
 
             UserInformation foundUser = await _userService.CheckUser(login);
-  
-            if (login.Password == foundUser.Password && login.Email == foundUser.Email && login.Username == foundUser.Username)
+            if (foundUser != null)
             {
-                user = new UserInformation { Username = foundUser.Username, Email = foundUser.Email };
+                if (login.Password == foundUser.Password && login.Email == foundUser.Email)
+                {
+                    user = new UserInformation {ID = foundUser.ID, Username = foundUser.Username, Email = foundUser.Email };
+                }
+                return user;
             }
-            return user;
+            else
+            {
+                return user;
+            }
+
+
+
         }
 
  
     }
+
+
 }

@@ -27,21 +27,6 @@ namespace SmartSaver.Controllers
             _userService = userService;
         }
 
-/*        [HttpGet("{email}/{password}")]
-        public async Task<ActionResult<UserInformation>> GetUser(string email, string password)
-        {
-            var check = await _userService.GetUser(email, password);
-            if (check.Success)
-            {
-                return Ok(check);
-            }
-            else
-            {
-                return BadRequest();
-            }
-
-        }*/
-
         // POST: api/UserInformations
         [HttpPost]
         public async Task<ActionResult<UserInformation>> PostUserInformation(UserInformation userInformation)

@@ -26,13 +26,6 @@ namespace SmartSaver.Controllers
             _JWTService = jwtService;
         }
 
-        [HttpGet]
-        [Authorize]
-        public ActionResult<IEnumerable<string>> Get()
-        {
-            return new string[] { "value1", "value2", "value3", "value4", "value5" };
-        }
-
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Login([FromBody] UserInformation login)
@@ -40,7 +33,7 @@ namespace SmartSaver.Controllers
             IActionResult response = Unauthorized();
             var user = _JWTService.AuthenticateUserAsync(login);
 
-            if (user != null)
+            if (user.Result != null)
             {
                 var tokenString = _JWTService.GenerateJSONWebToken(user.Result);
                 response = Ok(new { token = tokenString });
