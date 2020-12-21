@@ -29,7 +29,7 @@ export class NavMenu extends Component {
                 <li><a href="/log-in">Log In</a></li>
                 <li><a href="/sign-up">Sign Up</a></li>
                 <li className="divider"></li>
-                <li><a href="/BMInfo">Add Transaction</a></li>
+                <li><a href="/BMInfo">Budget Manager</a></li>
                 <li className="divider"></li>
                 <li><a href="/SavingsManagerInformations">Saving Manager</a></li>
                 <li className="divider"></li>
