@@ -48,6 +48,13 @@ namespace SmartSaver.Controllers
             return NoContent();
         }
 
+        [HttpPut]
+        public async Task<IActionResult> PutFromBudgetManager (ExpensesManagerInformation expensesManagerInformation)
+        {
+            await service.EditFromBudgetManager(expensesManagerInformation);
+            return NoContent();
+        }
+
         // POST: api/ExpensesManagerInformations
         [HttpPost]
         public async Task<ActionResult<ExpensesManagerInformation>> PostExpensesManagerInformation(ExpensesManagerInformation expensesManagerInformation)
@@ -56,14 +63,16 @@ namespace SmartSaver.Controllers
             return NoContent();
         }
 
-            // DELETE: api/ExpensesManagerInformations/5
-            [HttpDelete("{id}")]
-            public async Task<IActionResult> DeleteExpensesManagerInformation(int id)
-            {
-                    await service.Delete(id);
-                    return NoContent();
-            }
+
+
+        // DELETE: api/ExpensesManagerInformations/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteExpensesManagerInformation(int id)
+        {
+           await service.Delete(id);
+           return NoContent();
         }
+    }
 
 
     }

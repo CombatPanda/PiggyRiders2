@@ -33,7 +33,12 @@ namespace SmartSaver.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<SavingsManagerInformation>> GetSingle(int id)
         {
-            return Ok(await _savingService.GetSavingsById(id));
+            ServiceResponse<SavingsManagerInformation> response = await _savingService.GetSavingsById(id);
+            if (response.Data == null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
 
         // PUT: api/SavingsManagerInformations/5

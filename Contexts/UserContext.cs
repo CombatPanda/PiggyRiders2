@@ -21,5 +21,6 @@ namespace SmartSaver.Contexts
         public DbSet<UserBudget> UserBudget { get; set; }
         public DbSet<UserAchievement> UserAchievement { get; set; }
 
+
     }
 }

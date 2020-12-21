@@ -26,7 +26,12 @@ namespace SmartSaver.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserBalance>> GetSingle(int id)
         {
-            return Ok(await _balanceService.GetBalanceByUserId(id));
+            ServiceResponse<UserBalance> response = await _balanceService.GetBalanceByUserId(id);
+            if (response.Data == null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBalance(UserBalance updatedBalance, int id)

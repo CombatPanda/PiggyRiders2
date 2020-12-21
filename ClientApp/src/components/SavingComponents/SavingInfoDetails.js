@@ -11,7 +11,9 @@ class SavingInfoDetails extends Component {
             purpose: '',
             cost: '',
             date: '',
-            addition: ''
+            addition: '',
+            user_id: '',
+            balance: '',
 
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -31,9 +33,20 @@ class SavingInfoDetails extends Component {
 
         });
     }
+    async getBalance() {
+        let balanceId = this.props.match.params.user_id;
+        const data = await fetch(`https://localhost:44312/api/UserBalance/1`);
+        const response = await data.json();
+        this.setState({
+            balance: response.data.balance,
+        }, () => {
+
+        });
+    }
 
     componentWillMount() {
         this.getSaving();
+        this.getBalance();
     }
 
     onSubmit(e) {
@@ -45,6 +58,7 @@ class SavingInfoDetails extends Component {
         }
         e.preventDefault();
         this.editSaving(newSaving);
+        this.editBalance(newSaving);
     }
 
     editSaving(newSaving) {
@@ -60,6 +74,21 @@ class SavingInfoDetails extends Component {
                 cost: newSaving.cost,
                 date: newSaving.date,
                 lastAddition: newSaving.addition
+            })
+        }).then(response => {
+            this.props.history.push('/SavingsManagerInformations')
+        })
+    }
+
+    editBalance(newSaving) {
+        fetch(`https://localhost:44312/api/UserBalance/1`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                remove: newSaving.addition
             })
         }).then(response => {
             this.props.history.push('/SavingsManagerInformations')
@@ -83,23 +112,24 @@ class SavingInfoDetails extends Component {
                 <Link to='/SavingsManagerInformations'>Back</Link>
                 <br />
                 <h1>Edit Saving</h1>
+                <h1>Your balance: {this.state.balance}</h1>
 
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <div className="imput-field">
-                        <input type="text" name="purpose" ref="purpose" value={this.state.purpose} onChange={this.handleInputChange} />
                         <label htmlFor="purpose">Purpose</label>
+                        <input type="text" name="purpose" ref="purpose" value={this.state.purpose} onChange={this.handleInputChange} />
                     </div>
                     <div className="imput-field">
-                        <input type="text" name="cost" ref="cost" value={this.state.cost} onChange={this.handleInputChange} />
                         <label htmlFor="cost">Cost</label>
+                        <input type="text" name="cost" ref="cost" value={this.state.cost} onChange={this.handleInputChange} />
                     </div>
                     <div className="imput-field">
-                        <input type="text" name="date" ref="date" value={this.state.date} onChange={this.handleInputChange} />
                         <label htmlFor="date">Date</label>
+                        <input type="text" name="date" ref="date" value={this.state.date} onChange={this.handleInputChange} />
                     </div>
                     <div className="imput-field">
-                        <input type="text" name="addition" ref="addition" value={this.state.addition} onChange={this.handleInputChange} />
                         <label htmlFor="addition">Add to your saving</label>
+                        <input type="text" name="addition" ref="addition" value={this.state.addition} onChange={this.handleInputChange} />
                     </div>
                     <input type="submit" value="Save" className="btn" />
                 </form>
