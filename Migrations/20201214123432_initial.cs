@@ -2,7 +2,7 @@
 
 namespace SmartSaver.Migrations
 {
-    public partial class yep : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,20 +20,6 @@ namespace SmartSaver.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EMInfo", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ExpensesInfo",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    expensesInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ExpensesInfo", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,12 +42,29 @@ namespace SmartSaver.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserAchievement",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserAchievement", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserBalance",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     balance = table.Column<int>(type: "int", nullable: false),
+                    add = table.Column<int>(type: "int", nullable: false),
+                    remove = table.Column<int>(type: "int", nullable: false),
                     user_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -70,33 +73,18 @@ namespace SmartSaver.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserExpense",
+                name: "UserBudget",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    expenses = table.Column<int>(type: "int", nullable: false),
-                    expensesInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    amount = table.Column<int>(type: "int", nullable: false),
+                    text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     userID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserExpense", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserIncome",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    income = table.Column<int>(type: "int", nullable: false),
-                    incomeInfo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    userID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserIncome", x => x.ID);
+                    table.PrimaryKey("PK_UserBudget", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -121,19 +109,16 @@ namespace SmartSaver.Migrations
                 name: "EMInfo");
 
             migrationBuilder.DropTable(
-                name: "ExpensesInfo");
+                name: "SMInfo");
 
             migrationBuilder.DropTable(
-                name: "SMInfo");
+                name: "UserAchievement");
 
             migrationBuilder.DropTable(
                 name: "UserBalance");
 
             migrationBuilder.DropTable(
-                name: "UserExpense");
-
-            migrationBuilder.DropTable(
-                name: "UserIncome");
+                name: "UserBudget");
 
             migrationBuilder.DropTable(
                 name: "UserInfo");

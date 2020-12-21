@@ -17,13 +17,14 @@ namespace SmartSaver.Service.ServicesBM
         }
         public async Task Add(UserBudget budget)
         {
-           context.UserBudget.Add(budget);
-           await context.SaveChangesAsync();
-           AddToBalanceDB(budget.amount);
             if (budget.amount < 0)
             {
                 AddToLimitDB(budget.amount, budget.text);
             }
+            context.UserBudget.Add(budget);
+           await context.SaveChangesAsync();
+           AddToBalanceDB(budget.amount);
+           
         }
 
         public async Task<List<UserBudget>> GetAll()
