@@ -28,11 +28,8 @@ namespace SmartSaver.Services
 
         public async Task<ExpensesManagerInformation> GetById(int id)
         {
-            var expense = await context.EMInfo.FirstOrDefaultAsync(e => e.ID == id);
-            if (expense == null)
-                return null;
-            else return expense;
-
+                var expense = context.EMInfo.SingleOrDefault(e => e.ID==id);
+                return expense;
         }
 
         public async Task Edit(ExpensesManagerInformation expense, int id)      
@@ -63,27 +60,26 @@ namespace SmartSaver.Services
             await context.SaveChangesAsync();
         }
        
-        //is budget trackerio
-        //reikia iterpti user id
-        public void AddToDB(int spent, string category)
+        public async Task EditFromBudgetManager(ExpensesManagerInformation expense)
         {
-            ExpensesManagerInformation limit = context.EMInfo.SingleOrDefault(l => l.Category == category); //cia reiketu patikrinti dar ir useri
-            if (limit == null)
-            {
-                var l = new ExpensesManagerInformation
+            
+                ExpensesManagerInformation limit = context.EMInfo.SingleOrDefault(l => l.Category == expense.Category); //cia reiketu patikrinti dar ir useri
+                if (limit == null)
                 {
-                    Category = category,
-                    Spent = spent,
-                    Limit = null,
-                    uID = 1
-                };
-                context.EMInfo.Add(l);
-            }
-            else
-            {
-                limit.Spent += spent;
-            }
-            context.SaveChanges();
+                    var l = new ExpensesManagerInformation
+                    {
+                        Category = expense.Category,
+                        Spent = expense.Spent,
+                        Limit = null,
+                        uID = 1
+                    };
+                    context.EMInfo.Add(l);
+                }
+                else
+                {
+                    limit.Spent += expense.Spent;
+                }
+                await context.SaveChangesAsync();
         }
     }
 }

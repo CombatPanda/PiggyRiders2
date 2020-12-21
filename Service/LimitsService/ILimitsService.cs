@@ -14,6 +14,8 @@ namespace SmartSaver.Services
         Task Edit(ExpensesManagerInformation expense, int id);
         Task Add(ExpensesManagerInformation expense);
         Task Delete(int id);
+        Task EditFromBudgetManager(ExpensesManagerInformation expense);
+
 
     }
 }
