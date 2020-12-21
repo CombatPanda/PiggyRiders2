@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext } from 'react';
+﻿import React, { useState, useContext, useEffect } from 'react';
 import { SavingContext } from './SavingContext';
 import { Route } from 'react-router-dom';
 import { Button } from 'reactstrap';
@@ -19,8 +19,23 @@ const SavingList = () => {
             window.location.reload();
         }
     }
+    useEffect(() => {
+        fetchBalance();
+    }, []);
+
+    const [balance, setBalance] = useState('');
+
+    const fetchBalance = async () => {
+        const data = await fetch(`https://localhost:44312/api/UserBalance/1`);
+
+        const balance = await data.json();
+        console.log(balance);
+        setBalance(balance.data);
+    };
+
     return (
         <div>
+            <h1>Your balance: { balance.balance}</h1>
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
                     <tr>

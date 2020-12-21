@@ -19,24 +19,6 @@ namespace SmartSaver.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
-            modelBuilder.Entity("SmartSaver.Models.ExpensesInformation", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("expensesInfo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("userID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("ExpensesInfo");
-                });
-
             modelBuilder.Entity("SmartSaver.Models.ExpensesManagerInformation", b =>
                 {
                     b.Property<int>("ID")
@@ -83,12 +65,36 @@ namespace SmartSaver.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("lastAddition")
+                        .HasColumnType("int");
+
                     b.Property<int>("user_id")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
                     b.ToTable("SMInfo");
+                });
+
+            modelBuilder.Entity("SmartSaver.Models.UserAchievement", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("UserAchievement");
                 });
 
             modelBuilder.Entity("SmartSaver.Models.UserBalance", b =>
@@ -98,7 +104,13 @@ namespace SmartSaver.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("add")
+                        .HasColumnType("int");
+
                     b.Property<int>("balance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("remove")
                         .HasColumnType("int");
 
                     b.Property<int>("user_id")
@@ -109,17 +121,17 @@ namespace SmartSaver.Migrations
                     b.ToTable("UserBalance");
                 });
 
-            modelBuilder.Entity("SmartSaver.Models.UserExpense", b =>
+            modelBuilder.Entity("SmartSaver.Models.UserBudget", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("expenses")
+                    b.Property<int>("amount")
                         .HasColumnType("int");
 
-                    b.Property<string>("expensesInfo")
+                    b.Property<string>("text")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("userID")
@@ -127,28 +139,7 @@ namespace SmartSaver.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("UserExpense");
-                });
-
-            modelBuilder.Entity("SmartSaver.Models.UserIncome", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("income")
-                        .HasColumnType("int");
-
-                    b.Property<string>("incomeInfo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("userID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("UserIncome");
+                    b.ToTable("UserBudget");
                 });
 
             modelBuilder.Entity("SmartSaver.Models.UserInformation", b =>
