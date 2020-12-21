@@ -49,7 +49,7 @@ export const GlobalProvider = ({ children }) => {
             },
             body: JSON.stringify({
                 add: (transaction.amount > 0) ? transaction.amount : 0,
-                remove: (transaction.amount < 0) ? transaction.amount : 0,
+                remove: (transaction.amount < 0) ? transaction.amount*-1 : 0,
                 user_id:1
             })
         })
