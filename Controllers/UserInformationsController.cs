@@ -17,6 +17,7 @@ namespace SmartSaver.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class UserInformationsController : ControllerBase
     {
         private readonly IUserServices _userService;
@@ -26,22 +27,6 @@ namespace SmartSaver.Controllers
             _userService = userService;
         }
 
-        // GET: api/SavingsManagerInformations/
-        [HttpGet("{email}/{password}")]
-        public async Task<ActionResult<UserInformation>> GetUser(string email, string password)
-        {
-            var check = await _userService.GetUser(email, password);
-            if (check.Success)
-            {
-                return Ok(await _userService.GetUser(email, password));
-            }
-            else
-            {
-                return BadRequest();
-            }
-           
-        }
-
         // POST: api/UserInformations
         [HttpPost]
         public async Task<ActionResult<UserInformation>> PostUserInformation(UserInformation userInformation)
@@ -49,7 +34,7 @@ namespace SmartSaver.Controllers
             var check = await _userService.AddUser(userInformation);
             if (check.Success)
             {
-             return Ok(await _userService.AddUser(userInformation));
+                return Ok(await _userService.AddUser(userInformation));
             }
             else
             {
@@ -58,5 +43,5 @@ namespace SmartSaver.Controllers
         }
 
     }
-    }
+}
 
