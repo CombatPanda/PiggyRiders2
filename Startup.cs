@@ -43,7 +43,7 @@ namespace SmartSaver
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
 
             services.AddScoped<ILimitsService, ExpensesService>();
-            services.AddScoped<IBalanceServices, BalanceService>();
+            services.AddScoped<IBalanceService, BalanceService>();
             services.AddScoped<IBudgetService, BudgetService>();
 
             services.AddScoped<IAchievementService, AchievementService>();

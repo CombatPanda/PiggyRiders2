@@ -26,6 +26,7 @@ namespace SmartSaver.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserAchievement>>> Get()
         {
+            await _achievementService.UpdateAchievement();
             return Ok(await _achievementService.GetAllAchievements());
         }
 
@@ -39,9 +40,9 @@ namespace SmartSaver.Controllers
         // PUT: api/UserAchievement/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
-        public async Task<IActionResult> UpdateAchievement(UserAchievement updatedAchievement)
+        public async Task<IActionResult> UpdateAchievement()
         {
-            ServiceResponse<UserAchievement> response = await _achievementService.UpdateAchievement(updatedAchievement);
+            ServiceResponse<UserAchievement> response = await _achievementService.UpdateAchievement();
             if (response.Data == null)
             {
                 return NotFound(response);
