@@ -65,9 +65,23 @@ namespace SmartSaver.Service
                 return user;
             }
 
+        }
 
+        public string GetID(JwtSecurityToken token)
+        {
+            return token.Claims.First(claim => claim.Type == "sub").Value;
+
+        } 
+        public string GetUsername(JwtSecurityToken token)
+        {
+            return token.Claims.First(claim => claim.Type == "unique_name").Value;
 
         }
+
+
+
+
+
 
  
     }

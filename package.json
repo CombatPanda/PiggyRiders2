@@ -1,6 +1,10 @@
 {
   "dependencies": {
+    "@types/js-cookie": "^2.2.6",
     "aws-amplify": "^3.3.9",
-    "bootstrap": "^4.5.3"
+    "axios": "^0.21.1",
+    "bootstrap": "^4.5.3",
+    "js-cookie": "^2.2.1",
+    "jwt-decode": "^3.1.2"
   }
 }

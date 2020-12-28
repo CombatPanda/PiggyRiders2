@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-
-var token = "";
+import AuthApi from "./AuthApi";
+import Cookies from "C:/Users/Veronika/source/repos/lauratumaite/SmartSaver/node_modules/js-cookie/src/js.cookie.js";
+import jwtDecode from "jwt-decode";
 
 export default class Login extends Component {
   onSubmit(e) {
@@ -14,7 +15,8 @@ export default class Login extends Component {
     e.preventDefault();
   }
 
-  getUser(newUser) {
+  getUser(newUser) { 
+    const Auth = React.useContext(AuthApi)
     fetch("https://localhost:44312/api/Login", {
       method: "POST",
       headers: {
@@ -29,7 +31,10 @@ export default class Login extends Component {
       console.log(response);
 
       if (response.ok) {
-        document.cookie = response;
+        //document.cookie = response;
+        Auth.setAuth(true);
+        console.log("loginas sekmingas" + Auth.auth);
+        Cookies.set ("user", "loginTrue");
         this.props.history.push("/SavingsManagerInformations");
       } else {
         console.log(response.ok);
