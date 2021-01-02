@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 
-
-
 export default class Login extends Component {
-
-
-
 
   onSubmit(e) {
     const newUser = {

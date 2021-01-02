@@ -38,14 +38,12 @@ export class NavMenu extends Component {
                 <li className="divider"></li>
                 <li><a href="/Challenges">Challenges</a></li>
             </ul>
-            <nav className = "pink">
                 <div className="nav-wrapper">
-                    <a href="/" className="brand-logo">Smart Saver</a>
+                    <a className = "h1 center">SMART SAVER</a>
                     <ul className="right hide-on-med-and-down">
                         <li><a className="dropdown-trigger" href="#!" data-target="dropdown">Menu</a></li>
                     </ul>
                 </div>
-            </nav>
         </div>
     );
   }
