@@ -35,6 +35,33 @@ namespace SmartSaver.Service.ServicesBM
             }
             return budget;
         }
+
+        public async Task<int> GetExpenses()
+        {
+            int user = UserID();
+            int expenses = 0;
+            var items = context.UserBudget.Where(i => i.userID == user).ToList();
+            foreach (var i in items)
+            {
+                if (i.amount < 0)
+                    expenses += (i.amount * -1);
+            }
+           return expenses;
+        }
+
+        public async Task<int> GetIncomes()
+        {
+            int user = UserID();
+            int incomes = 0;
+            var items = context.UserBudget.Where(i => i.userID == user).ToList();
+            foreach (var i in items)
+            {
+                if (i.amount > 0)
+                    incomes += i.amount;
+            }
+            return incomes;
+        }
+
         private int UserID()
         {
             int userID;

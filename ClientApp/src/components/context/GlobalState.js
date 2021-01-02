@@ -4,7 +4,9 @@ import AppReducer from './AppReducer';
 
 // Initial state
 const initialState = {
-    transactions: []
+    transactions: [],
+    incomes: '',
+    expenses: ''
 }
 
 // Create context
@@ -23,6 +25,24 @@ export const GlobalProvider = ({ children }) => {
                 payload: response
             });
 
+    }
+
+    async function getExpenses() {
+        const data = await fetch('https://localhost:44312/api/UserBudgets/expenses');
+        const response = await data.json();
+        dispatch({
+            type: 'GET_EXPENSES',
+            payload: response
+        });
+    }
+
+    async function getIncomes() {
+        const data = await fetch('https://localhost:44312/api/UserBudgets/incomes');
+        const response = await data.json();
+        dispatch({
+            type: 'GET_INCOMES',
+            payload: response
+        });
     }
 
     async function addTransaction(transaction) {
@@ -74,8 +94,12 @@ export const GlobalProvider = ({ children }) => {
     return (
         <GlobalContext.Provider value={{
         transactions: state.transactions,
+        expenses: state.expenses,
+        incomes: state.incomes,
         addTransaction,
-        getTransactions
+        getTransactions,
+        getExpenses,
+        getIncomes
     }}>
         {children}
         </GlobalContext.Provider>);
