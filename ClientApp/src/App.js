@@ -19,7 +19,6 @@ import AuthApi from "./components/LoginRegisterComponents/AuthApi"
 function App() {
   const [auth, setAuth] = React.useState(false);
   return(
-
     <div>
       <AuthApi.Provider value = {{auth, setAuth}}>
     <Router>

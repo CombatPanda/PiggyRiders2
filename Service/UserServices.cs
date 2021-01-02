@@ -29,7 +29,12 @@ namespace SmartSaver.Service
             }
             else
             {
+                UserBalance userBalance = new UserBalance();
+                userBalance.user_id = newUser.ID;
+
+
                 _context.UserInfo.Add(newUser);
+                _context.UserBalance.Add(userBalance);
                 await _context.SaveChangesAsync();
                 serviceResponse.Data = await _context.UserInfo.ToListAsync();
                 return serviceResponse;

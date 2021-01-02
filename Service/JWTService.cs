@@ -73,7 +73,8 @@ namespace SmartSaver.Service
         {
             return token.Claims.First(claim => claim.Type == "sub").Value;
 
-        } 
+        }
+        
         public string GetUsername()
         {
             return token.Claims.First(claim => claim.Type == "unique_name").Value;

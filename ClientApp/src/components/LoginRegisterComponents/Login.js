@@ -5,7 +5,6 @@ import jwtDecode from "jwt-decode";
 
 export default class Login extends Component {
   onSubmit(e) {
-
     const newUser = {
       email: this.refs.email.value,
       password: this.refs.password.value
