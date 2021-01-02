@@ -1,10 +1,10 @@
 import React, { createContext, useReducer } from 'react';
-import { formatWithOptions } from 'util';
 import AppReducer from './AppReducer';
 
 // Initial state
 const initialState = {
-    transactions: []
+    transactions: [],
+    balance: ''
 }
 
 // Create context
@@ -18,11 +18,19 @@ export const GlobalProvider = ({ children }) => {
     async function getTransactions() {
             const data = await fetch('https://localhost:44312/api/UserBudgets');
             const response = await data.json();
-            dispatch({
-                type: 'GET_TRANSACTION',
-                payload: response
-            });
+        dispatch({
+            type: 'GET_TRANSACTION',
+            payload: response
+        });
+    }
 
+    async function getBalance() {
+        const data = await fetch(`https://localhost:44312/api/UserBalance/1`);
+        const response = await data.json();
+        dispatch({
+            type: 'GET_BALANCE',
+            payload: response.data.balance
+        });
     }
 
     async function addTransaction(transaction) {
@@ -64,7 +72,7 @@ export const GlobalProvider = ({ children }) => {
                     amount: transaction.amount,
                     userID: 1
                 })
-            })
+          })
             dispatch({
                 type: 'ADD_TRANSACTION',
                 payload: transaction
@@ -74,8 +82,10 @@ export const GlobalProvider = ({ children }) => {
     return (
         <GlobalContext.Provider value={{
         transactions: state.transactions,
+        balance: state.balance,
         addTransaction,
-        getTransactions
+        getTransactions,
+        getBalance
     }}>
         {children}
         </GlobalContext.Provider>);
