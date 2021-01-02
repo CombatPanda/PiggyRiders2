@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, Component } from 'react';
+﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class AddLimit extends Component {
@@ -10,8 +10,22 @@ class AddLimit extends Component {
             limit: (this.refs.limit.value == "") ? null : this.refs.limit.value,     
             uid: 1
         }
-        this.addLimit(newLimit);
         e.preventDefault();
+        if (this.handleValidation(newLimit)) {
+            this.addLimit(newLimit);
+        }
+       
+    }
+
+    handleValidation(newLimit) {
+        var formIsValid = true;
+        if (!newLimit.category)
+        {
+            formIsValid = false;
+            alert("Category field cannot be empty!");
+            return formIsValid;
+        }
+       else return formIsValid;
     }
 
     addLimit(newLimit) {
@@ -42,16 +56,16 @@ class AddLimit extends Component {
 
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <div className="imput-field">
-                        <input type="text" name="category" ref="category" />
                         <label htmlFor="category">Category</label>
+                        <input type="text" name="category" ref="category" />
                     </div>
                     <div className="imput-field">
-                        <input type="text" name="spent" ref="spent" />
                         <label htmlFor="spent">Spent</label>
+                        <input type="number" name="spent" ref="spent" />                        
                     </div>
-                    <div className="imput-field">
-                        <input type="text" name="limit" ref="limit"/>
+                    <div className="imput-field">                       
                         <label htmlFor="limit">Limit</label>
+                        <input type="number" name="limit" ref="limit" />
                     </div>
                     <input type="submit" value="Save" className="btn" />
                 </form>

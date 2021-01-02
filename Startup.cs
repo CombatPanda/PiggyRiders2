@@ -10,8 +10,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using SmartSaver.Contexts;
+using SmartSaver.Service.ServicesBM;
+using SmartSaver.Services;
 using SmartSaver.Service;
 using System.Text;
+using SmartSaver.Service.SavingService;
+using SmartSaver.Service.AchievementService;
+using SmartSaver.Service.BalanceService;
 
 namespace SmartSaver
 {
@@ -51,9 +56,17 @@ namespace SmartSaver
             {
                 configuration.RootPath = "ClientApp/build";
             });
+            services.AddScoped<ISavingService, SavingService>();
 
             services.AddDbContext<UserContext>(options=>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+
+            services.AddScoped<ILimitsService, ExpensesService>();
+            services.AddScoped<ILimitsService, LimitsService>();
+            services.AddScoped<IBalanceService, BalanceService>();
+            services.AddScoped<IBudgetService, BudgetService>();
+
+            services.AddScoped<IAchievementService, AchievementService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

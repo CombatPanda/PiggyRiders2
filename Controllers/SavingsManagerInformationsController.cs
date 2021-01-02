@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
+using SmartSaver.Service.SavingService;
 
 namespace SmartSaver.Controllers
 {
@@ -14,105 +15,67 @@ namespace SmartSaver.Controllers
     [ApiController]
     public class SavingsManagerInformationsController : ControllerBase
     {
-        private readonly UserContext _context;
+        private readonly ISavingService _savingService;
 
-        public SavingsManagerInformationsController(UserContext context)
+        public SavingsManagerInformationsController(ISavingService savingService)
         {
-            _context = context;
+            _savingService = savingService;
         }
 
         // GET: api/SavingsManagerInformations
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<SavingsManagerInformation>>> GetSMInfo()
+        public async Task<ActionResult<IEnumerable<SavingsManagerInformation>>> Get()
         {
-            return await _context.SMInfo.ToListAsync();
+            return Ok(await _savingService.GetAllSavings());
         }
 
         // GET: api/SavingsManagerInformations/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<SavingsManagerInformation>> GetSavingsManagerInformation(int id)
+        public async Task<ActionResult<SavingsManagerInformation>> GetSingle(int id)
         {
-            var savingsManagerInformation = await _context.SMInfo.FindAsync(id);
-
-            if (savingsManagerInformation == null)
+            ServiceResponse<SavingsManagerInformation> response = await _savingService.GetSavingsById(id);
+            if (response.Data == null)
             {
-                return NotFound();
+                return NotFound(response);
             }
-
-            return savingsManagerInformation;
+            return Ok(response);
         }
 
         // PUT: api/SavingsManagerInformations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutSavingsManagerInformation(int id, SavingsManagerInformation savingsManagerInformation)
+        public async Task<IActionResult> UpdateSaving(SavingsManagerInformation updatedSaving, int id)
         {
-            if (id != savingsManagerInformation.ID)
+            ServiceResponse<SavingsManagerInformation> response = await _savingService.UpdateSaving(updatedSaving);
+            if(response.Data == null)
             {
-                return BadRequest();
+                return NotFound(response);
             }
-
-            _context.Entry(savingsManagerInformation).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SavingsManagerInformationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(response);
         }
 
         // POST: api/SavingsManagerInformations
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<SavingsManagerInformation>> PostSavingsManagerInformation(SavingsManagerInformation savingsManagerInformation)
+        public async Task<ActionResult<SavingsManagerInformation>> PostSavingsManagerInformation(SavingsManagerInformation newSaving)
         {
-            _context.SMInfo.Add(savingsManagerInformation);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSavingsManagerInformation", new { id = savingsManagerInformation.ID }, savingsManagerInformation);
+            return Ok(await _savingService.AddSaving(newSaving));
         }
 
         // DELETE: api/SavingsManagerInformations/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteSavingsManagerInformation(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var savingsManagerInformation = await _context.SMInfo.FindAsync(id);
-            if (savingsManagerInformation == null)
+            ServiceResponse<List<SavingsManagerInformation>> response = await _savingService.DeleteSaving(id);
+            if (response.Data == null)
             {
-                return NotFound();
+                return NotFound(response);
             }
-
-            _context.SMInfo.Remove(savingsManagerInformation);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok(response);
         }
 
-        private bool SavingsManagerInformationExists(int id)
-        {
-            return _context.SMInfo.Any(e => e.ID == id);
-        }
-        [HttpPost]
-        [Route("/test")]
-        public async Task<ActionResult<SavingsManagerInformation>> Test(SavingsManagerInformation savingsManagerInformation)
-        {
-            _context.SMInfo.Add(savingsManagerInformation);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetSavingsManagerInformation", new { id = savingsManagerInformation.ID }, savingsManagerInformation);
-        }
+       
+        
     }
     
 }

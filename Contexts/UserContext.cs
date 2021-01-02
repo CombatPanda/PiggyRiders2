@@ -9,14 +9,17 @@ namespace SmartSaver.Contexts
 {
     public class UserContext : DbContext
     {
-        public UserContext(DbContextOptions<UserContext> options) : base(options){}
+        public UserContext(DbContextOptions<UserContext> options) : base(options)
+        {
+
+        }
+
         public DbSet<UserInformation> UserInfo { get; set; }
         public DbSet<ExpensesManagerInformation> EMInfo { get; set; }
         public DbSet<SavingsManagerInformation> SMInfo { get; set; }
-        public DbSet<UserExpense> UserExpense { get; set; }
         public DbSet<UserBalance> UserBalance { get; set; }
-        public DbSet<UserIncome> UserIncome { get; set; }
-        public DbSet<ExpensesInformation> ExpensesInfo { get; set; }
+        public DbSet<UserBudget> UserBudget { get; set; }
+        public DbSet<UserAchievement> UserAchievement { get; set; }
 
 
     }
