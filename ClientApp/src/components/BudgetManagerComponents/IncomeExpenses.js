@@ -14,7 +14,7 @@ export const IncomeExpenses = () => {
         getIncomes();
         setI(incomes);
     }
-    useEffect(() => { fetchInfo(); });
+    useEffect(() => { fetchInfo();});
 
     return (
         <div className="inc-exp-container">
