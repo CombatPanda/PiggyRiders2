@@ -14,13 +14,11 @@ namespace SmartSaver.Service.AchievementService
         public async Task completeAchievementAsync(UserContext _context, UserAchievement ach, string id)
         {
 
-          
-           
-            var savingsManagerInformationList = await _context.SMInfo.Where(s => s.user_id.ToString() == id).ToListAsync();
-            var userBalanceList = await _context.UserBalance.Where(s => s.user_id.ToString() == id).ToListAsync();
-            var userBudgetList = await _context.UserBudget.Where(s => s.userID.ToString() == id).ToListAsync();
+            var savingsManagerInformationList = await _context.SMInfo.Where(s => s.user_id == id).ToListAsync();
             UserBalance userBalance = await _context.UserBalance.Where(s => s.user_id.ToString() == id).FirstOrDefaultAsync();
             UserInformation userInformation = await _context.UserInfo.Where(s => s.ID.ToString() == id).FirstOrDefaultAsync();
+            var userBalanceList = await _context.UserBalance.Where(s => s.user_id.ToString() == id).ToListAsync();
+            var userBudgetList = await _context.UserBudget.Where(s => s.userID.ToString() == id).ToListAsync();
 
             int count = 0;
             int positive = 0;

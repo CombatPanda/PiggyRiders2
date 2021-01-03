@@ -31,7 +31,7 @@ namespace SmartSaver.Controllers
         public async Task<ActionResult<IEnumerable<UserAchievement>>> Get()
         {
             await _achievementService.UpdateAchievement(_jWTService.GetID());
-            return Ok(await _achievementService.GetAllAchievements());
+            return Ok(await _achievementService.GetAllAchievements(_jWTService.GetID()));
         }
 
         // GET: api/UserAchievement/5

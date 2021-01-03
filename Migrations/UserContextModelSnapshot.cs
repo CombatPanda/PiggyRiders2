@@ -68,8 +68,8 @@ namespace SmartSaver.Migrations
                     b.Property<int>("lastAddition")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
+                    b.Property<string>("user_id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -122,8 +122,8 @@ namespace SmartSaver.Migrations
                     b.Property<int>("remove")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
+                    b.Property<string>("user_id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 

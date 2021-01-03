@@ -17,10 +17,10 @@ namespace SmartSaver.Service.AchievementService
             _context = context;
         }
 
-        public async Task<ServiceResponse<List<UserAchievement>>> GetAllAchievements()
+        public async Task<ServiceResponse<List<UserAchievement>>> GetAllAchievements(string id)
         {
             ServiceResponse<List<UserAchievement>> serviceResponse = new ServiceResponse<List<UserAchievement>>();
-            serviceResponse.Data = await _context.UserAchievement.ToListAsync();
+            serviceResponse.Data = await _context.UserAchievement.Where(s => s.userID.ToString() == id).ToListAsync();
             return serviceResponse;
         }
 
