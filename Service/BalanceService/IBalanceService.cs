@@ -9,7 +9,7 @@ namespace SmartSaver.Service.BalanceService
     public interface IBalanceService
     {
         Task<ServiceResponse<List<UserBalance>>> GetAllBalances();
-         Task<ServiceResponse<UserBalance>> GetBalanceByUserId(int id);
-        Task<ServiceResponse<UserBalance>> UpdateBalance(UserBalance updatedBalance);
+         Task<ServiceResponse<UserBalance>> GetBalanceByUserId(string id);
+        Task<ServiceResponse<UserBalance>> UpdateBalance(UserBalance updatedBalance, string id);
     }
 }

@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
+using SmartSaver.Service;
 using SmartSaver.Service.AchievementService;
+
 
 namespace SmartSaver.Controllers
 {
@@ -16,17 +18,20 @@ namespace SmartSaver.Controllers
     public class UserAchievementController : ControllerBase
     {
         private readonly IAchievementService _achievementService;
+        private readonly IJWTService _jWTService;
 
-        public UserAchievementController(IAchievementService savingService)
+        public UserAchievementController(IAchievementService savingService, IJWTService jWTService)
         {
             _achievementService = savingService;
+            _jWTService = jWTService;
         }
 
         // GET: api/UserAchievement
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserAchievement>>> Get()
         {
-            return Ok(await _achievementService.GetAllAchievements());
+            await _achievementService.UpdateAchievement(_jWTService.GetID());
+            return Ok(await _achievementService.GetAllAchievements(_jWTService.GetID()));
         }
 
         // GET: api/UserAchievement/5
@@ -39,9 +44,9 @@ namespace SmartSaver.Controllers
         // PUT: api/UserAchievement/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
-        public async Task<IActionResult> UpdateAchievement(UserAchievement updatedAchievement)
+        public async Task<IActionResult> UpdateAchievement(int id)
         {
-            ServiceResponse<UserAchievement> response = await _achievementService.UpdateAchievement(updatedAchievement);
+            ServiceResponse<UserAchievement> response = await _achievementService.UpdateAchievement(_jWTService.GetID());
             if (response.Data == null)
             {
                 return NotFound(response);

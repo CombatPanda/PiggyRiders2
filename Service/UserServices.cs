@@ -10,6 +10,7 @@ namespace SmartSaver.Service
 {
     public class UserServices : IUserServices
     {
+        public static UserInformation user;
         private readonly UserContext _context;
 
         public UserServices(UserContext context)
@@ -28,29 +29,43 @@ namespace SmartSaver.Service
             }
             else
             {
+                UserBalance userBalance = new UserBalance();
+                UserAchievement userAchievement = new UserAchievement();
+
                 _context.UserInfo.Add(newUser);
                 await _context.SaveChangesAsync();
+                userBalance.user_id = (_context.UserInfo.Where(e => e.Email == newUser.Email && e.Password == newUser.Password).FirstOrDefault()).ID.ToString();
+                _context.UserBalance.Add(userBalance);
+
+                userAchievement.userID = (_context.UserInfo.Where(e => e.Email == newUser.Email && e.Password == newUser.Password).FirstOrDefault()).ID;
+                _context.UserAchievement.Add(new UserAchievement { Nr = 1, Name = "Register", Description = "Create an account", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 2, Name = "Baby Steps", Description = "Create your first item to save for", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 3, Name = "Profiting", Description = "Have more income than expenses", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 4, Name = "Gains", Description = "Add some income", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 5, Name = "Losses", Description = "Add some expenses", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 6, Name = "Getting Started", Description = "Have three saving goals", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 7, Name = "Completed!", Description = "Complete one saving goal", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 8, Name = "Progress", Description = "Complete three saving goals", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 9, Name = "Keep going", Description = "Complete five saving goals", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 10, Name = "Nice job", Description = "Complete ten saving goals", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 11, Name = "Great job", Description = "Complete twenty five saving goals", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 12, Name = "Awesome", Description = "Complete fifty saving goals", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 13, Name = "Incredible", Description = "Complete a hundred saving goals", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 14, Name = "Profiting 2x", Description = "Have twice as much income than expenses", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 15, Name = "Making Cash", Description = "Have five times as much income than expenses", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 16, Name = "Big Dreams", Description = "Have ten saving goals submitted", Status = 0, Score = 10, userID = userAchievement.userID });
+                _context.UserAchievement.Add(new UserAchievement { Nr = 17, Name = "Only Wishes", Description = "Have fifteen saving goals submitted", Status = 0, Score = 10, userID = userAchievement.userID });
+                await _context.SaveChangesAsync();
                 serviceResponse.Data = await _context.UserInfo.ToListAsync();
+
                 return serviceResponse;
             }
 
         }
 
-        public async Task<ServiceResponse<UserInformation>> GetUser(string email,string password)
+        public async Task<UserInformation> CheckUser(UserInformation newUser)
         {
-            ServiceResponse<UserInformation> serviceResponse = new ServiceResponse<UserInformation>();
-            if (EmailExists(email))
-            {
-               
-                serviceResponse.Data = _context.UserInfo.Where(e => e.Email == email && e.Password == password).FirstOrDefault<UserInformation>();
-                serviceResponse.Message = "Loggin was successful";
-                return serviceResponse;
-            }
-            else
-            {
-                serviceResponse.Success = false;
-                return serviceResponse;
-            }
+            return _context.UserInfo.Where(e => e.Email == newUser.Email && e.Password == newUser.Password).FirstOrDefault();
 
         }
 
@@ -65,56 +80,15 @@ namespace SmartSaver.Service
         {
             return _context.UserInfo.Any(e => e.Email == email);
         }
+
+        //Barto
+        public async Task<ServiceResponse<List<UserInformation>>> GetAllUsers()
+        {
+            ServiceResponse<List<UserInformation>> serviceResponse = new ServiceResponse<List<UserInformation>>();
+            serviceResponse.Data = await _context.UserInfo.ToListAsync();
+            return serviceResponse;
+        }
     }
 
 
-    /*        public async Task<List<UserInformation>> GetUser(UserInformation user)
-            {
-                using (UserContext db = new UserContext())
-                {
-                    return await (from a in db.UserInfo.AsNoTracking()
-                                  select new UserInformation
-                                  {
-                                      Password = a.Password,
-                                      Email = a.Email,
-                                  }).ToListAsync();
-                }
-            }
-
-            public async Task<bool> SaveUser(UserInformation user)
-            {
-                using (UserContext db = new UserContext())
-                {
-                    var usr = db.UserInfo
-                        .Where(b => b.Username == user.Username
-                        && b.Password == user.Password).FirstOrDefault<UserInformation>();
-                    if (usr == null)
-                    {
-                        var newUser = new UserInformation()
-                        {
-                            Username = user.Username,
-                            Password = user.Password,
-                            Email = user.Email,
-                        };
-                        db.UserInfo.Add(newUser);
-
-                    }
-                    return await db.SaveChangesAsync() >= 1;
-                }
-            }
-
-            public async Task<bool> DeleteUser(int Id)
-            {
-                using (UserContext db = new UserContext())
-                {
-                    var usr = db.UserInfo
-                        .Where(x => x.ID == Id).FirstOrDefault<UserInformation>();
-                    if (usr != null)
-                    {
-                        db.UserInfo.Remove(usr);
-                    }
-                    return await db.SaveChangesAsync() >= 1;
-                }
-            }
-        }*/
 }

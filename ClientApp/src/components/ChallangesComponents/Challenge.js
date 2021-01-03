@@ -15,7 +15,7 @@ class Challenges extends React.Component {
         }
     }
 
-    async getExpenses() {
+    async getAchievements() {
         const data = await fetch('https://localhost:44312/api/UserAchievement');
         const response = await data.json();
         this.setState({ achievements: response.data }, () => { });
@@ -23,7 +23,7 @@ class Challenges extends React.Component {
     }
 
     componentWillMount() {
-        this.getExpenses();
+        this.getAchievements();
     }
 
     getColor = (status) => {
@@ -49,24 +49,6 @@ class Challenges extends React.Component {
             return "Completed";
         else return "Ongoing";
     }
-
-    completeChallenge(challengeId, newStatus) {
-        fetch(`https://localhost:44312/api/ExpensesManagerInformations/${this.state.id}`, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                ID: challengeId.id,
-                Status: newStatus.status,
-                uID: 1
-            })
-        }).then(response => {
-            this.props.history.push('/Challenges')
-        })
-    }
-    //Challenges.completeChallenge(1, 1);
     render() {
         return (
             <div>
@@ -77,10 +59,10 @@ class Challenges extends React.Component {
                         <img src={this.getImage(challenge.status)} width="70" height="50"></img>
                         <>{challenge.name + ": "}</>
                         <>{challenge.description}</>
-                        <hright style={{ color: this.getColor(challenge.status), flex: 1, textAlign: 'right', alignSelf: 'stretch'}} >{challenge.status =" " + this.getStatus(challenge.status) }</hright>
+                        <hright style={{ color: this.getColor(challenge.status), flex: 1, textAlign: 'right', alignSelf: 'stretch' }} >{challenge.status = " " + this.getStatus(challenge.status)}</hright>
+                        <hright>{"  " + challenge.score}</hright>
                     </h3>
                
-                      //  <><h3><img src={challange.ImageSrc} width="70" height="50"></img>  {challange.Name} {challange.Description} <hright> {challange.Status} </hright></h3></>)    
                 )}
             </div>
         );

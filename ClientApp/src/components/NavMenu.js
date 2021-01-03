@@ -29,7 +29,7 @@ export class NavMenu extends Component {
                 <li><a href="/log-in">Log In</a></li>
                 <li><a href="/sign-up">Sign Up</a></li>
                 <li className="divider"></li>
-                <li><a href="/BMInfo">Add Transaction</a></li>
+                <li><a href="/BMInfo">Budget Manager</a></li>
                 <li className="divider"></li>
                 <li><a href="/SavingsManagerInformations">Saving Manager</a></li>
                 <li className="divider"></li>
@@ -37,6 +37,7 @@ export class NavMenu extends Component {
                 <li><a href="/ExpensesManagerInformations/add">Add Limit</a></li>
                 <li className="divider"></li>
                 <li><a href="/Challenges">Challenges</a></li>
+                <li><a href="/Leaderboard">Leader board</a></li>
             </ul>
                 <div className="nav-wrapper">
                     <a class = "h1">SMART SAVER</a>

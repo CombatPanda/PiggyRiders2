@@ -11,6 +11,7 @@ namespace SmartSaver.Service.SavingService
     public class SavingService : ISavingService
     {
         private readonly UserContext _context;
+        private StatusSetter statusSetter = new StatusSetter();
 
         public SavingService(UserContext context)
         {
@@ -19,9 +20,17 @@ namespace SmartSaver.Service.SavingService
         public async Task<ServiceResponse<List<SavingsManagerInformation>>> AddSaving(SavingsManagerInformation newSaving)
         {
             ServiceResponse<List<SavingsManagerInformation>> serviceResponse = new ServiceResponse<List<SavingsManagerInformation>>();
-            _context.SMInfo.Add(newSaving);
-            await _context.SaveChangesAsync();
-            serviceResponse.Data = await _context.SMInfo.ToListAsync();
+            try
+            {
+                _context.SMInfo.Add(newSaving);
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = await _context.SMInfo.ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
             return serviceResponse;
         }
 
@@ -46,17 +55,33 @@ namespace SmartSaver.Service.SavingService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<SavingsManagerInformation>>> GetAllSavings()
+        public async Task<ServiceResponse<List<SavingsManagerInformation>>> GetAllSavings(string id)
         {
             ServiceResponse<List<SavingsManagerInformation>> serviceResponse = new ServiceResponse<List<SavingsManagerInformation>>();
-            serviceResponse.Data = await _context.SMInfo.ToListAsync();
+            try
+            {
+                serviceResponse.Data = await _context.SMInfo.Where(s => s.user_id == id).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<SavingsManagerInformation>> GetSavingsById(int id)
         {
             ServiceResponse<SavingsManagerInformation> serviceResponse = new ServiceResponse<SavingsManagerInformation>();
-            serviceResponse.Data = await _context.SMInfo.FindAsync(id);
+            try
+            {
+                serviceResponse.Data = await _context.SMInfo.FindAsync(id);
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
             return serviceResponse;
         }
 
@@ -70,14 +95,7 @@ namespace SmartSaver.Service.SavingService
             savingsManagerInformation.Cost = updatedSaving.Cost;
             savingsManagerInformation.Date = updatedSaving.Date;
             savingsManagerInformation.SavedAmount += updatedSaving.lastAddition;
-                if (savingsManagerInformation.SavedAmount > 0 && savingsManagerInformation.SavedAmount < savingsManagerInformation.Cost)
-                {
-                    savingsManagerInformation.Status = "In progress";
-                }
-                if (savingsManagerInformation.SavedAmount + updatedSaving.lastAddition >=savingsManagerInformation.Cost)
-                {
-                    savingsManagerInformation.Status = "Completed";
-                }
+            savingsManagerInformation.Status = statusSetter.SetStatus(savingsManagerInformation.SavedAmount, savingsManagerInformation.Cost);
             await _context.SaveChangesAsync();
             serviceResponse.Data = savingsManagerInformation;
             }

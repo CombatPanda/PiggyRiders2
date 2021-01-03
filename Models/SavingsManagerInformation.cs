@@ -15,7 +15,7 @@ namespace SmartSaver.Models
         public int SavedAmount { get; set; } = 0;
         public string Status { get; set; } = "Not started";
         public int lastAddition { get; set; } = 0;
-        public int user_id { get; set; }
+        public string user_id { get; set; } 
 
     }
 }

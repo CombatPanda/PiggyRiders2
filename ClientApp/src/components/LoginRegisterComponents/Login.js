@@ -1,40 +1,48 @@
 import React, { Component } from "react";
 
-export default class Login extends Component {
+var token = "";
 
+export default class Login extends Component {
   onSubmit(e) {
+
     const newUser = {
-      password: this.refs.password.value,
-      email: this.refs.email.value
+      email: this.refs.email.value,
+      password: this.refs.password.value
     };
+
     this.getUser(newUser);
     e.preventDefault();
   }
-  
-  
+
   getUser(newUser) {
-    fetch("https://localhost:44312/api/UserInformations/" + newUser.email  + "/" + newUser.password, {
-      method: "GET",
+    fetch("https://localhost:44312/api/Login", {
+      method: "POST",
       headers: {
-        Accept: 
-        "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json"
       },
+      body: JSON.stringify({
+        Password: newUser.password,
+        Email: newUser.email
+      })
     }).then(response => {
-      console.log(response.ok)
+      console.log(response);
+
       if (response.ok) {
+        document.cookie = response;
         this.props.history.push("/SavingsManagerInformations");
-      }
-      else{
+      } else {
+        console.log(response.ok);
         alert("Failed to login, try signing up");
         this.props.history.push("/log-in");
       }
     });
   }
 
+
   render() {
-      return (
-        <form onSubmit={this.onSubmit.bind(this)} class="LogIn" >
+    return (
+      <form onSubmit={this.onSubmit.bind(this)} >
         <h3>Log In</h3>
 
         <div className="imput-field">
@@ -77,7 +85,7 @@ export default class Login extends Component {
         <p className="forgot-password text-right">
           Forgot <a href="#">password?</a>
         </p>
-              </form>
+      </form>
     );
   }
 }

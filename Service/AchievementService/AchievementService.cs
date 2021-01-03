@@ -17,10 +17,10 @@ namespace SmartSaver.Service.AchievementService
             _context = context;
         }
 
-        public async Task<ServiceResponse<List<UserAchievement>>> GetAllAchievements()
+        public async Task<ServiceResponse<List<UserAchievement>>> GetAllAchievements(string id)
         {
             ServiceResponse<List<UserAchievement>> serviceResponse = new ServiceResponse<List<UserAchievement>>();
-            serviceResponse.Data = await _context.UserAchievement.ToListAsync();
+            serviceResponse.Data = await _context.UserAchievement.Where(s => s.userID.ToString() == id).ToListAsync();
             return serviceResponse;
         }
 
@@ -30,20 +30,29 @@ namespace SmartSaver.Service.AchievementService
             serviceResponse.Data = await _context.UserAchievement.FindAsync(id);
             return serviceResponse;
         }
-
-        public async Task<ServiceResponse<UserAchievement>> UpdateAchievement(UserAchievement updatedAchievement)
+     
+        public async Task<ServiceResponse<UserAchievement>> UpdateAchievement(string id)
         {
+            int score = 0;
             ServiceResponse<UserAchievement> serviceResponse = new ServiceResponse<UserAchievement>();
-            try {
-
-            UserAchievement UserAchievement = await _context.UserAchievement.FindAsync(updatedAchievement.ID);
-                UserAchievement.Name = updatedAchievement.Name;
-                UserAchievement.Description = updatedAchievement.Description;
-                UserAchievement.Status = updatedAchievement.Status;
-            await _context.SaveChangesAsync();
-            serviceResponse.Data = UserAchievement;
+            try
+            {
+                AchievementCompleter Completer = new AchievementCompleter();
+                UserInformation userInformation = await _context.UserInfo.Where(s => s.ID.ToString() == id).FirstOrDefaultAsync();
+                UserAchievement UserAchievement = await _context.UserAchievement.Where(s => s.userID.ToString() == id).FirstOrDefaultAsync();
+                userInformation.Score = score;
+                var allAchievements = await _context.UserAchievement.Where(s => s.userID.ToString() == id).ToListAsync(); // visi achievmentai
+                foreach (UserAchievement ach in allAchievements)
+                {
+                    await Completer.completeAchievementAsync(_context, ach, id);
+                   
+                }
+                await Completer.CalculateScore(_context, id);
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = UserAchievement;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 serviceResponse.Success = false;
                 serviceResponse.Message = ex.Message;
             }

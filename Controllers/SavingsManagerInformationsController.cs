@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SmartSaver.Contexts;
 using SmartSaver.Models;
+using SmartSaver.Service;
 using SmartSaver.Service.SavingService;
 
 namespace SmartSaver.Controllers
@@ -16,24 +17,30 @@ namespace SmartSaver.Controllers
     public class SavingsManagerInformationsController : ControllerBase
     {
         private readonly ISavingService _savingService;
-
-        public SavingsManagerInformationsController(ISavingService savingService)
+        private readonly IJWTService _jWTService;
+        public SavingsManagerInformationsController(ISavingService savingService, IJWTService jWTService)
         {
             _savingService = savingService;
+            _jWTService = jWTService;
         }
 
         // GET: api/SavingsManagerInformations
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SavingsManagerInformation>>> Get()
         {
-            return Ok(await _savingService.GetAllSavings());
+            return Ok(await _savingService.GetAllSavings(_jWTService.GetID()));
         }
 
         // GET: api/SavingsManagerInformations/5
         [HttpGet("{id}")]
         public async Task<ActionResult<SavingsManagerInformation>> GetSingle(int id)
         {
-            return Ok(await _savingService.GetSavingsById(id));
+            ServiceResponse<SavingsManagerInformation> response = await _savingService.GetSavingsById(id);
+            if (response.Data == null)
+            {
+                return NotFound(response);
+            }
+            return Ok(response);
         }
 
         // PUT: api/SavingsManagerInformations/5
@@ -54,6 +61,7 @@ namespace SmartSaver.Controllers
         [HttpPost]
         public async Task<ActionResult<SavingsManagerInformation>> PostSavingsManagerInformation(SavingsManagerInformation newSaving)
         {
+            newSaving.user_id = _jWTService.GetID();
             return Ok(await _savingService.AddSaving(newSaving));
         }
 
