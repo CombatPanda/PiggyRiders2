@@ -2,7 +2,7 @@
 
 namespace SmartSaver.Migrations
 {
-    public partial class bilkekas : Migration
+    public partial class achievements : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

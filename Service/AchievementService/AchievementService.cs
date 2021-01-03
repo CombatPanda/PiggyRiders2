@@ -31,23 +31,23 @@ namespace SmartSaver.Service.AchievementService
             return serviceResponse;
         }
      
-        public async Task<ServiceResponse<UserAchievement>> UpdateAchievement()
+        public async Task<ServiceResponse<UserAchievement>> UpdateAchievement(string id)
         {
             int score = 0;
             ServiceResponse<UserAchievement> serviceResponse = new ServiceResponse<UserAchievement>();
             try
             {
                 AchievementCompleter Completer = new AchievementCompleter();
-                UserInformation userInformation = await _context.UserInfo.FindAsync(1);
-                UserAchievement UserAchievement = await _context.UserAchievement.FindAsync(1);
+                UserInformation userInformation = await _context.UserInfo.Where(s => s.ID.ToString() == id).FirstOrDefaultAsync();
+                UserAchievement UserAchievement = await _context.UserAchievement.Where(s => s.userID.ToString() == id).FirstOrDefaultAsync();
                 userInformation.Score = score;
-                var allAchievements = await _context.UserAchievement.ToListAsync(); // visi achievmentai
+                var allAchievements = await _context.UserAchievement.Where(s => s.userID.ToString() == id).ToListAsync(); // visi achievmentai
                 foreach (UserAchievement ach in allAchievements)
                 {
-                    await Completer.completeAchievementAsync(_context, ach);
+                    await Completer.completeAchievementAsync(_context, ach, id);
                    
                 }
-                await Completer.CalculateScore(_context);
+                await Completer.CalculateScore(_context, id);
                 await _context.SaveChangesAsync();
                 serviceResponse.Data = UserAchievement;
             }

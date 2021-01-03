@@ -11,18 +11,16 @@ namespace SmartSaver.Service.AchievementService
     public class AchievementCompleter
     {
         int score = 0;
-        public async Task completeAchievementAsync(UserContext _context, UserAchievement ach)
+        public async Task completeAchievementAsync(UserContext _context, UserAchievement ach, string id)
         {
 
-            var allAchievements = await _context.UserAchievement.ToListAsync(); // visi achievmentai
-            ExpensesManagerInformation expensesManagerInformation = await _context.EMInfo.FindAsync(1); // spent, limit
-            SavingsManagerInformation savingsManagerInformation = await _context.SMInfo.FindAsync(1); // savingsManagerInformation.Purpose
-            var savingsManagerInformationList = await _context.SMInfo.ToListAsync();
-            UserBalance userBalance = await _context.UserBalance.FindAsync(1); // UserBalance.balance UserBalance.user_id
-            var userBalanceList = await _context.UserBalance.ToListAsync();
-            UserBudget userBudget = await _context.UserBudget.FindAsync(1); // UserBudget.amount ToListAsync?
-            var userBudgetList = await _context.UserBudget.ToListAsync();
-            UserInformation userInformation = await _context.UserInfo.FindAsync(1); // ID username score
+          
+           
+            var savingsManagerInformationList = await _context.SMInfo.Where(s => s.user_id.ToString() == id).ToListAsync();
+            var userBalanceList = await _context.UserBalance.Where(s => s.user_id.ToString() == id).ToListAsync();
+            var userBudgetList = await _context.UserBudget.Where(s => s.userID.ToString() == id).ToListAsync();
+            UserBalance userBalance = await _context.UserBalance.Where(s => s.user_id.ToString() == id).FirstOrDefaultAsync();
+            UserInformation userInformation = await _context.UserInfo.Where(s => s.ID.ToString() == id).FirstOrDefaultAsync();
 
             int count = 0;
             int positive = 0;
@@ -154,11 +152,10 @@ namespace SmartSaver.Service.AchievementService
                 }
             }
         }
-        public async Task CalculateScore(UserContext _context)
+        public async Task CalculateScore(UserContext _context, string id)
         {
-            UserInformation userInformation = await _context.UserInfo.FindAsync(1);
-            UserAchievement UserAchievement = await _context.UserAchievement.FindAsync(1);
-            var allAchievements = await _context.UserAchievement.ToListAsync(); // visi achievmentai
+            UserInformation userInformation = await _context.UserInfo.Where(s => s.ID.ToString() == id).FirstOrDefaultAsync();
+            var allAchievements = await _context.UserAchievement.Where(s => s.userID.ToString() == id).ToListAsync(); // visi achievmentai
             foreach (UserAchievement ach in allAchievements)
             {
                 if(ach.Status == 1)
