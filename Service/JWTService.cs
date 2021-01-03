@@ -43,6 +43,8 @@ namespace SmartSaver.Service
                 expires: DateTime.Now.AddMinutes(120),
                 signingCredentials: credentials);
 
+
+
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
