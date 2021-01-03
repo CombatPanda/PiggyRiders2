@@ -4,8 +4,8 @@ import { GlobalContext } from '../context/GlobalState';
 
 export const AddTransaction =()=> {
     const[text, setText] = useState('');
-    const[amount, setAmount] = useState(0);
-    const { addTransaction } = useContext(GlobalContext);
+    const [amount, setAmount] = useState(0);
+    const { addTransaction, getExpenses, getIncomes, getBalance } = useContext(GlobalContext);
 
  const onSubmit = e => {
     e.preventDefault();
@@ -14,7 +14,10 @@ export const AddTransaction =()=> {
         text,
         amount: +amount
     }
-    addTransaction(newTransaction);
+     addTransaction(newTransaction);
+     getBalance();
+     getExpenses();
+     getIncomes();   
 }
        return (
             <div>

@@ -10,5 +10,8 @@ namespace SmartSaver.Service.ServicesBM
     {
         Task<List<UserBudget>> GetAll();
         Task Add(UserBudget budget);
+        
+        Task<int> GetExpenses();
+        Task<int> GetIncomes();
     }
 }
