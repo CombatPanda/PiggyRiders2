@@ -32,12 +32,12 @@ namespace SmartSaver.Service.BalanceService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<UserBalance>> GetBalanceByUserId(int id)
+        public async Task<ServiceResponse<UserBalance>> GetBalanceByUserId(string id)
         {
             ServiceResponse<UserBalance> serviceResponse = new ServiceResponse<UserBalance>();
             try
             {
-                serviceResponse.Data = await _context.UserBalance.FirstAsync(s => s.user_id == 1);
+                serviceResponse.Data = await _context.UserBalance.FirstAsync(s => s.user_id == id);
             }
             catch (Exception ex)
             {
@@ -47,11 +47,11 @@ namespace SmartSaver.Service.BalanceService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<UserBalance>> UpdateBalance(UserBalance updatedBalance)
+        public async Task<ServiceResponse<UserBalance>> UpdateBalance(UserBalance updatedBalance, string id)
         {
             ServiceResponse<UserBalance> serviceResponse = new ServiceResponse<UserBalance>();
             try {
-                UserBalance userBalance = await _context.UserBalance.FirstAsync(s => s.user_id == 1);
+                UserBalance userBalance = await _context.UserBalance.FirstAsync(s => s.user_id == id);
                 if (updatedBalance.add > 0)
                 {
                     userBalance.balance += updatedBalance.add;

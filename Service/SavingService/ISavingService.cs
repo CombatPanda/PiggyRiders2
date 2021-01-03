@@ -8,7 +8,7 @@ namespace SmartSaver.Service.SavingService
 {
     public interface ISavingService
     {
-        Task<ServiceResponse<List<SavingsManagerInformation>>> GetAllSavings();
+        Task<ServiceResponse<List<SavingsManagerInformation>>> GetAllSavings(string id);
         Task<ServiceResponse<SavingsManagerInformation>> GetSavingsById(int id);
         Task<ServiceResponse<List<SavingsManagerInformation>>> AddSaving(SavingsManagerInformation newSaving);
         Task<ServiceResponse<SavingsManagerInformation>> UpdateSaving(SavingsManagerInformation updatedSaving);
