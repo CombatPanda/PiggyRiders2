@@ -6,9 +6,13 @@ import { Link } from 'react-router-dom';
 export default class AddSavingInfo extends React.Component {
     constructor() {
         super();
+        var today = new Date(),
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         this.state = {
             fields: {},
-            errors: {}
+            errors: {},
+            currentDate: date
+             
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -83,10 +87,16 @@ export default class AddSavingInfo extends React.Component {
                 formIsValid = false;
                 errors["date"] = "*Please enter a valid date.";
             }
+            else {
+                var res = new Date(fields["date"]).getTime();
+                var res2 = new Date(this.state.currentDate).getTime();
+            }
+            if (res < res2) {
+                formIsValid = false;
+                errors["date"] = "*Please enter a valid date. One that is after today.";
+            }
         }
 
-
-      
 
         this.setState({
             errors: errors
@@ -138,7 +148,7 @@ export default class AddSavingInfo extends React.Component {
                     </div>
                     <div className="imput-field">
                         <label htmlFor="date">Date</label>
-                        <input type="text" name="date" ref="date" value={this.state.fields.date} onChange={this.handleChange} />
+                        <input type="text" name="date" placeholder="yyyy-mm-dd" ref="date" value={this.state.fields.date} onChange={this.handleChange} />
                         <div className="errorMsg">{this.state.errors.date}</div>
                     </div>
                     <input type="submit" value="Save" className="btn" />
