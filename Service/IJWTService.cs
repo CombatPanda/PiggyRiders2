@@ -10,6 +10,7 @@ namespace SmartSaver.Service
     {
         string GenerateJSONWebToken(UserInformation userInfo);
         Task<UserInformation> AuthenticateUserAsync(UserInformation login);
+        string GetID();
 
 
     }

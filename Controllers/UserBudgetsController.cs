@@ -25,6 +25,19 @@ namespace SmartSaver.Controllers
             var all = await service.GetAll();
             return all;
         }
+        [HttpGet("expenses")]
+        public async Task <int> GetExpenses()
+        {
+            var expenses = await service.GetExpenses();
+            return expenses;
+        }
+
+        [HttpGet("incomes")]
+        public async Task<int> GetIncomes()
+        {
+            var incomes = await service.GetIncomes();
+            return incomes;
+        }
 
         [HttpPost]
         public async Task<ActionResult<UserBudget>> PostUserIncome(UserBudget budget)

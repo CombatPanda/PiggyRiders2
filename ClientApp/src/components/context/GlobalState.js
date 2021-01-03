@@ -4,6 +4,8 @@ import AppReducer from './AppReducer';
 // Initial state
 const initialState = {
     transactions: [],
+    incomes: 0,
+    expenses: 0,
     balance: ''
 }
 
@@ -18,8 +20,18 @@ export const GlobalProvider = ({ children }) => {
     async function getTransactions() {
             const data = await fetch('https://localhost:44312/api/UserBudgets');
             const response = await data.json();
+            dispatch({
+                type: 'GET_TRANSACTION',
+                payload: response
+            });
+
+    }
+
+    async function getExpenses() {
+        const data = await fetch('https://localhost:44312/api/UserBudgets/expenses');
+        const response = await data.json();
         dispatch({
-            type: 'GET_TRANSACTION',
+            type: 'GET_EXPENSES',
             payload: response
         });
     }
@@ -30,6 +42,13 @@ export const GlobalProvider = ({ children }) => {
         dispatch({
             type: 'GET_BALANCE',
             payload: response.data.balance
+        });
+    async function getIncomes() {
+        const data = await fetch('https://localhost:44312/api/UserBudgets/incomes');
+        const response = await data.json();
+        dispatch({
+            type: 'GET_INCOMES',
+            payload: response
         });
     }
 
@@ -82,9 +101,12 @@ export const GlobalProvider = ({ children }) => {
     return (
         <GlobalContext.Provider value={{
         transactions: state.transactions,
+        expenses: state.expenses,
+        incomes: state.incomes,
         balance: state.balance,
         addTransaction,
-        getTransactions,
+        getExpenses,
+        getIncomes,
         getBalance
     }}>
         {children}
