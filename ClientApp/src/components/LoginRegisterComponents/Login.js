@@ -33,8 +33,8 @@ export default class Login extends Component {
   }
 
   render() {
-    return (
-      <form onSubmit={this.onSubmit.bind(this)}>
+      return (
+        <form onSubmit={this.onSubmit.bind(this)} class="LogIn" >
         <h3>Log In</h3>
 
         <div className="imput-field">
@@ -77,7 +77,7 @@ export default class Login extends Component {
         <p className="forgot-password text-right">
           Forgot <a href="#">password?</a>
         </p>
-      </form>
+              </form>
     );
   }
 }

@@ -2,18 +2,41 @@
   text-align: center;
 }
 
+.LogIn {
+    position: absolute;
+    overflow: visible;
+    width: 423px;
+    height: 450px;
+    margin: 50px 0px;
+    padding: 0px;
+    text-align: center;
+    display: inline-block;
+    background-color: rgba(28,22,122,1);
+    font-family: 'Montserrat';
+    text-align: center;
+}
+
+.background {
+    background-color: rgba(17,4,88,1);
+}
+
+.header {
+    font-family: 'Montserrat';
+   
+}
+
 .LRApp-logo {
   height: 40vmin;
 }
 
 .LRApp-header {
-  background-color: white;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
 }
 
 .LRApp-link {

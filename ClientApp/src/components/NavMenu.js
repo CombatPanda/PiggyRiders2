@@ -39,7 +39,7 @@ export class NavMenu extends Component {
                 <li><a href="/Challenges">Challenges</a></li>
             </ul>
                 <div className="nav-wrapper">
-                    <a className = "h1 center">SMART SAVER</a>
+                    <a class = "h1">SMART SAVER</a>
                     <ul className="right hide-on-med-and-down">
                         <li><a className="dropdown-trigger" href="#!" data-target="dropdown">Menu</a></li>
                     </ul>
