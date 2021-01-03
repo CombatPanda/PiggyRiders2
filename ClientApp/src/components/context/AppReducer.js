@@ -10,6 +10,11 @@ export default (state, action) => {
                 ...state,
                 transactions: [...state.transactions, action.payload]
             }
+        case 'GET_BALANCE':
+            return {
+                ...state,
+                balance: action.payload
+            }
         default:
             return state;
     }
