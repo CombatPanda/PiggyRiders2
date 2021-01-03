@@ -2,7 +2,7 @@
 
 namespace SmartSaver.Migrations
 {
-    public partial class mariausbarto : Migration
+    public partial class final : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
