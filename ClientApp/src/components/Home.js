@@ -5,7 +5,7 @@ export class Home extends Component {
 
   render() {
     return (
-      <div>
+       <div>
         <h1>Hello, world!</h1>
         <p>Welcome to Smart saver!</p>
       </div>

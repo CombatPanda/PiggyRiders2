@@ -10,6 +10,6 @@ namespace SmartSaver.Service.AchievementService
     {
         Task<ServiceResponse<List<UserAchievement>>> GetAllAchievements();
         Task<ServiceResponse<UserAchievement>> GetAchievmenetsById(int id);
-        Task<ServiceResponse<UserAchievement>> UpdateAchievement();
+        Task<ServiceResponse<UserAchievement>> UpdateAchievement(string id);
     }
 }

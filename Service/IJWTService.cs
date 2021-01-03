@@ -12,7 +12,5 @@ namespace SmartSaver.Service
         Task<UserInformation> AuthenticateUserAsync(UserInformation login);
         string GetID();
         string GetUsername();
-
-
     }
 }

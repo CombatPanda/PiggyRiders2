@@ -58,6 +58,7 @@ namespace SmartSaver.Service
                 if (login.Password == foundUser.Password && login.Email == foundUser.Email)
                 {
                     user = new UserInformation {ID = foundUser.ID, Username = foundUser.Username, Email = foundUser.Email };
+
                 }
                 return user;
             }
