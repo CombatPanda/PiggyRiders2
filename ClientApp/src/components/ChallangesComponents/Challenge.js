@@ -59,7 +59,8 @@ class Challenges extends React.Component {
                         <img src={this.getImage(challenge.status)} width="70" height="50"></img>
                         <>{challenge.name + ": "}</>
                         <>{challenge.description}</>
-                        <hright style={{ color: this.getColor(challenge.status), flex: 1, textAlign: 'right', alignSelf: 'stretch'}} >{challenge.status =" " + this.getStatus(challenge.status) }</hright>
+                        <hright style={{ color: this.getColor(challenge.status), flex: 1, textAlign: 'right', alignSelf: 'stretch' }} >{challenge.status = " " + this.getStatus(challenge.status)}</hright>
+                        <hright>{"  " + challenge.score}</hright>
                     </h3>
                
                 )}

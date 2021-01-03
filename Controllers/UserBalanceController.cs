@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SmartSaver.Models;
+using SmartSaver.Service;
 using SmartSaver.Service.BalanceService;
 using System;
 using System.Collections.Generic;
@@ -13,30 +14,33 @@ namespace SmartSaver.Controllers
     public class UserBalanceController : ControllerBase
     {
         private readonly IBalanceService _balanceService;
+        private readonly IJWTService _jWTService;
 
-        public UserBalanceController(IBalanceService balanceService)
+        public UserBalanceController(IBalanceService balanceService, IJWTService jWTService)
         {
             _balanceService = balanceService;
+            _jWTService = jWTService;
+
         }
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult<IEnumerable<UserBalance>>> Get()
         {
             return Ok(await _balanceService.GetAllBalances());
-        }
-        [HttpGet("{id}")]
-        public async Task<ActionResult<UserBalance>> GetSingle(int id)
+        }*/
+        [HttpGet]
+        public async Task<ActionResult<UserBalance>> GetSingle()
         {
-            ServiceResponse<UserBalance> response = await _balanceService.GetBalanceByUserId(id);
+            ServiceResponse<UserBalance> response = await _balanceService.GetBalanceByUserId(_jWTService.GetID());
             if (response.Data == null)
             {
                 return NotFound(response);
             }
             return Ok(response);
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBalance(UserBalance updatedBalance, int id)
+        [HttpPut]
+        public async Task<IActionResult> UpdateBalance(UserBalance updatedBalance)
         {
-            ServiceResponse<UserBalance> response = await _balanceService.UpdateBalance(updatedBalance);
+            ServiceResponse<UserBalance> response = await _balanceService.UpdateBalance(updatedBalance, _jWTService.GetID());
             if (response.Data == null)
             {
                 return NotFound(response);

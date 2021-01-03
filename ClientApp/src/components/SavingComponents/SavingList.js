@@ -26,7 +26,7 @@ const SavingList = () => {
     const [balance, setBalance] = useState('');
 
     const fetchBalance = async () => {
-        const data = await fetch(`https://localhost:44312/api/UserBalance/1`);
+        const data = await fetch(`https://localhost:44312/api/UserBalance`);
 
         const balance = await data.json();
         console.log(balance);

@@ -55,12 +55,12 @@ namespace SmartSaver.Service.SavingService
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<SavingsManagerInformation>>> GetAllSavings()
+        public async Task<ServiceResponse<List<SavingsManagerInformation>>> GetAllSavings(string id)
         {
             ServiceResponse<List<SavingsManagerInformation>> serviceResponse = new ServiceResponse<List<SavingsManagerInformation>>();
             try
             {
-                serviceResponse.Data = await _context.SMInfo.ToListAsync();
+                serviceResponse.Data = await _context.SMInfo.Where(s => s.user_id == id).ToListAsync();
             }
             catch (Exception ex)
             {

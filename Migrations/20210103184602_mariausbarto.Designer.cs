@@ -10,8 +10,8 @@ using SmartSaver.Contexts;
 namespace SmartSaver.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20201221124943_initial")]
-    partial class initial
+    [Migration("20210103184602_mariausbarto")]
+    partial class mariausbarto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,8 +70,8 @@ namespace SmartSaver.Migrations
                     b.Property<int>("lastAddition")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
+                    b.Property<string>("user_id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -91,7 +91,16 @@ namespace SmartSaver.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Nr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userID")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -115,8 +124,8 @@ namespace SmartSaver.Migrations
                     b.Property<int>("remove")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
+                    b.Property<string>("user_id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -156,6 +165,9 @@ namespace SmartSaver.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");

@@ -68,8 +68,8 @@ namespace SmartSaver.Migrations
                     b.Property<int>("lastAddition")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
+                    b.Property<string>("user_id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -88,6 +88,12 @@ namespace SmartSaver.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Nr")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -116,8 +122,8 @@ namespace SmartSaver.Migrations
                     b.Property<int>("remove")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
+                    b.Property<string>("user_id")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
 
@@ -157,6 +163,9 @@ namespace SmartSaver.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
