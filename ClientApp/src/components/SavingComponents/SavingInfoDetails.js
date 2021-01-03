@@ -44,7 +44,7 @@ class SavingInfoDetails extends Component {
     }
     async getBalance() {
         let balanceId = this.props.match.params.user_id;
-        const data = await fetch(`https://localhost:44312/api/UserBalance/1`);
+        const data = await fetch(`https://localhost:44312/api/UserBalance`);
         const response = await data.json();
         this.setState({
             balance: response.data.balance,
@@ -171,7 +171,7 @@ class SavingInfoDetails extends Component {
     }
 
     editBalance(newSaving) {
-        fetch(`https://localhost:44312/api/UserBalance/1`, {
+        fetch(`https://localhost:44312/api/UserBalance`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
