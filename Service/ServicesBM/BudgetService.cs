@@ -17,8 +17,8 @@ namespace SmartSaver.Service.ServicesBM
         }
         public async Task Add(UserBudget budget)
         {
-           context.UserBudget.Add(budget);
-           await context.SaveChangesAsync();
+            context.UserBudget.Add(budget);
+            await context.SaveChangesAsync();
         }
 
         public async Task<List<UserBudget>> GetAll()

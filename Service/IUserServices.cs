@@ -10,7 +10,7 @@ namespace SmartSaver.Service
     {
 
         Task<ServiceResponse<List<UserInformation>>> AddUser(UserInformation newUser);
-        Task<ServiceResponse<UserInformation>> GetUser(string email, string password);
+        Task<UserInformation> CheckUser(UserInformation newUser);
 
         Task<ServiceResponse<List<UserInformation>>> GetAllUsers(); // WIP, man reikia gauti visus userius - Bartas
 
