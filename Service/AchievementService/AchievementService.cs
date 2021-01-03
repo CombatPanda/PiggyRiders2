@@ -30,20 +30,23 @@ namespace SmartSaver.Service.AchievementService
             serviceResponse.Data = await _context.UserAchievement.FindAsync(id);
             return serviceResponse;
         }
-
-        public async Task<ServiceResponse<UserAchievement>> UpdateAchievement(UserAchievement updatedAchievement)
+     
+        public async Task<ServiceResponse<UserAchievement>> UpdateAchievement()
         {
             ServiceResponse<UserAchievement> serviceResponse = new ServiceResponse<UserAchievement>();
-            try {
-
-            UserAchievement UserAchievement = await _context.UserAchievement.FindAsync(updatedAchievement.ID);
-                UserAchievement.Name = updatedAchievement.Name;
-                UserAchievement.Description = updatedAchievement.Description;
-                UserAchievement.Status = updatedAchievement.Status;
-            await _context.SaveChangesAsync();
-            serviceResponse.Data = UserAchievement;
+            try
+            {
+                UserAchievement UserAchievement = await _context.UserAchievement.FindAsync(1);
+                var allAchievements = await _context.UserAchievement.ToListAsync(); // visi achievmentai
+                foreach (UserAchievement ach in allAchievements)
+                {
+                    await AchievementCompleter.completeAchievementAsync(_context, ach);
+                    await _context.SaveChangesAsync();
+                    serviceResponse.Data = UserAchievement;
+                }
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 serviceResponse.Success = false;
                 serviceResponse.Message = ex.Message;
             }

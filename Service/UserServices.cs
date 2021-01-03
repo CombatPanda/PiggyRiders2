@@ -10,6 +10,7 @@ namespace SmartSaver.Service
 {
     public class UserServices : IUserServices
     {
+        public static UserInformation user;
         private readonly UserContext _context;
 
         public UserServices(UserContext context)
@@ -36,21 +37,9 @@ namespace SmartSaver.Service
 
         }
 
-        public async Task<ServiceResponse<UserInformation>> GetUser(string email,string password)
+        public async Task<UserInformation> CheckUser(UserInformation newUser)
         {
-            ServiceResponse<UserInformation> serviceResponse = new ServiceResponse<UserInformation>();
-            if (EmailExists(email))
-            {
-               
-                serviceResponse.Data = _context.UserInfo.Where(e => e.Email == email && e.Password == password).FirstOrDefault<UserInformation>();
-                serviceResponse.Message = "Loggin was successful";
-                return serviceResponse;
-            }
-            else
-            {
-                serviceResponse.Success = false;
-                return serviceResponse;
-            }
+            return _context.UserInfo.Where(e => e.Email == newUser.Email && e.Password == newUser.Password).FirstOrDefault();
 
         }
 
@@ -68,53 +57,4 @@ namespace SmartSaver.Service
     }
 
 
-    /*        public async Task<List<UserInformation>> GetUser(UserInformation user)
-            {
-                using (UserContext db = new UserContext())
-                {
-                    return await (from a in db.UserInfo.AsNoTracking()
-                                  select new UserInformation
-                                  {
-                                      Password = a.Password,
-                                      Email = a.Email,
-                                  }).ToListAsync();
-                }
-            }
-
-            public async Task<bool> SaveUser(UserInformation user)
-            {
-                using (UserContext db = new UserContext())
-                {
-                    var usr = db.UserInfo
-                        .Where(b => b.Username == user.Username
-                        && b.Password == user.Password).FirstOrDefault<UserInformation>();
-                    if (usr == null)
-                    {
-                        var newUser = new UserInformation()
-                        {
-                            Username = user.Username,
-                            Password = user.Password,
-                            Email = user.Email,
-                        };
-                        db.UserInfo.Add(newUser);
-
-                    }
-                    return await db.SaveChangesAsync() >= 1;
-                }
-            }
-
-            public async Task<bool> DeleteUser(int Id)
-            {
-                using (UserContext db = new UserContext())
-                {
-                    var usr = db.UserInfo
-                        .Where(x => x.ID == Id).FirstOrDefault<UserInformation>();
-                    if (usr != null)
-                    {
-                        db.UserInfo.Remove(usr);
-                    }
-                    return await db.SaveChangesAsync() >= 1;
-                }
-            }
-        }*/
 }
