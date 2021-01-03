@@ -65,6 +65,14 @@ namespace SmartSaver.Service
         {
             return _context.UserInfo.Any(e => e.Email == email);
         }
+
+        //Barto
+        public async Task<ServiceResponse<List<UserInformation>>> GetAllUsers()
+        {
+            ServiceResponse<List<UserInformation>> serviceResponse = new ServiceResponse<List<UserInformation>>();
+            serviceResponse.Data = await _context.UserInfo.ToListAsync();
+            return serviceResponse;
+        }
     }
 
 

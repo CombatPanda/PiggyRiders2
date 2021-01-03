@@ -57,6 +57,12 @@ namespace SmartSaver.Controllers
             }
         }
 
+        // GET: api/UserInformation
+        //Barto
+        public async Task<ActionResult<IEnumerable<UserInformation>>> Get()
+        {
+            return Ok(await _userService.GetAllUsers());
+        }
     }
     }
 

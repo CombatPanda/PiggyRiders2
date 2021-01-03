@@ -33,17 +33,23 @@ namespace SmartSaver.Service.AchievementService
      
         public async Task<ServiceResponse<UserAchievement>> UpdateAchievement()
         {
+            int score = 0;
             ServiceResponse<UserAchievement> serviceResponse = new ServiceResponse<UserAchievement>();
             try
             {
+                AchievementCompleter Completer = new AchievementCompleter();
+                UserInformation userInformation = await _context.UserInfo.FindAsync(1);
                 UserAchievement UserAchievement = await _context.UserAchievement.FindAsync(1);
+                userInformation.Score = score;
                 var allAchievements = await _context.UserAchievement.ToListAsync(); // visi achievmentai
                 foreach (UserAchievement ach in allAchievements)
                 {
-                    await AchievementCompleter.completeAchievementAsync(_context, ach);
-                    await _context.SaveChangesAsync();
-                    serviceResponse.Data = UserAchievement;
+                    await Completer.completeAchievementAsync(_context, ach);
+                   
                 }
+                await Completer.CalculateScore(_context);
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = UserAchievement;
             }
             catch (Exception ex)
             {

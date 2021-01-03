@@ -2,7 +2,7 @@
 
 namespace SmartSaver.Migrations
 {
-    public partial class initial : Migration
+    public partial class bilkekas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,9 +47,12 @@ namespace SmartSaver.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Nr = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    Score = table.Column<int>(type: "int", nullable: false),
+                    userID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,7 +98,8 @@ namespace SmartSaver.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Score = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
