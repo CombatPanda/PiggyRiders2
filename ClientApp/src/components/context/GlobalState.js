@@ -18,13 +18,12 @@ export const GlobalProvider = ({ children }) => {
 
     // Actions
     async function getTransactions() {
-            const data = await fetch('https://localhost:44312/api/UserBudgets');
-            const response = await data.json();
-            dispatch({
-                type: 'GET_TRANSACTION',
-                payload: response
-            });
-
+        const data = await fetch('https://localhost:44312/api/UserBudgets');
+        const response = await data.json();
+        dispatch({
+            type: 'GET_TRANSACTION',
+            payload: response
+        });
     }
 
     async function getExpenses() {
@@ -43,44 +42,46 @@ export const GlobalProvider = ({ children }) => {
             type: 'GET_BALANCE',
             payload: response.data.balance
         });
-    async function getIncomes() {
-        const data = await fetch('https://localhost:44312/api/UserBudgets/incomes');
-        const response = await data.json();
-        dispatch({
-            type: 'GET_INCOMES',
-            payload: response
-        });
     }
 
-    async function addTransaction(transaction) {
-        if (transaction.amount < 0) {
-            fetch('https://localhost:44312/api/ExpensesManagerInformations', {
+        async function getIncomes() {
+            const data = await fetch('https://localhost:44312/api/UserBudgets/incomes');
+            const response = await data.json();
+            dispatch({
+                type: 'GET_INCOMES',
+                payload: response
+            });
+        }
+
+        async function addTransaction(transaction) {
+            if (transaction.amount < 0) {
+                fetch('https://localhost:44312/api/ExpensesManagerInformations', {
+                    method: 'PUT',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        Category: transaction.text,
+                        Spent: transaction.amount * -1,
+                        Limit: null,
+                        uId: 1
+                    })
+                })
+            }
+            fetch('https://localhost:44312/api/UserBalance/1', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    Category: transaction.text,
-                    Spent: transaction.amount * -1,
-                    Limit: null,
-                    uId: 1
+                    add: (transaction.amount > 0) ? transaction.amount : 0,
+                    remove: (transaction.amount < 0) ? transaction.amount * -1 : 0,
+                    user_id: 1
                 })
             })
-        }
-        fetch('https://localhost:44312/api/UserBalance/1', {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                add: (transaction.amount > 0) ? transaction.amount : 0,
-                remove: (transaction.amount < 0) ? transaction.amount*-1 : 0,
-                user_id:1
-            })
-        })
-          fetch('https://localhost:44312/api/UserBudgets', {
+            fetch('https://localhost:44312/api/UserBudgets', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -91,24 +92,25 @@ export const GlobalProvider = ({ children }) => {
                     amount: transaction.amount,
                     userID: 1
                 })
-          })
+            })
             dispatch({
                 type: 'ADD_TRANSACTION',
                 payload: transaction
             });
         }
 
-    return (
-        <GlobalContext.Provider value={{
-        transactions: state.transactions,
-        expenses: state.expenses,
-        incomes: state.incomes,
-        balance: state.balance,
-        addTransaction,
-        getExpenses,
-        getIncomes,
-        getBalance
-    }}>
-        {children}
-        </GlobalContext.Provider>);
-}
+        return (
+            <GlobalContext.Provider value={{
+                transactions: state.transactions,
+                expenses: state.expenses,
+                incomes: state.incomes,
+                balance: state.balance,
+                addTransaction,
+                getExpenses,
+                getIncomes,
+                getBalance,
+                getTransactions
+            }}>
+                {children}
+            </GlobalContext.Provider>);
+    }
