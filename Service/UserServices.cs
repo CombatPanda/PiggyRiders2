@@ -29,9 +29,15 @@ namespace SmartSaver.Service
             }
             else
             {
+                UserBalance userBalance = new UserBalance();
                 _context.UserInfo.Add(newUser);
                 await _context.SaveChangesAsync();
+                userBalance.user_id = (_context.UserInfo.Where(e => e.Email == newUser.Email && e.Password == newUser.Password).FirstOrDefault()).ID;
+                _context.UserBalance.Add(userBalance);
+
+                await _context.SaveChangesAsync();
                 serviceResponse.Data = await _context.UserInfo.ToListAsync();
+
                 return serviceResponse;
             }
 

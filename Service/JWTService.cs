@@ -17,6 +17,7 @@ namespace SmartSaver.Service
     {
         private IConfiguration _config;
         private readonly IUserServices _userService;
+        public static JwtSecurityToken token;
 
         public JWTService(IConfiguration config, IUserServices userService)
         {
@@ -36,7 +37,7 @@ namespace SmartSaver.Service
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
              };
 
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
+                token = new JwtSecurityToken(_config["Jwt:Issuer"],
                 _config["Jwt:Issuer"],
                 claims,
                 expires: DateTime.Now.AddMinutes(120),
@@ -64,12 +65,19 @@ namespace SmartSaver.Service
             {
                 return user;
             }
+        }
+        public string GetID()
+        {
+            return token.Claims.First(claim => claim.Type == "sub").Value;
 
-
+        }
+        public string GetUsername()
+        {
+            return token.Claims.First(claim => claim.Type == "unique_name").Value;
 
         }
 
- 
+
     }
 
 
