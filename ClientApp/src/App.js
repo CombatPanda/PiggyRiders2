@@ -14,7 +14,7 @@ import Login from "./components/LoginRegisterComponents/Login";
 import SignUp from "./components/LoginRegisterComponents/Signup";
 import Challenges from "./components/ChallangesComponents/Challenge";
 import AuthApi from "./components/LoginRegisterComponents/AuthApi";
-import Cookies from "C:/Users/Veronika/source/repos/lauratumaite/SmartSaver/node_modules/js-cookie/src/js.cookie.js";
+import Cookies from "C:/Users/Lenovo/source/repos/SmartSaver/node_modules/js-cookie/src/js.cookie.js";
 import Leaderboard from "./components/LeaderboardComponents/Leaderboard";
 
 
@@ -45,7 +45,8 @@ function App() {
 
 const Routes = () => {
   const Auth = React.useContext(AuthApi)
-  return(
+    return (
+      <Layout>
     <Switch>
         <ProtectedLogin path="/log-in" excat component={Login} auth = {Auth.auth}/>
         <Route path="/sign-up" exact component={SignUp} />
@@ -59,8 +60,9 @@ const Routes = () => {
         <ProtectedRoutes path="/BMInfo/:id" auth = {Auth.auth} exact component={BMInfo} />
         <ProtectedRoutes path="/Challenges" auth = {Auth.auth} exact component={Challenges} />
         <ProtectedRoutes path="/Leaderboard"  auth = {Auth.auth} exact component={Leaderboard} />
-    </Switch>  
-  )
+            </Switch>
+</Layout>
+        )
 }
 
 const ProtectedRoutes = ({auth, component:Component, ...rest}) =>{

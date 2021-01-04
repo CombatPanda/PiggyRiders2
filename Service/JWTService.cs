@@ -19,7 +19,6 @@ namespace SmartSaver.Service
         private readonly IUserServices _userService;
         public static JwtSecurityToken token;
 
-        public static JwtSecurityToken token;
 
         public JWTService(IConfiguration config, IUserServices userService)
         {
