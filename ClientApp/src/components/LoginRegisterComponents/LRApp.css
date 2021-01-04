@@ -19,6 +19,18 @@
 }
 
 
+.signup_redirect {
+    color: #e32976;
+    text-align: center;
+    font-size: 13px;
+    padding-top: 10px;
+    margin: 0;
+    font-weight: 400;
+    font-style: oblique;
+    font-size: 10px;
+    font-family: Montserrat;
+}
+
 
 /* Inactive/Active Default input field color */
 .input-field input[type]:not([readonly]),
@@ -67,6 +79,8 @@
     color: white;
     font-weight: 600;
     font-style: oblique;
+    font-size: 15px;
+    text-align:left;
     font-family: Montserrat;
 }
 
@@ -110,12 +124,8 @@
     padding: 2px 50px;
 }
 
-    .myButton:hover {
+    .myButton:hover,
+    .myButton:active {
         background-color: #e32976;
         color: white;
     }
-
-.myButton:active {
-    position: relative;
-    top: 1px;
-}

@@ -1,6 +1,7 @@
 ﻿import { match } from 'assert';
 import React, { useState, useEffect, Component } from 'react';
 import { Link } from 'react-router-dom';
+import './styles.css';
 
 class SavingInfoDetails extends Component {
 
@@ -204,7 +205,7 @@ class SavingInfoDetails extends Component {
                 <h1>Edit Saving</h1>
                 <h1>You have saved: {this.state.savedAmount}</h1>
                 <h1>Cost: {this.state.cost}</h1>
-                <h1>Your balance: {this.state.balance}</h1>
+                <p class="bold_oblique"> Your balance: {this.state.balance}</p>
 
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <div className="imput-field">

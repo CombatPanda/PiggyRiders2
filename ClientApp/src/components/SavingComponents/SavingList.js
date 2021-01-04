@@ -35,15 +35,15 @@ const SavingList = () => {
 
     return (
         <div>
-            <h1>Your balance: { balance.balance}</h1>
+            <p class="bold_oblique">your balance: { balance.balance}</p>
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
-                    <tr>
-                        <th>Purpose</th>
-                        <th>Cost</th>
-                        <th>Date</th>
-                        <th>Saved Amount</th>
-                        <th>Status</th>
+                    <tr class="simple_oblique">
+                        <th>purpose</th>
+                        <th>cost</th>
+                        <th>date</th>
+                        <th>saved amount</th>
+                        <th>status</th>
                     </tr>
                 </thead>
                 <tbody>

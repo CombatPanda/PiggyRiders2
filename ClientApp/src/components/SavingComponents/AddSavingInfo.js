@@ -2,6 +2,7 @@
 import { SavingContext } from './SavingContext';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import './styles.css';
 
 export default class AddSavingInfo extends React.Component {
     constructor() {
@@ -131,27 +132,26 @@ export default class AddSavingInfo extends React.Component {
     render() {
         return (
             <div>
-               
-                <h1>Savings</h1>
-
                 <form onSubmit={this.submitSavingForm}>
-                    <div className="imput-field">
-                        <label htmlFor="purpose">Purpose</label>
-                        <input type="text" name="purpose" ref="purpose" value={this.state.fields.purpose} onChange={this.handleChange} />
-                        <div className="errorMsg">{this.state.errors.purpose}</div>
+                    <div class="input-field">
+                        <p class="bold_oblique" htmlFor="purpose">purpose
+                        <input type="text" name="purpose" ref="purpose" value={this.state.fields.purpose} onChange={this.handleChange} className="form-control"
+                                placeholder="enter purpose..."/>
+                        <div className="errorMsg">{this.state.errors.purpose}</div></p>
                     </div>
-                    <div className="imput-field">
-                        <label htmlFor="cost">Cost</label>
-                        <input type="text" name="cost" ref="cost" value={this.state.fields.cost} onChange={this.handleChange} />
-                        <div className="errorMsg">{this.state.errors.cost}</div>
+                    <div class="input-field">
+                        <p class="bold_oblique" htmlFor="cost">cost
+                        <input type="text" name="cost" ref="cost" value={this.state.fields.cost} onChange={this.handleChange} className="form-control"
+                                placeholder="enter cost..."/>
+                        <div className="errorMsg">{this.state.errors.cost}</div></p>
                         
                     </div>
-                    <div className="imput-field">
-                        <label htmlFor="date">Date</label>
-                        <input type="text" name="date" placeholder="yyyy-mm-dd" ref="date" value={this.state.fields.date} onChange={this.handleChange} />
-                        <div className="errorMsg">{this.state.errors.date}</div>
+                    <div class="input-field">
+                       <p class="bold_oblique" htmlFor="date">date
+                        <input type="text" name="date" className="form-control" placeholder="yyyy-mm-dd" ref="date" value={this.state.fields.date} onChange={this.handleChange} />
+                            <div className="errorMsg">{this.state.errors.date}</div></p>
                     </div>
-                    <input type="submit" value="Save" className="btn" />
+                    <button type="submit" class="button_save">SAVE</button>
                 </form>
 
             </div>

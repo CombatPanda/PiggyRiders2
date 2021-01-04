@@ -45,15 +45,14 @@ form input {
     padding: 2px 50px;
 }
 
-    .button:hover {
+    .button:hover,
+    .button:active,
+    .button::marker
+    {
         background-color: #e32976;
         color: white;
     }
 
-.button:active {
-    position: relative;
-    top: 1px;
-}
 
 
 .errorMsg {

@@ -142,7 +142,7 @@ addUser(newUser) {
                placeholder="enter password..."/>
                             <div className="errorMsg">{this.state.errors.password}</div></p></div>
                
-                    <button type="submit" class="button">
+                <button type="submit" class="button">
                         SIGN UP
             </button>
                </form>

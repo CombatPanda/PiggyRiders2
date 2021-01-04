@@ -22,8 +22,9 @@ export default class App extends Component {
   render () {
     return (
       <Layout>
-       <Route path="/" excat component={Login} />
-            <Route path="/sign-up" exact component={SignUp} />
+       <Route path="/log-in" excat component={Login} />
+        <Route path="/sign-up" exact component={SignUp} />
+        <Route path="/" exact component={Home} />
         <Route path='/ExpensesManagerInformations' exact component={FetchExpensesManagerInfo} />
         <Route path="/ExpensesManagerInformations/add" excat component={AddLimit} />
         <Route path="/ExpensesManagerInformations/edit/:id" excat component={EditExpensesInfo} />
