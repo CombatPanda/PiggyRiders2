@@ -8,8 +8,8 @@ export const AddTransaction =()=> {
     const { addTransaction, getExpenses, getIncomes, getBalance } = useContext(GlobalContext);
 
  const onSubmit = e => {
-    e.preventDefault();
-
+     e.preventDefault();
+  
     const newTransaction = {
         text,
         amount: +amount

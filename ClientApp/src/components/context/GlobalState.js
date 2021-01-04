@@ -36,7 +36,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     async function getBalance() {
-        const data = await fetch(`https://localhost:44312/api/UserBalance/1`);
+        const data = await fetch(`https://localhost:44312/api/UserBalance`);
         const response = await data.json();
         dispatch({
             type: 'GET_BALANCE',
@@ -69,7 +69,7 @@ export const GlobalProvider = ({ children }) => {
                     })
                 })
             }
-            fetch('https://localhost:44312/api/UserBalance/1', {
+            fetch('https://localhost:44312/api/UserBalance', {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -77,8 +77,7 @@ export const GlobalProvider = ({ children }) => {
                 },
                 body: JSON.stringify({
                     add: (transaction.amount > 0) ? transaction.amount : 0,
-                    remove: (transaction.amount < 0) ? transaction.amount * -1 : 0,
-                    user_id: 1
+                    remove: (transaction.amount < 0) ? transaction.amount * -1 : 0
                 })
             })
             fetch('https://localhost:44312/api/UserBudgets', {
