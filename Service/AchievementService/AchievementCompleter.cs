@@ -15,10 +15,11 @@ namespace SmartSaver.Service.AchievementService
         {
 
             var savingsManagerInformationList = await _context.SMInfo.Where(s => s.user_id == id).ToListAsync();
-            UserBalance userBalance = await _context.UserBalance.Where(s => s.user_id.ToString() == id).FirstOrDefaultAsync();
-            UserInformation userInformation = await _context.UserInfo.Where(s => s.ID.ToString() == id).FirstOrDefaultAsync();
-            var userBalanceList = await _context.UserBalance.Where(s => s.user_id.ToString() == id).ToListAsync();
+            UserInformation userInformation = await _context.UserInfo.Where(s => s.ID.ToString() == id).FirstOrDefaultAsync(); 
+            var userBalanceList = await _context.UserBalance.Where(s => s.user_id == id).ToListAsync();
             var userBudgetList = await _context.UserBudget.Where(s => s.userID.ToString() == id).ToListAsync();
+            UserBalance userBalance = await _context.UserBalance.Where(s => s.user_id == id).FirstOrDefaultAsync();
+        
 
             int count = 0;
             int positive = 0;
