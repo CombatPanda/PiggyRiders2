@@ -4,17 +4,20 @@ import { GlobalContext } from '../context/GlobalState';
 
 
 export const IncomeExpenses = () => {
-    const { getIncomes, getExpenses, incomes, expenses } = useContext(GlobalContext);
-    const [e, setE] = useState(0);
-    const [i, setI] = useState(0);
 
-    const fetchInfo = () => {
-        getExpenses();
-        setE(expenses);
-        getIncomes();
-        setI(incomes);
-    }
-    useEffect(() => { fetchInfo();});
+    const { transactions } = useContext(GlobalContext);
+
+    const amounts = transactions.map(transaction => transaction.amount);
+
+    const i = amounts
+        .filter(item => item > 0)
+        .reduce((acc, item) => (acc += item), 0)
+        .toFixed(2);
+
+    const e = (
+        amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0) *
+        -1
+    ).toFixed(2);
 
     return (
         <div className="inc-exp-container">

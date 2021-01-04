@@ -16,8 +16,6 @@ export const AddTransaction =()=> {
     }
      addTransaction(newTransaction);
      getBalance();
-     getExpenses();
-     getIncomes();   
 }
        return (
             <div>
