@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 * {
   box-sizing: border-box;
@@ -8,14 +8,18 @@ body {
     min-height: 100vh;
     display: flex;
     font-weight: 400;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Montserrat';
+    font-size: 22px;
+    text-align: center;
 }
 
 
-h1,h2,h3,h4,h5,h6,label,span {
-  font-weight: 500;
-  color: #e32976;
-  font-family: 'Fira Sans', sans-serif;
+h1, h2, h3, h4, h5, h6, label, span {
+    font-weight: 500;
+    color: #e32976;
+    font-family: 'Montserrat';
+    font-size: 22px;
+    text-align: center;
 }
 
 body, html, .App, #root, .auth-wrapper {
@@ -23,9 +27,15 @@ body, html, .App, #root, .auth-wrapper {
   height: 100%;
 }
 
+center{
+    align-content:center;
+}
 
 .navbar-light {
+    .navbar-light {
   background-color: #e32976;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+}
   box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
 }
 
@@ -65,13 +75,13 @@ body, html, .App, #root, .auth-wrapper {
 
 .forgot-password,
 .forgot-password a {
-  text-align: right;
-  font-size: 13px;
-  padding-top: 10px;
-  color: #e32976;
-  margin: 0;
-}
-
-.forgot-password a {
-  color: #167bff;
+    text-align: right;
+    font-size: 13px;
+    padding-top: 10px;
+    color: #e32976;
+    margin: 0;
+    font-weight: 400;
+    font-style: oblique;
+    font-size: 10px;
+    font-family: Montserrat;
 }

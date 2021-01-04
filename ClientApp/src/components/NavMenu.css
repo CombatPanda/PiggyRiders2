@@ -1,18 +1,60 @@
-﻿a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
 }
 
 html {
   font-size: 14px;
 }
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+
+/* Style the navigation menu */
+.navbar {
+    margin-top: 10px;
+    padding: 0;
+    background-color: #110458;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+/* Navigation links */
+    .navbar a {
+        font-family: Montserrat;
+        font-style: oblique;
+        font-weight: 500;
+        margin-bottom: 12px;
+        float: right;
+        white-space: nowrap;
+        color: white;
+        font-size: 12px;
+        width: auto;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border-radius: 28px; /* Four equal-width links. If you have two links, use 50%, and 33.33% for three links, etc.. */
+        text-align: center; /* If you want the text to be centered */
+    }
+
+/* Add a background color on mouse-over */
+        .navbar a:hover {
+            background-color: #1C167A;
+            font-family: Montserrat;
+            font-style: oblique;
+            font-weight: 500;
+            color: white;
+        }
+
+/* Style the current/active link */
+        .navbar a.active {
+            background-color: #4CAF50;
+            border: 2px solid #e32976;
+        }
+
+/* Add responsiveness - on screens less than 500px, make the navigation links appear on top of each other, instead of next to each other */
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        text-align: left; /* If you want the text to be left-aligned on small screens */
+    }
 }
+

@@ -32,7 +32,12 @@ export const AddTransaction =()=> {
 
                    <button className="btn">Add transaction</button>
 
-                </form>
+               </form>
+               <div className="nav-wrapper">
+                   <ul className="right hide-on-med-and-down">
+                       <li><a className="dropdown-trigger" href="#!" data-target="dropdown">Menu</a></li>
+                   </ul>
+               </div>
             </div>
         )
     }

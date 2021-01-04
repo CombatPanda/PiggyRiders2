@@ -24,16 +24,44 @@ form input {
 }
 
 .button {
-  background-color: #00BFFF;
-  border-color: #3ac162;
-  font-weight: bold;
-  padding: 12px 15px;
-  color: #ffffff;
+    margin: 0;
+    margin-top: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position: relative;
+    background-color: transparent;
+    border-radius: 28px;
+    border: 2px solid #e32976;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: Montserrat;
+    font-style: normal;
+    color: #e32976;
+    font-weight: 500;
+    padding: 2px 50px;
 }
 
+    .button:hover,
+    .button:active,
+    .button::marker
+    {
+        background-color: #e32976;
+        color: white;
+    }
+
+
+
 .errorMsg {
-  color: #cc0000;
-  margin-bottom: 12px;
+    font-size: 12px;
+    font-family: Montserrat;
+    font-style: oblique;
+    color: #e32976;
+    font-weight: 500;
+    margin-bottom: 12px;
 }
 
 .sucessMsg {
