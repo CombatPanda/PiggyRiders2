@@ -3,9 +3,14 @@
   text-align: center;
   word-break: break-all;
 }
-
-h1{
+.test {
     color:white;
+}
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100px;
 }
 
 html {
@@ -20,3 +25,5 @@ html {
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
+
+

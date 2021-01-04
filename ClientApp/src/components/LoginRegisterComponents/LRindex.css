@@ -75,13 +75,13 @@ center{
 
 .forgot-password,
 .forgot-password a {
-  text-align: right;
-  font-size: 13px;
-  padding-top: 10px;
-  color: #e32976;
-  margin: 0;
-}
-
-.forgot-password a {
-  color: #167bff;
+    text-align: right;
+    font-size: 13px;
+    padding-top: 10px;
+    color: #e32976;
+    margin: 0;
+    font-weight: 400;
+    font-style: oblique;
+    font-size: 10px;
+    font-family: Montserrat;
 }

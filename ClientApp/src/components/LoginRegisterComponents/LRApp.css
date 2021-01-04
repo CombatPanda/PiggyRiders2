@@ -1,3 +1,5 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
 .LRApp {
   text-align: center;
 }
@@ -11,9 +13,27 @@
     padding: 0px;
     text-align: center;
     display: inline-block;
-    background-color: rgba(28,22,122,1);
+    background-color: #110458;
     font-family: 'Montserrat';
     text-align: center;
+}
+
+
+
+/* Inactive/Active Default input field color */
+.input-field input[type]:not([readonly]),
+.input-field textarea:not([readonly]) {
+    font-weight: 400;
+    font-style: oblique;
+    font-size: 10px;
+    font-family: Montserrat;
+    color:white;
+    border-bottom: 2px solid #e32976;
+}
+
+.input-field input[type]:focus:not([readonly]) {
+    border-bottom: 2px solid #FE76FF;
+    box-shadow: 0 1px 0 0 #FE76FF;
 }
 
 .background {
@@ -41,4 +61,61 @@
 
 .LRApp-link {
   color: #e32976;
+}
+
+.bold_oblique {
+    color: white;
+    font-weight: 600;
+    font-style: oblique;
+    font-family: Montserrat;
+}
+
+.simple_oblique {
+    color: white;
+    font-weight: 400;
+    font-style: oblique;
+    font-size: 10px;
+    font-family: Montserrat;
+    padding-top:3px;
+    text-align:left;
+}
+
+::placeholder {
+    color: white;
+    font-weight: 400;
+    font-style: oblique;
+    font-size: 10px;
+    font-family: Montserrat;
+}
+
+.myButton {
+    margin: 0;
+    margin-top: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position: relative;
+    background-color: transparent;
+    border-radius: 28px;
+    border: 2px solid #e32976;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 20px;
+    font-family: Montserrat;
+    font-style: normal;
+    color: #e32976;
+    font-weight: 500;
+    padding: 2px 50px;
+}
+
+    .myButton:hover {
+        background-color: #e32976;
+        color: white;
+    }
+
+.myButton:active {
+    position: relative;
+    top: 1px;
 }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import './LRApp.css';
 var token = "";
 
 export default class Login extends Component {
@@ -41,51 +41,48 @@ export default class Login extends Component {
 
 
   render() {
-    return (
-      <form onSubmit={this.onSubmit.bind(this)} >
-        <h3>Log In</h3>
-
-        <div className="imput-field">
-          <label>Email address</label>
+      return (
+          <form onSubmit={this.onSubmit.bind(this)} >
+            <div class="input-field">
+          <p class = "bold_oblique">email
           <input
             type="email"
             name="email"
             ref="email"
             className="form-control"
-            placeholder="Enter email"
-          />
+            placeholder="enter email..."
+            /></p>
         </div>
 
-        <div className="imput-field">
-          <label htmlFor="password">Password</label>
+        <div class="input-field">
+        <p class="bold_oblique"htmlFor="password">password
           <input
+            className="input_color"
             type="password"
             name="password"
             ref="password"
-            placeholder="Enter password"
-          />
+            placeholder="enter password..."
+        /></p>
         </div>
 
         <div className="form-group">
-          <div className="custom-control custom-checkbox">
+          <div className="custom-control custom-checkbox ">
             <input
               type="checkbox"
               className="custom-control-input"
               id="customCheck1"
             />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
+                      <label className="custom-control-label simple_oblique" htmlFor="customCheck1">remember me</label>
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary btn-block">
-          Submit
+        <button type="submit" class="myButton">
+          LOG IN
         </button>
         <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
+                  <a href="#">forgot password?</a>
         </p>
-      </form>
+        </form>
     );
   }
 }
