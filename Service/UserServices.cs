@@ -33,6 +33,7 @@ namespace SmartSaver.Service
                 UserAchievement userAchievement = new UserAchievement();
 
                 _context.UserInfo.Add(newUser);
+                _context.UserBalance.Add(userBalance);
                 await _context.SaveChangesAsync();
                 userBalance.user_id = (_context.UserInfo.Where(e => e.Email == newUser.Email && e.Password == newUser.Password).FirstOrDefault()).ID.ToString();
                 _context.UserBalance.Add(userBalance);

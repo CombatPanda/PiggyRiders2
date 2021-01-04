@@ -35,6 +35,10 @@ export class NavMenu extends Component {
                 <li><a href="/ExpensesManagerInformations/add">add limit</a></li>
                 <li><a href="/Challenges">challenges</a></li>
                 <li><a href="/Leaderboard">leaderboard</a></li>
+                <li><a href="/">Home</a></li>
+
+
+
             </ul>
         </div>
     );
