@@ -24,8 +24,10 @@ export class NavMenu extends Component {
   }
 
   render () {
-    return (
-        <div >
+      return (
+
+          <div >
+              <img class="logo" src={Logo} />
             <ul class="navbar">
                 <li><a href="/log-in">log in</a></li>
                 <li><a href="/sign-up">sign up</a></li>
@@ -36,13 +38,8 @@ export class NavMenu extends Component {
                 <li><a href="/Challenges">challenges</a></li>
                 <li><a href="/Leaderboard">leaderboard</a></li>
                 <li><a href="/">Home</a></li>
-
-
-
             </ul>
         </div>
     );
   }
 }
-
-//<img class="logo" src={Logo}/>

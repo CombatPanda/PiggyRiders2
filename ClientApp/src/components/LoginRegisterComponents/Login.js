@@ -38,22 +38,19 @@ const Login = (e) => {
 
     return (
         <form>
-            <h3>Log In</h3>
-
             <div className="input-field">
-                <p class="bold_oblique">email
+                <label class="bold_oblique color_white">email</label>
                  <input
                         type="email"
                         name="email"
                         ref={inputEmailRef}
                         className="form-control"
                         placeholder="enter email..."
-                    /></p>
+                    />
             </div>
             <div className="input-field">
-                <p class="bold_oblique" htmlFor="password">password
+                <p class="bold_oblique color_white" htmlFor="password">password
                  <input
-                        className="input_color"
                         type="password"
                         name="password"
                         ref={inputPasswordRef}
